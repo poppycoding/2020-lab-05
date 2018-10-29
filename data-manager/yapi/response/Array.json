@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "number"
+    },
+    "message": {
+      "type": "string"
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "orderNum": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "目录排序"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "仅仅两级结构,暂时为空"
+          }
+        },
+        "required": [
+          "list"
+        ]
+      }
+    }
+  },
+  "required": [
+    "code",
+    "message",
+    "data"
+  ]
+}
