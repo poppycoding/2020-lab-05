@@ -1,0 +1,6 @@
+org.neo4j.driver.v1.exceptions.TransientException: LockClient[471239] can't wait on resource RWLock[NODE(65736), hash=835131655] since => LockClient[471239] <-[:HELD_BY]- RWLock[NODE(65636), hash=2016691326] <-[:WAITING_FOR]- LockClient[471240] <-[:HELD_BY]- RWLock[NODE(65736), hash=835131655]
+	at org.neo4j.driver.internal.util.ErrorUtil.newNeo4jError(ErrorUtil.java:65)
+org.neo4j.driver.v1.exceptions.TransientException: LockClient[471244] can't wait on resource RWLock[NODE(65736), hash=835131655] since => LockClient[471244] <-[:HELD_BY]- RWLock[NODE(65636), hash=2016691326] <-[:WAITING_FOR]- LockClient[471240] <-[:HELD_BY]- RWLock[NODE(65736), hash=835131655]
+	at org.neo4j.driver.internal.util.ErrorUtil.newNeo4jError(ErrorUtil.java:65)
+org.neo4j.driver.v1.exceptions.TransientException: LockClient[471242] can't wait on resource RWLock[NODE(65736), hash=835131655] since => LockClient[471242] <-[:HELD_BY]- RWLock[NODE(65636), hash=2016691326] <-[:WAITING_FOR]- LockClient[471240] <-[:HELD_BY]- RWLock[NODE(65736), hash=835131655]
+	at org.neo4j.driver.internal.util.ErrorUtil.newNeo4jError(ErrorUtil.java:65)

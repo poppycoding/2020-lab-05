@@ -1,0 +1,29 @@
+{
+  "data": [
+    {
+      "id": "view-id",
+      "name": "viewName",
+      "label": {
+        "color": "#fff"
+      }
+    },
+    {
+      "id": "table-id",
+      "name": "tableName"
+    },
+    {
+      "id": "table-id",
+      "name": "tableName"
+    }
+  ],
+  "links": [
+    {
+      "source": "db-id",
+      "target": "view-id"
+    },
+    {
+      "source": "table-id",
+      "target": "view-id"
+    }
+  ]
+}
