@@ -23,13 +23,12 @@ match (t:TableInfo {id:{0}}) -[r1:COLUMN_INFO]- (c:ColumnInfo), (t) -[r2:TABLE_I
 
 3.==================>>view
 match
-(v:ViewInfo {id:'view-mysql@192.168.241.243@3306@sourcedata@sourcedata@big_big_big'})
+(v:ViewInfo {id:'view-mysql@192.168.241.243@3306@sourcedata@sourcedata@v_test_table'})
 -[r1:INPUT_TABLE]- (t:TableInfo)
-return
-{view: (v {.id,.viewName as name}) , tables: collect(t {.id,.tableName})}
-{data: ((v {.id,.viewName}),collect(t {.id,.tableName}))}
+with
+{view: ( {id:v.id, name:v.viewName}) , tables: collect({id: t.id, name:t.tableName})} as a
+return {data: [((a.tables)), (a.view)]}
 
-match (v:ViewInfo {id:{0}}) -[r1:COLUMN_INFO]- (c:ColumnInfo), (v)  -[r2:VIEW_INFO]- (d:DbInfo) return {db:(d{.id,.dbName}), view: (v {.*}) , columns: collect(c {.id,.columnName})}
 
 
 4.==================>>column
