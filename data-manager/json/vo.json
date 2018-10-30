@@ -1,0 +1,32 @@
+{
+  "data": [
+    {
+      "name": "test_table_2",
+      "id": "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_2",
+      "category": "around"
+    },
+    {
+      "name": "sourcedata",
+      "id": "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1",
+      "category": "around"
+    },
+    {
+      "name": "v_test_table",
+      "id": "view-mysql@192.168.241.243@3306@sourcedata@sourcedata@v_test_table",
+      "label": {
+        "color": "#fff"
+      },
+      "category": "center"
+    }
+  ],
+  "links": [
+    {
+      "source": "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_2",
+      "target": "view-mysql@192.168.241.243@3306@sourcedata@sourcedata@v_test_table"
+    },
+    {
+      "source": "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1",
+      "target": "view-mysql@192.168.241.243@3306@sourcedata@sourcedata@v_test_table"
+    }
+  ]
+}

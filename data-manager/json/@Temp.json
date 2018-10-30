@@ -1,16 +1,19 @@
 {
-  "view": {
+  "center": {
     "id": "view-mysql@192.168.241.243@3306@sourcedata@sourcedata@v_test_table",
-    "name": "v_test_table"
+    "name": "v_test_table",
+    "category": "center"
   },
-  "tables": [
-    {
-      "id": "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1",
-      "name": "test_table_1"
-    },
+  "around": [
     {
       "id": "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_2",
-      "name": "test_table_2"
+      "name": "test_table_2",
+      "category": "around"
+    },
+    {
+      "id": "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1",
+      "name": "sourcedata",
+      "category": "around"
     }
   ]
 }

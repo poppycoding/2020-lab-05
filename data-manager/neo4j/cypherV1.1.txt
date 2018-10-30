@@ -25,9 +25,8 @@ match (t:TableInfo {id:{0}}) -[r1:COLUMN_INFO]- (c:ColumnInfo), (t) -[r2:TABLE_I
 match
 (v:ViewInfo {id:'view-mysql@192.168.241.243@3306@sourcedata@sourcedata@v_test_table'})
 -[r1:INPUT_TABLE]- (t:TableInfo)
-with
-{view: ( {id:v.id, name:v.viewName}) , tables: collect({id: t.id, name:t.tableName})} as a
-return {data: [((a.tables)), (a.view)]}
+return
+{center: ( {id:v.id, name:v.viewName,category:'center'}) , around: collect({id: t.id, name:t.tableName,category:'around'})}
 
 
 
