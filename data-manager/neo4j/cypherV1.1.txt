@@ -9,16 +9,18 @@ return
 match (d:DbInfo {contextPath: {0}}) -[r]- (t:TableInfo) return {db:(d {.*}), tables:collect(t {.id,.tableName})}
 
 
+
+
 2.==================>>table
-match
-(t:TableInfo {id:'table-mysql@192.168.241.243@3306@sourcedata@sourcedata@analysis_table_business_result'})
--[r1:COLUMN_INFO]- (c:ColumnInfo),
-(t) -[r2:TABLE_INFO]- (d:DbInfo)
-return
-{db:(d{.id,.dbName}), table: (t {.*}) , columns: collect(c {.id,.columnName})}
+MATCH p =(a)-->(b)-->(c)
+WHERE a.id = 'table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_2'
+MATCH
+(a) -[r1:COLUMN_INFO]- (b),(b) -[r2:FK_TABLE]- (c)
+RETURN {center: ( {id:a.id, name:a.tableName,category:'center'}) , around: collect({id: c.id, name:c.tableName,category:'around'})}
+
+MATCH p =(a)-->(b)-->(c) WHERE a.id = {0} MATCH (a) -[r1:COLUMN_INFO]- (b),(b) -[r2:FK_TABLE]- (c) RETURN {center: ( {id:a.id, name:a.tableName,category:'center'}) , around: collect({id: c.id, name:c.tableName,category:'around'})}
 
 
-match (t:TableInfo {id:{0}}) -[r1:COLUMN_INFO]- (c:ColumnInfo), (t) -[r2:TABLE_INFO]- (d:DbInfo) return {db:(d {.id,.dbName}), table:(t {.*}) , columns:collect(c {.id,.columnName})}
 
 
 3.==================>>view
@@ -28,17 +30,7 @@ match
 return
 {center: ( {id:v.id, name:v.viewName,category:'center'}) , around: collect({id: t.id, name:t.tableName,category:'around'})}
 
-
-
-4.==================>>column
-match
-(c:ColumnInfo {id:'column-mysql@192.168.241.243@3306@sourcedata@sourcedata@rela_table_business@id'})
--[r1:COLUMN_INFO]- (t:TableInfo),
-(v) -[r2:COLUMN_INFO]- (v:ViewInfo)
-return
-{table:(t {.id,.dbName}), column: (c {.*}) , view: (v {.id,.dbName})}
-
-match (c:ColumnInfo {id:{0}}) -[r1:COLUMN_INFO]- (t:TableInfo), (v) -[r2:COLUMN_INFO]- (v:ViewInfo) return {table:(t {.id,.dbName}), column: (c {.*}) , view: (v {.id,.dbName})}
+match (v:ViewInfo {id:{0}}) -[r:INPUT_TABLE]- (t:TableInfo) return {center: ( {id:v.id, name:v.viewName,category:'center'}) , around: collect({id: t.id, name:t.tableName,category:'around'})}
 
 
 

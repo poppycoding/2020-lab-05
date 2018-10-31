@@ -1,0 +1,18 @@
+
+1.==================>>create relation
+MATCH
+(a:TableInfo),(b:ColumnInfo)
+WHERE a.id = 'table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_2'
+AND b.id = 'column-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_2@test3_id'
+CREATE (a)-[r:COLUMN_INFO]->(b)
+RETURN r
+
+
+
+
+2.==================>>delete relation
+MATCH
+(x { id: 'table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_2' })
+-[r:COLUMN_INFO]->
+(y {id: 'column-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_2@test3_id'})
+DELETE r
