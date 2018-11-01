@@ -7,3 +7,20 @@ RETURN {begin:({id:t.id,name:t.metaName}),process:collect({id:x.id,name:x.metaNa
 
 
 MATCH (t { id: "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_7" }) -[:LINEAGE|:IMPACT*1..]->(x) RETURN {begin:({id:t.id,name:t.metaName}),process:collect({id:x.id,name:x.metaName})}
+
+
+MATCH (t: TableInfo { id: "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1" })
+-[:LINEAGE|:IMPACT*1..]->(x)
+with t,x
+match p= ()-[:LINEAGE|:IMPACT*1..2]->()
+return p
+
+
+MATCH p=(t: TableInfo { id: "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1" })
+-[:LINEAGE|:IMPACT*1..]->(x), p2=()-[:LINEAGE|:IMPACT*1..1]->()
+return p
+
+MATCH p=(t: TableInfo { id: "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1" })
+-[:LINEAGE|:IMPACT*1..]->(x)
+
+return p
