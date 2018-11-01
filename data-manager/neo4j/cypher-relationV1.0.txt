@@ -1,3 +1,7 @@
+0.==================>>查询上下级关系
+
+
+
 
 1.==================>>db
 match
@@ -7,6 +11,8 @@ return
 {db: (d {.*}), tables: collect(t {.id,.tableName}) }
 
 match (d:DbInfo {contextPath: {0}}) -[r]- (t:TableInfo) return {db:(d {.*}), tables:collect(t {.id,.tableName})}
+
+
 
 
 2.==================>>table
@@ -21,6 +27,8 @@ return
 match (t:TableInfo {id:{0}}) -[r1:COLUMN_INFO]- (c:ColumnInfo), (t) -[r2:TABLE_INFO]- (d:DbInfo) return {db:(d {.id,.dbName}), table:(t {.*}) , columns:collect(c {.id,.columnName})}
 
 
+
+
 3.==================>>view
 match
 (v:ViewInfo {id:'view-mysql@192.168.241.243@3306@sourcedata@sourcedata@v_test_table'})
@@ -30,6 +38,8 @@ with
 return {data: [((a.tables)[0]), ((a.tables)[1]), (a.view)]}
 
 match (v:ViewInfo {id:{0}}) -[r1:COLUMN_INFO]- (c:ColumnInfo), (v)  -[r2:VIEW_INFO]- (d:DbInfo) return {db:(d{.id,.dbName}), view: (v {.*}) , columns: collect(c {.id,.columnName})}
+
+
 
 
 4.==================>>column

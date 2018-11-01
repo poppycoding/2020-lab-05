@@ -1,19 +1,24 @@
 {
-  "center": {
-    "id": "view-mysql@192.168.241.243@3306@sourcedata@sourcedata@v_test_table",
-    "name": "v_test_table",
-    "category": "center"
-  },
-  "around": [
+  "process": [
     {
-      "id": "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_2",
-      "name": "test_table_2",
-      "category": "around"
+      "name": "7to6",
+      "id": "kettle-24@transformation@/test1/7to6"
     },
     {
-      "id": "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1",
-      "name": "sourcedata",
-      "category": "around"
+      "name": "test_table_6",
+      "id": "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_6"
+    },
+    {
+      "name": "62to4",
+      "id": "kettle-24@transformation@/test1/62to4"
+    },
+    {
+      "name": "test_table_4",
+      "id": "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_4"
     }
-  ]
+  ],
+  "begin": {
+    "name": "test_table_7",
+    "id": "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_7"
+  }
 }

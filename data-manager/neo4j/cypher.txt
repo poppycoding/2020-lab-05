@@ -1,3 +1,7 @@
+0.==================>>基础命令
+
+
+
 
 1.==================>>create relation
 MATCH
@@ -16,3 +20,9 @@ MATCH
 -[r:COLUMN_INFO]->
 (y {id: 'column-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_2@test3_id'})
 DELETE r
+
+
+
+
+3.==================>>delete all
+match (n)-[r]-() delete n,r
