@@ -1,0 +1,49 @@
+0.==================>>查询影响关系
+
+MATCH
+p= (t: TableInfo { id: "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1" }) -[:LINEAGE|:IMPACT*1..]->(x)
+set t._color = "#fff",t._shape="square",x._color = "#eee", x._shape="square"
+return
+extract(n IN nodes(p)| n.id) AS id ,
+extract(n IN nodes(p)| n.metaName) AS name,
+extract(n IN nodes(p)| n.dbName) AS dbName,
+extract(n IN nodes(p)| n._color) AS color,
+extract(n IN nodes(p)| n._shape) AS shape,
+
+
+MATCH
+p= (t: TableInfo { id: "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1" }) -[:LINEAGE|:IMPACT*1..]->(x)
+set t._color = "#fff",t._shape="square",x._color = "#eee", x._shape="square"
+return {
+id: extract(n IN nodes(p)| n.id),
+name: extract(n IN nodes(p)| n.metaName),
+dbName: extract(n IN nodes(p)| n.dbName),
+color: extract(n IN nodes(p)| n._color),
+shape: extract(n IN nodes(p)| n._shape)
+}
+
+
+MATCH
+p= (t: TableInfo { id: "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1" }) -[:LINEAGE|:IMPACT*1..]->(x)
+set t._color = "#fff",t._shape="square",x._color = "#eee",t._dbName=t.dbName, x._shape="square",x._dbName=t.dbName
+return
+{ data: extract(n IN nodes(p)| n.id+'>>>'+n.metaName+'>>>'+n._color+'>>>'+n._shape+'>>>'+n._dbName)}
+
+
+MATCH
+p= (t: TableInfo { id: "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1" }) -[:LINEAGE|:IMPACT*1..]->(x)
+set t._color = "#fff",t._shape="square",t._dbName=t.dbName,x._color = "#eee", x._shape="square",x._dbName=t.dbName
+return
+{ data: extract(n IN nodes(p)| n.id+'>>>'+n.metaName+'>>>'+n._color+'>>>'+n._shape+'>>>'+n._dbName)}
+
+
+=========================
+MATCH
+p= (t: TableInfo { id: "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_7" }) <-[:LINEAGE|:IMPACT*1..]-(x)
+set t._color = "#fff",t._shape="square",x._color = "#eee",t._dbName=t.dbName, x._shape="square",x._dbName=t.dbName
+return
+extract(n IN nodes(p)| n.id+'>>>'+n.metaName+'>>>'+n._color+'>>>'+n._shape+'>>>'+n._dbName)
+
+
+
+MATCH p= (t: TableInfo { id: "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_7" }) <-[:LINEAGE|:IMPACT*1..]-(x) set t._color = "#fff",t._shape="square",x._color = "#eee",t._dbName=t.dbName, x._shape="square",x._dbName=t.dbName return { data: extract(n IN nodes(p)| n.id+'>>>'+n.metaName+'>>>'+n._color+'>>>'+n._shape+'>>>'+n._dbName)}

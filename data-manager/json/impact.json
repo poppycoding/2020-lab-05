@@ -2,16 +2,24 @@
   "data": [
     {
       "id": "元数据1",
-      "name": "主表",
-      "mark": "mark"
+      "metaName": "表1",
+      "dBName": "库",
+      "shape": "square",
+      "color": "#ffe"
     },
     {
       "id": "元数据2",
-      "name": "次表"
+      "metaName": "表2",
+      "dBName": "",
+      "shape": "ball",
+      "color": "#ffd"
     },
     {
       "id": "元数据3",
-      "name": "次表"
+      "metaName": "表3",
+      "dBName": "库",
+      "shape": "square",
+      "color": "#ffa"
     }
   ],
   "links": [
