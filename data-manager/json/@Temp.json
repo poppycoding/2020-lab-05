@@ -1,24 +1,83 @@
-{
-  "process": [
-    {
-      "name": "7to6",
-      "id": "kettle-24@transformation@/test1/7to6"
-    },
-    {
-      "name": "test_table_6",
-      "id": "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_6"
-    },
-    {
-      "name": "62to4",
-      "id": "kettle-24@transformation@/test1/62to4"
-    },
-    {
-      "name": "test_table_4",
-      "id": "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_4"
-    }
-  ],
-  "begin": {
-    "name": "test_table_7",
-    "id": "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_7"
+[
+  {
+    "extract(n IN nodes(p)| n.id+'>>>'+n.metaName+'>>>'+n._color+'>>>'+n._shape+'>>>'+n._dbName)": [
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1>>>test_table_1>>>#fff>>>square>>>sourcedata",
+      "kettle-24@transformation@/test1/乱码测试>>>乱码测试>>>#eee>>>square>>>sourcedata"
+    ]
+  },
+  {
+    "extract(n IN nodes(p)| n.id+'>>>'+n.metaName+'>>>'+n._color+'>>>'+n._shape+'>>>'+n._dbName)": [
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1>>>test_table_1>>>#fff>>>square>>>sourcedata",
+      "kettle-24@transformation@/test1/乱码测试>>>乱码测试>>>#eee>>>square>>>sourcedata",
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_2>>>test_table_2>>>#eee>>>square>>>sourcedata"
+    ]
+  },
+  {
+    "extract(n IN nodes(p)| n.id+'>>>'+n.metaName+'>>>'+n._color+'>>>'+n._shape+'>>>'+n._dbName)": [
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1>>>test_table_1>>>#fff>>>square>>>sourcedata",
+      "kettle-24@transformation@/test1/乱码测试>>>乱码测试>>>#eee>>>square>>>sourcedata",
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_2>>>test_table_2>>>#eee>>>square>>>sourcedata",
+      "kettle-24@transformation@/test1/62to4>>>62to4>>>#eee>>>square>>>sourcedata"
+    ]
+  },
+  {
+    "extract(n IN nodes(p)| n.id+'>>>'+n.metaName+'>>>'+n._color+'>>>'+n._shape+'>>>'+n._dbName)": [
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1>>>test_table_1>>>#fff>>>square>>>sourcedata",
+      "kettle-24@transformation@/test1/乱码测试>>>乱码测试>>>#eee>>>square>>>sourcedata",
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_2>>>test_table_2>>>#eee>>>square>>>sourcedata",
+      "kettle-24@transformation@/test1/62to4>>>62to4>>>#eee>>>square>>>sourcedata",
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_4>>>test_table_4>>>#eee>>>square>>>sourcedata"
+    ]
+  },
+  {
+    "extract(n IN nodes(p)| n.id+'>>>'+n.metaName+'>>>'+n._color+'>>>'+n._shape+'>>>'+n._dbName)": [
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1>>>test_table_1>>>#fff>>>square>>>sourcedata",
+      "kettle-24@transformation@/test1/15to7>>>15to7>>>#eee>>>square>>>sourcedata"
+    ]
+  },
+  {
+    "extract(n IN nodes(p)| n.id+'>>>'+n.metaName+'>>>'+n._color+'>>>'+n._shape+'>>>'+n._dbName)": [
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1>>>test_table_1>>>#fff>>>square>>>sourcedata",
+      "kettle-24@transformation@/test1/15to7>>>15to7>>>#eee>>>square>>>sourcedata",
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_7>>>test_table_7>>>#eee>>>square>>>sourcedata"
+    ]
+  },
+  {
+    "extract(n IN nodes(p)| n.id+'>>>'+n.metaName+'>>>'+n._color+'>>>'+n._shape+'>>>'+n._dbName)": [
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1>>>test_table_1>>>#fff>>>square>>>sourcedata",
+      "kettle-24@transformation@/test1/15to7>>>15to7>>>#eee>>>square>>>sourcedata",
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_7>>>test_table_7>>>#eee>>>square>>>sourcedata",
+      "kettle-24@transformation@/test1/7to6>>>7to6>>>#eee>>>square>>>sourcedata"
+    ]
+  },
+  {
+    "extract(n IN nodes(p)| n.id+'>>>'+n.metaName+'>>>'+n._color+'>>>'+n._shape+'>>>'+n._dbName)": [
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1>>>test_table_1>>>#fff>>>square>>>sourcedata",
+      "kettle-24@transformation@/test1/15to7>>>15to7>>>#eee>>>square>>>sourcedata",
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_7>>>test_table_7>>>#eee>>>square>>>sourcedata",
+      "kettle-24@transformation@/test1/7to6>>>7to6>>>#eee>>>square>>>sourcedata",
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_6>>>test_table_6>>>#eee>>>square>>>sourcedata"
+    ]
+  },
+  {
+    "extract(n IN nodes(p)| n.id+'>>>'+n.metaName+'>>>'+n._color+'>>>'+n._shape+'>>>'+n._dbName)": [
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1>>>test_table_1>>>#fff>>>square>>>sourcedata",
+      "kettle-24@transformation@/test1/15to7>>>15to7>>>#eee>>>square>>>sourcedata",
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_7>>>test_table_7>>>#eee>>>square>>>sourcedata",
+      "kettle-24@transformation@/test1/7to6>>>7to6>>>#eee>>>square>>>sourcedata",
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_6>>>test_table_6>>>#eee>>>square>>>sourcedata",
+      "kettle-24@transformation@/test1/62to4>>>62to4>>>#eee>>>square>>>sourcedata"
+    ]
+  },
+  {
+    "extract(n IN nodes(p)| n.id+'>>>'+n.metaName+'>>>'+n._color+'>>>'+n._shape+'>>>'+n._dbName)": [
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1>>>test_table_1>>>#fff>>>square>>>sourcedata",
+      "kettle-24@transformation@/test1/15to7>>>15to7>>>#eee>>>square>>>sourcedata",
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_7>>>test_table_7>>>#eee>>>square>>>sourcedata",
+      "kettle-24@transformation@/test1/7to6>>>7to6>>>#eee>>>square>>>sourcedata",
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_6>>>test_table_6>>>#eee>>>square>>>sourcedata",
+      "kettle-24@transformation@/test1/62to4>>>62to4>>>#eee>>>square>>>sourcedata",
+      "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_4>>>test_table_4>>>#eee>>>square>>>sourcedata"
+    ]
   }
-}
+]
