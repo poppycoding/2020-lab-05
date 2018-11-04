@@ -1,0 +1,11 @@
+0.==================>>查询影响关系
+
+
+
+
+MATCH
+p=(t: TableInfo { id: "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1" })
+-[:LINEAGE|:IMPACT*1..]->(x)
+return p
+
+MATCH p=(t: TableInfo { id:{0} }) -[:LINEAGE|:IMPACT*1..]->(x) return p
