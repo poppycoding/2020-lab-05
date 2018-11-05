@@ -11,6 +11,23 @@ AND b.id = 'column-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_2
 CREATE (a)-[r:COLUMN_INFO]->(b)
 RETURN r
 
+MATCH
+(a:TableInfo),(b:KettleInfo)
+WHERE b.id = 'kettle-24@transformation@test1@62to4'
+CREATE (a)-[r:LINEAGE]->(b)
+RETURN *
+
+CREATE (a:TableInfo {contextPath: 'table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_67',id:'table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_67'})
+MATCH
+(a:TableInfo),(b:KettleInfo)
+WHERE b.id = 'kettle-24@transformation@test1@62to4'and a.id = 'table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_67'
+CREATE (a)-[r:LINEAGE]->(b)
+RETURN *
+
+match (k:KettleInfo)
+where k.id = "kettle-24@transformation@/test1/7to6"
+CREATE p =(TableInfo { tableName: "测试2" })-[:LINEAGE]->(k)
+RETURN p
 
 
 
@@ -19,6 +36,13 @@ MATCH
 (x { id: 'table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_2' })
 -[r:COLUMN_INFO]->
 (y {id: 'column-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_2@test3_id'})
+DELETE r
+
+
+MATCH
+(x)
+-[r:LINEAGE]->
+(y {id: 'kettle-24@transformation@test1@62to4'})
 DELETE r
 
 
