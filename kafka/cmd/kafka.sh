@@ -22,11 +22,16 @@ java -cp KafkaOffsetMonitor-assembly-0.2.1.jar com.quantifind.kafka.offsetapp.Of
 # zip: 源码用的play框架,需要用sbt编译,麻烦!==>直接网盘资源: https://blog.csdn.net/isea533/article/details/73727485
 
 # application.conf: 修改zk地址,kafka-manager.zkhosts="192.168.241.11:2181,192.168.241.17:2181,192.168.241.13:2181"
+# 注意: kafka-manager.zkhosts似乎任意一个正确的zk地址即可,后续web页面手动自定义填写相关zk地址
+
+# 配置权限: basicAuthentication.enabled=true 开启账号密码相关
 
 # windows下直接bat命令执行,默认9000端口,通过如下命令,指定端口后台运行,linux同理
 
 # web: http://127.0.0.1:8099  ===>> 浏览器访问即可!
 
-# 新建一个集群名称:Cluster Name; 输入zk的ip逗号分隔: Cluster Zookeeper Hosts; 保存即可查看
+# 新建一个集群名称:Cluster Name; 输入zk的ip逗号分隔: Cluster Zookeeper Hosts; kafka版本选择最接近部署的版本,保存即可查看相关信息!
 
-bin/kafka-manager -Dconfig.file=conf/application.conf -Dhttp.port=8099 &
+# 杀掉进程重启的时候,删除报错的pid文件: This application is already running (Or delete /root/apps/kafka-manager/RUNNING_PID file).
+
+nohup bin/kafka-manager -Dconfig.file=conf/application.conf -Dhttp.port=8099 &
