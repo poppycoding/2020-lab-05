@@ -73,7 +73,7 @@ INSERT INTO  `sys_permission`(`id`, `perm_type`, `parent_id`, `name`, `url`, `pe
 -- 系统用户
 CREATE TABLE IF NOT EXISTS `sys_user` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL COMMENT '用户名',
+  `username` varchar(50) binary NOT NULL COMMENT '用户名',
   `password` varchar(100) COMMENT '密码',
   `role_name` varchar(10) COMMENT '用户角色名称',
   `salt` varchar(20) COMMENT '盐',
