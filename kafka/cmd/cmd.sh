@@ -1,8 +1,20 @@
 #!/usr/bin/env bash
 
+############ start zk
+nohup bin/zookeeper-server-start.sh config/zookeeper.properties > zk.log 2>&1 &
 
-# cmd: start monitor
 
+
+
+
+############ start kafka
+nohup bin/kafka-server-start.sh config/server.properties > kafka.log 2>&1 &
+
+
+
+
+
+############ cmd: start monitor
 # jar: https://github.com/quantifind/KafkaOffsetMonitor/releases
 
 # monitor启动; 通过java -cp命令, -zk后面加zk地址端口,逗号拼接;
@@ -17,8 +29,9 @@ java -cp KafkaOffsetMonitor-assembly-0.2.1.jar com.quantifind.kafka.offsetapp.Of
 
 
 
-# cmd: start manager
 
+
+############ cmd: start manager
 # zip: 源码用的play框架,需要用sbt编译,麻烦!==>直接网盘资源: https://blog.csdn.net/isea533/article/details/73727485
 
 # application.conf: 修改zk地址,kafka-manager.zkhosts="192.168.241.11:2181,192.168.241.17:2181,192.168.241.13:2181"
