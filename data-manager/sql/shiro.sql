@@ -1,29 +1,4 @@
 -- ----------------------------
--- 3、采集作业表
--- ----------------------------
-CREATE TABLE IF NOT EXISTS `collect_job` (
-  `id` bigint(13) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `job_name` varchar(100) NOT NULL UNIQUE COMMENT '采集作业名称',
-  `source_id` bigint(13) COMMENT '数据源配置id',
-  `sample_line` int(11) DEFAULT 0 COMMENT '抽样行数',
-  `collect_type` int(2) DEFAULT 0 COMMENT '采集作业类型：数据库采集-0；ETL采集-1',
-  `create_by` varchar(64) DEFAULT '' COMMENT '创建者',
-  `create_at` bigint(13) DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) DEFAULT '' COMMENT '更新者',
-  `update_at` bigint(13) DEFAULT NULL COMMENT '更新时间',
-  `remark` text COMMENT '备注（保留字段）',
-  `status` int(2) DEFAULT 0 COMMENT '采集状态，0：进行中，1：完成，2：终止',
-  `thread_id` varchar(20) DEFAULT NULL COMMENT '线程ID',
-  `start_time` bigint(13) DEFAULT NULL COMMENT '任务开始时间',
-  `end_time` bigint(13) DEFAULT NULL COMMENT '任务结束时间',
-  `db_type` int(2) DEFAULT NULL COMMENT '数据源类型：ORACLE-0；SQL_SERVER-1；MYSQL-2',
-  `db_name` varchar(50) DEFAULT NULL COMMENT '数据库名称',
-  `version` int(13) DEFAULT 0 COMMENT '采集版本号',
-  PRIMARY KEY (`id`),
-  INDEX idx_job_name (`job_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='源数据发现作业表';
-
--- ----------------------------
 -- 3、shiro相关表格
 -- ----------------------------
 -- 系统资源权限
@@ -106,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `sys_token` (
 -- 角色
 CREATE TABLE IF NOT EXISTS `sys_role` (
   `id` bigint(13) NOT NULL AUTO_INCREMENT,
-  `role_name` varchar(100) COMMENT '角色名称',
+  `role_name` varchar(100) binary COMMENT '角色名称',
   `status` tinyint DEFAULT 1 COMMENT '状态  0：禁用   1：正常',
   `remark` varchar(100) COMMENT '备注',
   `create_by` varchar(64) DEFAULT '' COMMENT '创建者',

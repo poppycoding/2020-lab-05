@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-############ start zk
+############ start zk (内置zk)
 nohup bin/zookeeper-server-start.sh config/zookeeper.properties > zk.log 2>&1 &
 
 
@@ -9,6 +9,8 @@ nohup bin/zookeeper-server-start.sh config/zookeeper.properties > zk.log 2>&1 &
 
 ############ start kafka
 nohup bin/kafka-server-start.sh config/server.properties > kafka.log 2>&1 &
+
+bin/kafka-server-start.sh -daemon config/server.properties
 
 
 

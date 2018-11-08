@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+############ kill命令
 # kill process: dms.jar (v反转)
 ps -ef | grep dms.jar | grep -v grep | awk '{print $2}' | xargs kill -9
 
