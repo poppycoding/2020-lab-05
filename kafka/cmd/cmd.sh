@@ -8,9 +8,12 @@ nohup bin/zookeeper-server-start.sh config/zookeeper.properties > zk.log 2>&1 &
 
 
 ############ start kafka
-nohup bin/kafka-server-start.sh config/server.properties > kafka.log 2>&1 &
+1.nohup bin/kafka-server-start.sh config/server.properties > kafka.log 2>&1 &
 
-bin/kafka-server-start.sh -daemon config/server.properties
+2.bin/kafka-server-start.sh -daemon config/server.properties
+
+############ check zk节点信息
+bin/kafka-topics.sh --zookeeper localhost:2181 --list
 
 
 
