@@ -5,16 +5,24 @@ nohup bin/zookeeper-server-start.sh config/zookeeper.properties > zk.log 2>&1 &
 
 
 
-
-
 ############ start kafka
 1.nohup bin/kafka-server-start.sh config/server.properties > kafka.log 2>&1 &
 
 2.bin/kafka-server-start.sh -daemon config/server.properties
 
+
+
 ############ check zk节点信息
 bin/kafka-topics.sh --zookeeper localhost:2181 --list
 
+
+############ 创建topic,复制replication 3份,分区partitions 5个
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic test
+
+
+./kafka-console-producer.sh --broker-list localhost:9092 --topic test_ha
+
+./kafka-console-consumer.sh --bootstrap-server 192.168.241.13:9092 --topic metadata_topic_table --from-beginning
 
 
 

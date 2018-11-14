@@ -44,6 +44,8 @@ INSERT INTO  `sys_permission`(`id`, `perm_type`, `parent_id`, `name`, `url`, `pe
 INSERT INTO  `sys_permission`(`id`, `perm_type`, `parent_id`, `name`, `url`, `perms`, `icon`, `type`, `order_num`) VALUES (27, 1, 9, '编辑', NULL, 'sys:role:update,sys:perm:list,sys:role:list', NULL, 2, NULL);
 INSERT INTO  `sys_permission`(`id`, `perm_type`, `parent_id`, `name`, `url`, `perms`, `icon`, `type`, `order_num`) VALUES (28, 1, 9, '删除', NULL, 'sys:role:delete,sys:role:list', NULL, 2, NULL);
 INSERT INTO  `sys_permission`(`id`, `perm_type`, `parent_id`, `name`, `url`, `perms`, `icon`, `type`, `order_num`) VALUES (29, 1, 9, '禁用状态', NULL, 'sys:role:list,sys:role:status', NULL, 2, NULL);
+INSERT INTO  `sys_permission`(`id`, `perm_type`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) VALUES (30, 1, 9, '显示', NULL, 'sys:role:list', 2, NULL, NULL);
+
 
 -- 系统用户
 CREATE TABLE IF NOT EXISTS `sys_user` (
