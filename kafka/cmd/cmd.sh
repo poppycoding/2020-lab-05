@@ -12,17 +12,30 @@ nohup bin/zookeeper-server-start.sh config/zookeeper.properties > zk.log 2>&1 &
 
 
 
-############ check zk节点信息
+############ check topic信息
 bin/kafka-topics.sh --zookeeper localhost:2181 --list
 
 
+
+############ delete kafka topic信息-同时要删除kafka储存目录(默认为tmp/kafka-logs)
+#如果kafka启动时加载的配置文件中server.properties没有配置delete.topic.enable=true，那么此时的删除并不是真正的删除，
+#而是把topic标记为：marked for deletion,通过zookeeper客户端命令查看标记;此外通过zk客户端命令,彻底删除topic信息(见zk命令)
+bin/kafka-topics.sh --delete --zookeeper 192.168.241.13:2181 --topic test_hehe
+
+
+
 ############ 创建topic,复制replication 3份,分区partitions 5个
-bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic test
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic test_haha
 
 
-./kafka-console-producer.sh --broker-list localhost:9092 --topic test_ha
 
-./kafka-console-consumer.sh --bootstrap-server 192.168.241.13:9092 --topic metadata_topic_table --from-beginning
+############ 控制台-测试生产者(此处发出消息)
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test_haha
+
+
+
+############ 控制台-测试消费者(此处接受消息)
+bin/kafka-console-consumer.sh --bootstrap-server 192.168.241.13:9092 --topic test_haha --from-beginning
 
 
 
@@ -61,3 +74,10 @@ java -cp KafkaOffsetMonitor-assembly-0.2.1.jar com.quantifind.kafka.offsetapp.Of
 # 杀掉进程重启的时候,删除报错的pid文件: This application is already running (Or delete /root/apps/kafka-manager/RUNNING_PID file).
 
 nohup bin/kafka-manager -Dconfig.file=conf/application.conf -Dhttp.port=8099 &
+
+
+
+
+
+
+http://www.rowkey.me/blog/2015/05/30/kafka-usage/
