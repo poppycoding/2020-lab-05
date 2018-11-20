@@ -1,5 +1,19 @@
 #!/usr/bin/env bash
 
+######### maven打包,skip-test
+
+# -DskipTests，不执行测试用例，但编译测试用例类生成相应的class文件至target/test-classes
+mvn clean package -D skipTests
+
+# -Dmaven.test.skip=true，不执行测试用例，也不编译测试用例类。
+mvn clean package -D maven.test.skip=true
+
+
+
+
+
+
+
 ######### maven本地导入jar.在jar包当前位置执行
 
 # ojdbc
