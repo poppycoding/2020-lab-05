@@ -14,18 +14,31 @@ python3 /discover_data/sourcedata-py/main1.py 2 11
 
 ./kafka-topics.sh --zookeeper localhost:2181 --list
 
-./kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic metadata_topic_sample
-./kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic metadata_topic_db
-./kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic metadata_topic_table
-./kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic metadata_topic_view
-./kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic metadata_topic_column
-./kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic metadata_topic_server
-./kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic metadata_topic_kettle
-./kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic metadata_topic_deploy
+# 集群备份 + 分区
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic metadata_topic_sample
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic metadata_topic_db
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic metadata_topic_table
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic metadata_topic_view
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic metadata_topic_column
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic metadata_topic_server
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic metadata_topic_kettle
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic metadata_topic_deploy
 
 
-./kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic test_ha
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic test_ha
 
-./kafka-console-producer.sh --broker-list localhost:9092 --topic test_ha
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test_ha
 
-./kafka-console-consumer.sh --zookeeper localhost:2181 --topic test_ha --from-beginning
+bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test_ha --from-beginning
+
+
+# 单节点复制因子参数必须存在,且大于零
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic metadata_topic_sample
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic metadata_topic_db
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic metadata_topic_table
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic metadata_topic_view
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic metadata_topic_column
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic metadata_topic_server
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic metadata_topic_kettle
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic metadata_topic_deploy
+
