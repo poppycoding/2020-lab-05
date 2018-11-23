@@ -24,6 +24,13 @@ WHERE b.id = 'kettle-24@transformation@test1@62to4'and a.id = 'table-mysql@192.1
 CREATE (a)-[r:LINEAGE]->(b)
 RETURN *
 
+CREATE (a:ViewInfo {contextPath: 'view-mysql@127.0.0.1@3306@sourcedata@sourcedata@test_view_666',id:'view-mysql@127.0.0.1@3306@sourcedata@sourcedata@test_view_666'})
+MATCH
+(a:ViewInfo),(b:ViewInfo)
+WHERE b.id = 'view-mysql@192.168.241.243@3306@sourcedata@sourcedata@v_test_table'and a.id = 'view-mysql@127.0.0.1@3306@sourcedata@sourcedata@test_view_666'
+CREATE (a)-[r:INPUT_VIEW]->(b)
+RETURN *
+
 match (k:KettleInfo)
 where k.id = "kettle-24@transformation@/test1/7to6"
 CREATE p =(TableInfo { tableName: "测试2" })-[:LINEAGE]->(k)
