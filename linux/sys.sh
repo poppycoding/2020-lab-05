@@ -16,6 +16,11 @@ timedatectl set-ntp true
 
 
 
+########### 防火墙(centos7) https://www.cnblogs.com/zhangzhibin/p/6231870.html
+# status running & not running
+firewall-cmd --state
 
-###########
+# stop
+systemctl stop firewalld.service
+
 

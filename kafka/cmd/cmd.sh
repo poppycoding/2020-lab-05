@@ -70,8 +70,8 @@ java -cp KafkaOffsetMonitor-assembly-0.2.1.jar com.quantifind.kafka.offsetapp.Of
 # 新建一个集群名称:Cluster Name; 输入zk的ip逗号分隔: Cluster Zookeeper Hosts; kafka版本选择最接近部署的版本,保存即可查看相关信息!
 
 # 杀掉进程重启的时候,删除报错的pid文件: This application is already running (Or delete /root/apps/kafka-manager/RUNNING_PID file).
-
-nohup bin/kafka-manager -Dconfig.file=conf/application.conf -Dhttp.port=8099 &
+rm -rf RUNNING_PID
+nohup bin/kafka-manager -Dconfig.file=conf/application.conf -Dhttp.port=9099 &
 
 
 

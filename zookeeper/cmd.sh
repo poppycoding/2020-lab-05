@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 ############ zk启动,查看状态
-./zkServer.sh start
+bin/zkServer.sh start
 
-./zkServer.sh status
+bin/zkServer.sh status
 
 
 ############ zk客户端,删除topic
