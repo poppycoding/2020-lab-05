@@ -30,7 +30,7 @@ bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 -
 
 
 ############ 控制台-测试生产者(此处发出消息)
-bin/kafka-console-producer.sh --broker-list localhost:9092 --topic metadata_topic_db
+bin/kafka-console-producer.sh --broker-list 192.168.241.13:9092 --topic metadata_topic_db
 
 ############ 控制台-测试消费者(此处接受消息)
 bin/kafka-console-consumer.sh --bootstrap-server 192.168.241.13:9092 --topic metadata_topic_db --from-beginning
