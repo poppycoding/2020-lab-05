@@ -9,7 +9,7 @@ bin/zkServer.sh status
 ############ zk客户端,删除topic
 
 # 进入zk
-./zkCli.sh -server  localhost:2181
+bin/zkCli.sh -server  localhost:2181
 
 # 查看topic信息
 ls /brokers/topics

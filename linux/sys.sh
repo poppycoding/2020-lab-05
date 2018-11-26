@@ -24,3 +24,10 @@ firewall-cmd --state
 systemctl stop firewalld.service
 
 
+
+############ 查看内存
+free -g
+df -h
+du -sh
+
+

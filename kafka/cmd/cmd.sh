@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
 
+
+
 ############ start zk (内置zk)
 nohup bin/zookeeper-server-start.sh config/zookeeper.properties > zk.log 2>&1 &
+
+
+
+############ kill kafka
+lsof -i:9092 | awk 'NR==2{print $2}' | xargs kill -9
+
 
 
 
