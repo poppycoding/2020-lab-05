@@ -1,0 +1,46 @@
+[
+  {
+    "typeCode": "businessType",
+    "typeName": "业务属性"
+  },
+  {
+    "dictCode": "businessType",
+    "dictName": "业务类型-1",
+    "remark": "1",
+    "typeId": "1067375781652598784",
+    "typeCode": "businessType",
+    "typeName": "业务属性"
+  },
+
+
+
+  {
+    "typeCode": "technicalType",
+    "typeName": "技术类型"
+  },
+  {
+    "dictCode": "technicalType",
+    "dictName": "技术类型-1",
+    "remark": "1",
+    "typeId": "1067334873838129152",
+    "typeCode": "technicalType",
+    "typeName": "技术类型"
+  },
+
+
+
+  {
+    "typeCode": "physicalType",
+    "typeName": "物理类型"
+  },
+  {
+    "dictCode": "physicalType",
+    "dictName": "物理类型-1",
+    "remark": "1",
+    "typeId": "1067335028603752448",
+    "typeCode": "physicalType",
+    "typeName": "物理类型"
+  }
+
+
+]

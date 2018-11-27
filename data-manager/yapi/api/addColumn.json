@@ -1,0 +1,174 @@
+[
+  {
+    "columnName": "test_add",
+    "columnChineseName": "测试列",
+    "columnComment": "测试新增列",
+    "isPk": 0,
+    "isFk": 0,
+    "businessType": [
+      {
+        "id": "1067303037724397568",
+        "dictCode": "businessType",
+        "dictName": "业务类型-1",
+        "remark": "1",
+        "typeId": "1067302891657760768",
+        "typeCode": "businessType",
+        "typeName": "业务属性",
+        "createAt": 1543299848262,
+        "updateAt": 1543299848262,
+        "createBy": "Elijah",
+        "updateBy": "Elijah"
+      },
+      {
+        "id": "1067303111917441024",
+        "dictCode": "businessType-2",
+        "dictName": "业务类型-2",
+        "remark": "2",
+        "typeId": "1067302891657760768",
+        "typeCode": "businessType",
+        "typeName": "业务属性",
+        "createAt": 1543299866042,
+        "updateAt": 1543299866042,
+        "createBy": "Elijah",
+        "updateBy": "Elijah"
+      }
+    ],
+    "technicalType": [
+      {
+        "id": "1067303998689775616",
+        "dictCode": "technicalType",
+        "dictName": "技术类型-1",
+        "remark": "1",
+        "typeId": "1067303755965403136",
+        "typeCode": "technicalType",
+        "typeName": "技术类型",
+        "createAt": 1543300077439,
+        "updateAt": 1543300077439,
+        "createBy": "Elijah",
+        "updateBy": "Elijah"
+      },
+      {
+        "id": "1067304048467775488",
+        "dictCode": "technicalType2",
+        "dictName": "技术类型-2",
+        "remark": "2",
+        "typeId": "1067303755965403136",
+        "typeCode": "technicalType",
+        "typeName": "技术类型",
+        "createAt": 1543300089343,
+        "updateAt": 1543300089343,
+        "createBy": "Elijah",
+        "updateBy": "Elijah"
+      }
+    ],
+    "createAt": 1543300482827,
+    "updateAt": 1543300482827,
+    "createBy": "elijah"
+  },
+
+
+  {
+    "id": "1067303037724397568",
+    "dictCode": "businessType",
+    "dictName": "业务类型-1",
+    "remark": "1",
+    "typeId": "1067302891657760768",
+    "typeCode": "businessType",
+    "typeName": "业务属性",
+    "createAt": 1543299848262,
+    "updateAt": 1543299848262,
+    "createBy": "Elijah",
+    "updateBy": "Elijah"
+  },
+  {
+    "id": "1067303111917441024",
+    "dictCode": "businessType-2",
+    "dictName": "业务类型-2",
+    "remark": "2",
+    "typeId": "1067302891657760768",
+    "typeCode": "businessType",
+    "typeName": "业务属性",
+    "createAt": 1543299866042,
+    "updateAt": 1543299866042,
+    "createBy": "Elijah",
+    "updateBy": "Elijah"
+  },
+  {
+    "id": "1067303867684884480",
+    "dictCode": "1",
+    "dictName": "业务表1",
+    "remark": "2",
+    "typeId": "1067302891657760768",
+    "typeCode": "businessType",
+    "typeName": "业务属性",
+    "createAt": 1543300046239,
+    "updateAt": 1543300046239,
+    "createBy": "Elijah",
+    "updateBy": "Elijah"
+  },
+  {
+    "id": "1067303907946008576",
+    "dictCode": "2",
+    "dictName": "业务表2",
+    "remark": "2",
+    "typeId": "1067302891657760768",
+    "typeCode": "businessType",
+    "typeName": "业务属性",
+    "createAt": 1543300055838,
+    "updateAt": 1543300055838,
+    "createBy": "Elijah",
+    "updateBy": "Elijah"
+  },
+  {
+    "id": "1067303998689775616",
+    "dictCode": "technicalType",
+    "dictName": "技术类型-1",
+    "remark": "1",
+    "typeId": "1067303755965403136",
+    "typeCode": "technicalType",
+    "typeName": "技术类型",
+    "createAt": 1543300077439,
+    "updateAt": 1543300077439,
+    "createBy": "Elijah",
+    "updateBy": "Elijah"
+  },
+  {
+    "id": "1067304048467775488",
+    "dictCode": "technicalType2",
+    "dictName": "技术类型-2",
+    "remark": "2",
+    "typeId": "1067303755965403136",
+    "typeCode": "technicalType",
+    "typeName": "技术类型",
+    "createAt": 1543300089343,
+    "updateAt": 1543300089343,
+    "createBy": "Elijah",
+    "updateBy": "Elijah"
+  },
+  {
+    "id": "1067304475024297984",
+    "dictCode": "physicalType",
+    "dictName": "物理类型-1",
+    "remark": "1",
+    "typeId": "1067304406967521280",
+    "typeCode": "physicalType",
+    "typeName": "物理类型",
+    "createAt": 1543300191041,
+    "updateAt": 1543300191041,
+    "createBy": "Elijah",
+    "updateBy": "Elijah"
+  },
+  {
+    "id": "1067304514031325184",
+    "dictCode": "physicalType2",
+    "dictName": "物理类型-2",
+    "remark": "2",
+    "typeId": "1067304406967521280",
+    "typeCode": "physicalType",
+    "typeName": "物理类型",
+    "createAt": 1543300200339,
+    "updateAt": 1543300200339,
+    "createBy": "Elijah",
+    "updateBy": "Elijah"
+  }
+]
