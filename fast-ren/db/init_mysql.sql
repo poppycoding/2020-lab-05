@@ -20,8 +20,8 @@ CREATE TABLE `sys_user` (
   `email` varchar(100) COMMENT '邮箱',
   `mobile` varchar(100) COMMENT '手机号',
   `status` tinyint COMMENT '状态  0：禁用   1：正常',
-  `create_user_id` bigint(20) COMMENT '创建者ID',
-  `create_time` datetime COMMENT '创建时间',
+  `create_by` varchar(20) COMMENT '创建者',
+  `create_at` bigint(20) COMMENT '创建时间',
   PRIMARY KEY (`user_id`),
   UNIQUE INDEX (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统用户';
@@ -30,8 +30,8 @@ CREATE TABLE `sys_user` (
 CREATE TABLE `sys_user_token` (
   `user_id` bigint(20) NOT NULL,
   `token` varchar(100) NOT NULL COMMENT 'token',
-  `expire_time` datetime DEFAULT NULL COMMENT '过期时间',
-  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `expire_time` bigint(20) DEFAULT NULL COMMENT '过期时间',
+  `update_at` bigint(20) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `token` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统用户Token';
@@ -40,7 +40,7 @@ CREATE TABLE `sys_user_token` (
 CREATE TABLE `sys_captcha` (
   `uuid` char(36) NOT NULL COMMENT 'uuid',
   `code` varchar(6) NOT NULL COMMENT '验证码',
-  `expire_time` datetime DEFAULT NULL COMMENT '过期时间',
+  `expire_time` bigint(20) DEFAULT NULL COMMENT '过期时间',
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统验证码';
 
@@ -49,8 +49,8 @@ CREATE TABLE `sys_role` (
   `role_id` bigint NOT NULL AUTO_INCREMENT,
   `role_name` varchar(100) COMMENT '角色名称',
   `remark` varchar(100) COMMENT '备注',
-  `create_user_id` bigint(20) COMMENT '创建者ID',
-  `create_time` datetime COMMENT '创建时间',
+  `create_by` varchar(20) COMMENT '创建者',
+  `create_at` bigint(20) COMMENT '创建时间',
   PRIMARY KEY (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色';
 
@@ -91,7 +91,7 @@ CREATE TABLE `sys_log` (
   `params` varchar(5000) COMMENT '请求参数',
   `time` bigint NOT NULL COMMENT '执行时长(毫秒)',
   `ip` varchar(64) COMMENT 'IP地址',
-  `create_date` datetime COMMENT '创建时间',
+  `create_at` bigint(20) COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=`InnoDB` DEFAULT CHARACTER SET utf8 COMMENT='系统日志';
 
@@ -100,7 +100,7 @@ CREATE TABLE `sys_log` (
 CREATE TABLE `sys_oss` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `url` varchar(200) COMMENT 'URL地址',
-  `create_date` datetime COMMENT '创建时间',
+  `create_at` bigint(20) COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=`InnoDB` DEFAULT CHARACTER SET utf8 COMMENT='文件上传';
 
@@ -114,7 +114,7 @@ CREATE TABLE `schedule_job` (
   `cron_expression` varchar(100) DEFAULT NULL COMMENT 'cron表达式',
   `status` tinyint(4) DEFAULT NULL COMMENT '任务状态  0：正常  1：暂停',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
-  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_at` bigint(20) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`job_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定时任务';
 
@@ -128,7 +128,7 @@ CREATE TABLE `schedule_job_log` (
   `status` tinyint(4) NOT NULL COMMENT '任务状态    0：成功    1：失败',
   `error` varchar(2000) DEFAULT NULL COMMENT '失败信息',
   `times` int(11) NOT NULL COMMENT '耗时(单位：毫秒)',
-  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_at` bigint(20) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`log_id`),
   KEY `job_id` (`job_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
@@ -141,7 +141,7 @@ CREATE TABLE `tb_user` (
   `username` varchar(50) NOT NULL COMMENT '用户名',
   `mobile` varchar(20) NOT NULL COMMENT '手机号',
   `password` varchar(64) COMMENT '密码',
-  `create_time` datetime COMMENT '创建时间',
+  `create_at` bigint(20) COMMENT '创建时间',
   PRIMARY KEY (`user_id`),
   UNIQUE INDEX (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户';
@@ -152,7 +152,7 @@ CREATE TABLE `tb_user` (
 
 
 -- 初始数据
-INSERT INTO `sys_user` (`user_id`, `username`, `password`, `salt`, `email`, `mobile`, `status`, `create_user_id`, `create_time`) VALUES ('1', 'admin', '9ec9750e709431dad22365cabc5c625482e574c74adaebba7dd02f1129e4ce1d', 'YzcmCZNvbXocrsz9dm8e', 'root@renren.io', '13612345678', '1', '1', '2016-11-11 11:11:11');
+INSERT INTO `sys_user` (`user_id`, `username`, `password`, `salt`, `email`, `mobile`, `status`, `create_by`, `create_at`) VALUES ('1', 'admin', '9ec9750e709431dad22365cabc5c625482e574c74adaebba7dd02f1129e4ce1d', 'YzcmCZNvbXocrsz9dm8e', 'root@renren.io', '13612345678', '1', '1', '1542888761500');
 
 INSERT INTO `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) VALUES (1, 0, '系统管理', NULL, NULL, 0, 'system', 0);
 INSERT INTO `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) VALUES (2, 1, '管理员列表', 'sys/user', NULL, 1, 'admin', 1);
@@ -185,12 +185,12 @@ INSERT INTO `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `
 INSERT INTO `sys_menu`(`menu_id`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) VALUES (30, 1, '文件上传', 'oss/oss', 'sys:oss:all', 1, 'oss', 6);
 
 INSERT INTO `sys_config` (`param_key`, `param_value`, `status`, `remark`) VALUES ('CLOUD_STORAGE_CONFIG_KEY', '{\"aliyunAccessKeyId\":\"\",\"aliyunAccessKeySecret\":\"\",\"aliyunBucketName\":\"\",\"aliyunDomain\":\"\",\"aliyunEndPoint\":\"\",\"aliyunPrefix\":\"\",\"qcloudBucketName\":\"\",\"qcloudDomain\":\"\",\"qcloudPrefix\":\"\",\"qcloudSecretId\":\"\",\"qcloudSecretKey\":\"\",\"qiniuAccessKey\":\"NrgMfABZxWLo5B-YYSjoE8-AZ1EISdi1Z3ubLOeZ\",\"qiniuBucketName\":\"ios-app\",\"qiniuDomain\":\"http://7xqbwh.dl1.z0.glb.clouddn.com\",\"qiniuPrefix\":\"upload\",\"qiniuSecretKey\":\"uIwJHevMRWU0VLxFvgy0tAcOdGqasdtVlJkdy6vV\",\"type\":1}', '0', '云存储配置信息');
-INSERT INTO `schedule_job` (`bean_name`, `method_name`, `params`, `cron_expression`, `status`, `remark`, `create_time`) VALUES ('testTask', 'test', 'renren', '0 0/30 * * * ?', '0', '有参数测试', '2016-12-01 23:16:46');
-INSERT INTO `schedule_job` (`bean_name`, `method_name`, `params`, `cron_expression`, `status`, `remark`, `create_time`) VALUES ('testTask', 'test2', NULL, '0 0/30 * * * ?', '1', '无参数测试', '2016-12-03 14:55:56');
+INSERT INTO `schedule_job` (`bean_name`, `method_name`, `params`, `cron_expression`, `status`, `remark`, `create_at`) VALUES ('testTask', 'test', 'renren', '0 0/30 * * * ?', '0', '有参数测试', '1542888761500');
+INSERT INTO `schedule_job` (`bean_name`, `method_name`, `params`, `cron_expression`, `status`, `remark`, `create_at`) VALUES ('testTask', 'test2', NULL, '0 0/30 * * * ?', '1', '无参数测试', '1542888761500');
 
 
 -- 账号：13612345678  密码：admin
-INSERT INTO `tb_user` (`username`, `mobile`, `password`, `create_time`) VALUES ('mark', '13612345678', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '2017-03-23 22:37:41');
+INSERT INTO `tb_user` (`username`, `mobile`, `password`, `create_at`) VALUES ('mark', '13612345678', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '1542888761500');
 
 
 
