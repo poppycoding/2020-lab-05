@@ -6,10 +6,18 @@
 1.==================>>db
 # 查看db-db
 match
-(d1 :DbInfo {contextPath:'db-oracle@192.168.202.2@1521@orcl'}) -[:TABLE_INFO|:IMPACT|:LINEAGE*4]- (d2 :DbInfo)
-RETURN {center: ( {id:d1.id, name:d1.dbName,category:'center'}) , around: collect(DISTINCT  {id: d2.id, name:d2.dbName,category:'around'})}
+(d:DbInfo),(d1:DbInfo) -[r]- (t1:TableInfo), (t1) -[r2]-(k:KettleInfo), (k) -[r3]-(t2:TableInfo), (t2) -[r4]- (d2 :DbInfo)
+return *
 
-match (d1:DbInfo{id:{0}}) -[:TABLE_INFO|:IMPACT|:LINEAGE*4]- (d2:DbInfo) RETURN {center:({id:d1.id, name:d1.dbName, category:'center'}) , around:collect(DISTINCT {id:d2.id, name:d2.dbName, category:'around'})}
+match
+(d:DbInfo),
+(d1:DbInfo) -[r:TABLE_INFO]-> (t1:TableInfo),
+(t1) <-[r2:IMPACT]-(k:KettleInfo),
+(k) -[r3]-(t2:TableInfo),
+(t2) <-[r4:TABLE_INFO]- (d2 :DbInfo)
+return *
+
+
 
 
 
@@ -23,16 +31,4 @@ RETURN {center: ( {id:a.id, name:a.tableName,category:'center'}) , around: colle
 
 MATCH p =(a)-->(b)-->(c) WHERE a.id = {0} MATCH (a) -[r1:COLUMN_INFO]- (b),(b) -[r2:FK_TABLE]- (c) RETURN {center: ( {id:a.id, name:a.tableName,category:'center'}) , around: collect({id: c.id, name:c.tableName,category:'around'})}
 
-
-
-
-
-3.==================>>view(来源table|view)
-match
-(v:ViewInfo {id:'view-mysql@192.168.241.243@3306@sourcedata@sourcedata@v_test_table'})
--[:INPUT_TABLE|:INPUT_VIEW]- (t)
-return
-{center: ( {id:v.id, name:v.viewName,category:'center'}) , around: collect({id: t.id, name:t.tableName,category:'around'})}
-
-match (v:ViewInfo {id:{0}}) -[:INPUT_TABLE|:INPUT_VIEW]- (t) return {center: ( {id:v.id, name:v.viewName,category:'center'}) , around: collect({id: t.id, name:t.tableName,category:'around'})}
 
