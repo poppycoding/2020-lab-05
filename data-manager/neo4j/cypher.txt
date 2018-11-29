@@ -57,3 +57,5 @@ DELETE r
 
 3.==================>>delete all
 match (n)-[r]-() delete n,r
+
+match (n:DictInfo{id:'1067304048467775488'}) -[r]-() delete n ,r
