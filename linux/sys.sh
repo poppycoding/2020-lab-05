@@ -31,3 +31,20 @@ df -h
 du -sh
 
 
+
+############ .tar .tar.gz .gz
+# 解压
+tar zxvf FileName.tar.gz
+tar xvf FileName.tar
+gunzip FileName.gz
+unzip FileName.zip
+rar x FileName.rar
+# 压缩
+tar cvf FileName.tar DirName
+tar zcvf FileName.tar.gz DirName
+gzip FileName
+zip FileName.zip DirName
+rar a FileName.rar DirName
+
+
+
