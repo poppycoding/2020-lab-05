@@ -32,7 +32,7 @@ shape: extract(n IN nodes(p)| n._shape)
 
 MATCH
 p= (t: TableInfo { id: "table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_1" }) -[:LINEAGE|:IMPACT*1..]->(x)
-set t._color = "#fff",t._shape="square",x._color = "#eee",t._dbName=t.dbName, x._shape="square",x._dbName=t.dbName
+set x._color = "#eee",x._shape="square",x._dbName=t.dbName,t._color = "#fff",t._dbName=t.dbName,t._shape="square"
 return
 { data: extract(n IN nodes(p)| n.id+'>>>'+n.metaName+'>>>'+n._color+'>>>'+n._shape+'>>>'+n._dbName)}
 
