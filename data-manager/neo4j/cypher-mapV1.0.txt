@@ -18,6 +18,24 @@ match
 return *
 
 
+match
+(d:DbInfo),
+(d1:DbInfo) -[r:TABLE_INFO]-> (t1:TableInfo),
+(t1) <-[r2:IMPACT]-(k:KettleInfo),
+(k) <-[r3:LINEAGE]-(t2:TableInfo),
+(t2) <-[r4:TABLE_INFO]- (d2 :DbInfo)
+return  collect({dId1: d1.id, dId2: d2.id, tId1: t1.id, tId2: t2.id, kId: k.id })
+
+match
+(d1:DbInfo) -[r:TABLE_INFO]-> (t1:TableInfo),
+(t1) <-[r2:IMPACT]-(k:KettleInfo),
+(k) <-[r3:LINEAGE]-(t2:TableInfo),
+(t2) <-[r4:TABLE_INFO]- (d2 :DbInfo)
+where k.jobName = 'skip-db'
+with distinct d1,d2,t1,t2,k
+return collect({ dId1:d1.id, dId2:d2.id, tId1:t1.id, tId2:t2.id, kId:k.id })
+
+
 
 
 
