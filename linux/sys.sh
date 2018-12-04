@@ -48,3 +48,7 @@ rar a FileName.rar DirName
 
 
 
+############ 搜索终端屏幕
+ctrl + shift + f
+
+
