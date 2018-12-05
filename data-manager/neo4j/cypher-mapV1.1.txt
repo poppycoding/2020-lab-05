@@ -18,7 +18,7 @@ keyInfo: collect(d.id),
 arrowInfo: collect(distinct { dId1:d1.id, dId2:d2.id, tId1:t1.id, tId2:t2.id, kId:k.id })}
 
 
-match (d1:DbInfo) -[r:TABLE_INFO]-> (t1:TableInfo), (t1) <-[r2:IMPACT]-(k:KettleInfo), (k) <-[r3:LINEAGE]-(t2:TableInfo), (t2) <-[r4:TABLE_INFO]- (d2 :DbInfo) where k.jobName ={0} and d1.id <> d2.id and  d1.dbName CONTAINS {1} or  d2.dbName CONTAINS {1}  return{ keyInfo: collect(d.id), arrowInfo: collect(distinct { dId1:d1.id, dId2:d2.id, tId1:t1.id, tId2:t2.id, kId:k.id })}}
+match (d:DbInfo),(d1:DbInfo) -[r:TABLE_INFO]-> (t1:TableInfo), (t1) <-[r2:IMPACT]-(k:KettleInfo), (k) <-[r3:LINEAGE]-(t2:TableInfo), (t2) <-[r4:TABLE_INFO]- (d2 :DbInfo) where k.jobName ={0} and d1.id <> d2.id and  d1.dbName CONTAINS {1} or  d2.dbName CONTAINS {1}  return{ keyInfo: collect(d.id), arrowInfo: collect(distinct { dId1:d1.id, dId2:d2.id, tId1:t1.id, tId2:t2.id, kId:k.id })}
 
 
 
