@@ -27,15 +27,3 @@ match (d:DbInfo),(d1:DbInfo) -[r:TABLE_INFO]-> (t1:TableInfo), (t1) <-[r2:IMPACT
 
 
 
-
-
-2.==================>>table
-MATCH p =(a)-->(b)-->(c)
-WHERE a.id = 'table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_2'
-MATCH
-(a) -[r1:COLUMN_INFO]- (b),(b) -[r2:FK_TABLE]- (c)
-RETURN {center: ( {id:a.id, name:a.tableName,category:'center'}) , around: collect({id: c.id, name:c.tableName,category:'around'})}
-
-MATCH p =(a)-->(b)-->(c) WHERE a.id = {0} MATCH (a) -[r1:COLUMN_INFO]- (b),(b) -[r2:FK_TABLE]- (c) RETURN {center: ( {id:a.id, name:a.tableName,category:'center'}) , around: collect({id: c.id, name:c.tableName,category:'around'})}
-
-
