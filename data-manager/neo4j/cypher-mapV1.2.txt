@@ -39,12 +39,29 @@ match (d:DbInfo),(d1:DbInfo) -[r:TABLE_INFO]-> (t1:TableInfo), (t1) <-[r2:IMPACT
 
 
 2.==================>>table
-MATCH p =(a)-->(b)-->(c)
-WHERE a.id = 'table-mysql@192.168.241.243@3306@sourcedata@sourcedata@test_table_2'
-MATCH
-(a) -[r1:COLUMN_INFO]- (b),(b) -[r2:FK_TABLE]- (c)
-RETURN {center: ( {id:a.id, name:a.tableName,category:'center'}) , around: collect({id: c.id, name:c.tableName,category:'around'})}
+match
+(d:DbInfo) -[r:TABLE_INFO]-(t)
+where t.jobName ='xtgl'
+return collect({dId:d.id,tId:t.id})
 
-MATCH p =(a)-->(b)-->(c) WHERE a.id = {0} MATCH (a) -[r1:COLUMN_INFO]- (b),(b) -[r2:FK_TABLE]- (c) RETURN {center: ( {id:a.id, name:a.tableName,category:'center'}) , around: collect({id: c.id, name:c.tableName,category:'around'})}
+match (d:DbInfo) -[r:TABLE_INFO]-(t) where t.jobName ={0} or ({0} is null) return collect({dId:d.id,tId:t.id})
 
 
+
+
+match
+(t1:TableInfo) -[r1:COLUMN_INFO]- (c:ColumnInfo), (c) -[r2:FK_TABLE]- (t2:TableInfo)
+where c.jobName ='xtgl'
+return collect({source:t1.id,target:t2.id,value:"fk"})
+
+match (t1:TableInfo) -[r1:COLUMN_INFO]- (c:ColumnInfo), (c) -[r2:FK_TABLE]- (t2:TableInfo) where c.jobName ={0} or ({0} is null) return collect({source:t1.id,target:t2.id,value:"fk"})
+
+
+
+
+match
+(t3:TableInfo) -[r3:LINEAGE]- (k:KettleInfo), (k) -[r4:IMPACT]-  (t4:TableInfo)
+where  k.jobName = 'kettle(buquan)'
+return collect({source:t3.id,target:t4.id,value:"etl"})
+
+match (t3:TableInfo) -[r3:LINEAGE]- (k:KettleInfo), (k) -[r4:IMPACT]- (t4:TableInfo) where  k.jobName ={0} or ({0} is null) return collect({source:t3.id,target:t4.id,value:"etl"})
