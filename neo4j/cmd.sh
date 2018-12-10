@@ -6,6 +6,9 @@ neo4j.bat status | stop | start | restart
 #linuxs: neo4j cmd
 bin/neo4j status | stop | start | restart
 
+curl http://localhost:7474
+
+
 
 
 

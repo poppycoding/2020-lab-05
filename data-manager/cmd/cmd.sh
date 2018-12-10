@@ -24,7 +24,7 @@ bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 -
 bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic metadata_topic_kettle
 bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 5 --topic metadata_topic_deploy
 
-# cloudera集群
+# cloudera集群 master:9092, node:9092 ... ...
 bin/kafka-topics --create --zookeeper master:2181 --replication-factor 3 --partitions 3 --topic metadata_topic_sample
 bin/kafka-topics --create --zookeeper master:2181 --replication-factor 3 --partitions 3 --topic metadata_topic_db
 bin/kafka-topics --create --zookeeper master:2181 --replication-factor 3 --partitions 3 --topic metadata_topic_table
