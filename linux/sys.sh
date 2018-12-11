@@ -19,7 +19,6 @@ timedatectl set-ntp true
 ########### 防火墙(centos7) https://www.cnblogs.com/zhangzhibin/p/6231870.html
 # status running & not running
 firewall-cmd --state
-
 # stop
 systemctl stop firewalld.service
 
@@ -52,3 +51,14 @@ rar a FileName.rar DirName
 ctrl + shift + f
 
 
+
+
+############ HISTORY
+# 设置历史格式
+export HISTTIMEFORMAT='%F %T '
+
+# 文本形式查看历史命令
+history | grep -i "tail"
+
+# 搜索keyword，再次输入
+ctrl + R + keyword
