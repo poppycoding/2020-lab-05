@@ -50,7 +50,13 @@ bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 -
 
 bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test_ha
 
+
+# 测试消费者1（不稳定）
 bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test_ha --from-beginning
+
+# 测试消费者2
+bin/kafka-console-consumer.sh --bootstrap-server master:9092 --topic metadata_topic_db --from-beginning
+
 
 
 # 单节点replication-factor复制因子参数必须存在,且大于零
