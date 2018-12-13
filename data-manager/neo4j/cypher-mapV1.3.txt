@@ -5,30 +5,29 @@
 
 1.==================>>db
 # 查看db-db
+match (d:DbInfo)  return collect(d.id)
 
 match
-(d:DbInfo),
 (d1:DbInfo) -[r:TABLE_INFO]-> (t1:TableInfo),
 (t1) <-[r2:IMPACT]-(k:KettleInfo),
 (k) <-[r3:LINEAGE]-(t2:TableInfo),
 (t2) <-[r4:TABLE_INFO]- (d2 :DbInfo)
 where k.jobName ='kettle(ft)' and d1.id <> d2.id
-return{
-keyInfo: collect(d.id),
-arrowInfo: collect(distinct { dId1:d1.id, dDelete1:d1.isDeleted, dId2:d2.id, dDelete2:d2.isDeleted, tId1:t1.id, tDelete1:t1.isDeleted, tId2:t2.id, tDelete2:t2.isDeleted, kId:k.id })}
+return collect(distinct { dId1:d1.id, dDelete1:d1.isDeleted, dId2:d2.id, dDelete2:d2.isDeleted, tId1:t1.id, tDelete1:t1.isDeleted, tId2:t2.id, tDelete2:t2.isDeleted, kId:k.id })
 
+
+
+match (d:DbInfo) where d.jobName ={0} return collect({id:d.id, deleted:d.isDeleted})
 match
-(d:DbInfo),
 (d1:DbInfo) -[r:TABLE_INFO]-> (t1:TableInfo),
 (t1) <-[r2:IMPACT]-(k:KettleInfo),
 (k) <-[r3:LINEAGE]-(t2:TableInfo),
 (t2) <-[r4:TABLE_INFO]- (d2 :DbInfo)
 where (k.jobName ={0} or ({0} is null)) and d1.id <> d2.id
-return{
-keyInfo: collect(d.id),
-arrowInfo: collect(distinct { dId1:d1.id, dDelete1:d1.isDeleted, dId2:d2.id, dDelete2:d2.isDeleted, tId1:t1.id, tDelete1:t1.isDeleted, tId2:t2.id, tDelete2:t2.isDeleted, kId:k.id })}
+return
+collect(distinct { dId1:d1.id, dDelete1:d1.isDeleted, dId2:d2.id, dDelete2:d2.isDeleted, tId1:t1.id, tDelete1:t1.isDeleted, tId2:t2.id, tDelete2:t2.isDeleted, kId:k.id })
 
-match (d:DbInfo),(d1:DbInfo) -[r:TABLE_INFO]-> (t1:TableInfo), (t1) <-[r2:IMPACT]-(k:KettleInfo), (k) <-[r3:LINEAGE]-(t2:TableInfo), (t2) <-[r4:TABLE_INFO]- (d2 :DbInfo) where (k.jobName ={0} or ({0} is null)) and d1.id <> d2.id return{ keyInfo: collect(d.id), arrowInfo: collect(distinct { dId1:d1.id, dDelete1:d1.isDeleted, dId2:d2.id, dDelete2:d2.isDeleted, tId1:t1.id, tDelete1:t1.isDeleted, tId2:t2.id, tDelete2:t2.isDeleted, kId:k.id })}
+match (d1:DbInfo) -[r:TABLE_INFO]-> (t1:TableInfo), (t1) <-[r2:IMPACT]-(k:KettleInfo), (k) <-[r3:LINEAGE]-(t2:TableInfo), (t2) <-[r4:TABLE_INFO]- (d2 :DbInfo) where (k.jobName ={0} or ({0} is null)) and d1.id <> d2.id return collect(distinct { dId1:d1.id, dDelete1:d1.isDeleted, dId2:d2.id, dDelete2:d2.isDeleted, tId1:t1.id, tDelete1:t1.isDeleted, tId2:t2.id, tDelete2:t2.isDeleted, kId:k.id })
 
 
 
@@ -39,14 +38,6 @@ match (d:DbInfo),(d1:DbInfo) -[r:TABLE_INFO]-> (t1:TableInfo), (t1) <-[r2:IMPACT
 
 
 2.==================>>table
-match
-(d:DbInfo) -[r:TABLE_INFO]-(t)
-where t.jobName ='xtgl'
-return collect({dId:d.id,tId:t.id})
-
-match (d:DbInfo) -[r:TABLE_INFO]-(t) where t.jobName ={0} or ({0} is null) return collect({dId:d.id,tId:t.id})
-
-
 
 
 match
