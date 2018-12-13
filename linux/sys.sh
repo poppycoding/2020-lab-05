@@ -62,3 +62,12 @@ history | grep -i "tail"
 
 # 搜索keyword，再次输入
 ctrl + R + keyword
+
+
+
+# 查看linux版本
+cat /etc/redhat-release
+lsb_release -a
+
+# 带宽信息查看
+sudo ethtool eth1
