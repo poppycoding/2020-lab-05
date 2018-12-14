@@ -69,5 +69,12 @@ ctrl + R + keyword
 cat /etc/redhat-release
 lsb_release -a
 
+
 # 带宽信息查看
 sudo ethtool eth1
+
+
+
+# 查找文件,根据文件大小(c是byte),文件名查找,支持正则
+find / -size 1500c
+find /home -name  test.*
