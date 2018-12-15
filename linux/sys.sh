@@ -59,7 +59,6 @@ export HISTTIMEFORMAT='%F %T '
 
 # 文本形式查看历史命令
 history | grep -i "tail"
-
 # 搜索keyword，再次输入
 ctrl + R + keyword
 
@@ -68,6 +67,7 @@ ctrl + R + keyword
 # 查看linux版本
 cat /etc/redhat-release
 lsb_release -a
+
 
 
 # 带宽信息查看
