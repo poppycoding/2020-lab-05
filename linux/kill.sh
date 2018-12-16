@@ -6,6 +6,9 @@
 netstat -nap | grep 8080 | grep LISTEN
 netstat -nap | grep 10425 | grep LISTEN
 
+# windows 查看进程端口
+netstat -ano | findstr 8080
+
 
 
 ############ kill命令
