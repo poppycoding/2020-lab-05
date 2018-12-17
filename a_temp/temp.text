@@ -1,0 +1,18 @@
+
+1.元数据项目机器配置申请
+配置: 4核 16G
+SSD: 40G
+
+
+2.项目部署内容
+搜索引擎: elasticsearch全文索引
+关系数据库: mysql系统数据
+图数据库: neo4j关系储存
+消息队列: kafka,zookeeper
+相关监控: es-head,kafka-manager
+前后端程序项目: java程序, nginx服务等
+
+
+
+
+

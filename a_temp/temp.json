@@ -1,0 +1,23 @@
+[
+  {
+    "dId2": "db-oracle@192.168.202.2@1521@orcl",
+    "dId1": "db-mysql@192.168.240.201@3306@whm1234",
+    "kId": "kettle-5@transformation@datamanager@oracle-mysql(oracle表小写)",
+    "tId1": "table-mysql@192.168.240.201@3306@whm1234@whm1234@department",
+    "tId2": "table-oracle@192.168.202.2@1521@orcl@SH@TTTT"
+  },
+  {
+    "dId2": "db-oracle@192.168.202.2@1521@orcl",
+    "dId1": "db-mysql@192.168.240.201@3306@whm1234",
+    "kId": "kettle-7@transformation@datamanager@test@skip_db",
+    "tId1": "table-mysql@192.168.240.201@3306@whm1234@whm1234@department",
+    "tId2": "table-oracle@192.168.202.2@1521@orcl@SH@TTTT"
+  },
+  {
+    "dId2": "db-oracle@192.168.202.2@1521@orcl",
+    "dId1": "db-sqlserver@192.168.202.13@1433@whm12",
+    "kId": "kettle-6@transformation@datamanager@test@不可使用",
+    "tId1": "table-sqlserver@192.168.202.13@1433@whm12@dbo@NETINFO",
+    "tId2": "table-oracle@192.168.202.2@1521@orcl@SH@EMP"
+  }
+]
