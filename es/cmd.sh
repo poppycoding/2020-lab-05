@@ -6,6 +6,8 @@ passwd es
 
 
 # start es (注意防火墙关闭)
+./elasticsearch -d
+# 或者
 nohup bin/elasticsearch &
 
 curl http://localhost:9200
