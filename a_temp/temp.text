@@ -14,5 +14,25 @@ SSD: 40G
 
 
 
+imp dms/dms@orcl  file=/home/oracle/dms.dmp ignore=y full=y;
+
+impdp dms/dms@192.168.202.2/orcl DIRECTORY=exp_dir DUMPFILE=dms.dmp REMAP_SCHEMA=SRCUSER:user
+
+impdp dms/dms DIRECTORY=exp_dir DUMPFILE=dms.dmp SCHEMAS=SH;
+
+impdp DMS/dms DIRECTORY=exp_dir DUMPFILE=dms.dmp REMAP_SCHEMA=xctg:DMS
+
+impdp DMS/dms DIRECTORY=exp_dir DUMPFILE=dms.dmp
+
+create directory exp_dir as '/home/oracle';
+select * from dba_directories;
+grant read,write on directory exp_dir to DMS;
+
+
+impdp DMS/dms@orcl directory=exp_dir dumpfile=dms.dmp remap_schema=xhct,hc_xhct,gwht,CTMSPROD,psprd,xctg,xctgonline_dev,xhd,HCBSYQ:DMS;
+impdp DMS/dms@orcl directory=exp_dir dumpfile=dms.dmp tables=* remap_schema=xctg:DMS;
+
+
+select CREATED from ALL_OBJECTS where OBJECT_TYPE='TABLE' and OBJECT_NAME=ACTIVE_LOG
 
 
