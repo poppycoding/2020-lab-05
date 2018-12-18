@@ -13,7 +13,7 @@ SSD: 40G
 前后端程序项目: java程序, nginx服务等
 
 
-
+3.oracle数据泵
 imp dms/dms@orcl  file=/home/oracle/dms.dmp ignore=y full=y;
 
 impdp dms/dms@192.168.202.2/orcl DIRECTORY=exp_dir DUMPFILE=dms.dmp REMAP_SCHEMA=SRCUSER:user
