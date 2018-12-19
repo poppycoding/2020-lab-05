@@ -33,6 +33,44 @@ select count(column_name) from all_tab_columns [where owner='TEST'];
 SELECT
 t.table_num, v.view_num, c.column_num, (t.table_num + v.view_num + c.column_num + 1) count_all
 FROM
-(select count(*) table_num from dba_tables where owner='HC_XHCT') t,
-(select count(*) view_num from dba_views where owner = 'HC_XHCT') v,
-(select count(column_name) column_num from dba_tab_columns where owner='HC_XHCT') c
+(select count(*) table_num from dba_tables where owner='CTMSPROD') t,
+(select count(*) view_num from dba_views where owner = 'CTMSPROD') v,
+(select count(column_name) column_num from dba_tab_columns where owner='CTMSPROD') c
+
+
+
+
+--5.表空间
+--创建:create tablespace 表间名 datafile '数据文件名' size 表空间大小
+create tablespace data_test datafile '/oracle/app/oradata/orcl/data_test_tbs.dbf' size 2000M;
+--查看
+SELECT tablespace_name, file_id, file_name, round(bytes / (1024 * 1024), 0) total_space FROM dba_data_files ORDER BY tablespace_name;
+
+
+
+
+--6.oracle相关操作
+--[创建用户]:create user 用户名 identified by 口令[即密码]；
+create user username identified by pwd;
+--[创建默认表空间的用户] create user 用户名 identified by 密码 default tablespace 表空间表;
+create user username identified by pwd default tablespace data_test;
+--[删除用户]:drop user 用户名 cascade(如果有数据对象,必须加上cascade参数);
+drop user test cascade;
+
+
+
+--oracle为兼容以前版本，提供三种标准角色（role）:connect(临时)/resource(正式)/dba(管理员).
+--授权：grant connect, resource to 用户名
+grant connect, resource to test;
+--撤销：revoke connect, resource from 用户名;
+revoke connect, resource from test;
+
+
+
+--用户还可以在oracle创建自己的role(需要拥有create role系统权限)
+--创建
+create role testRole;
+--拥有testRole角色的所有用户都具有对class表的select查询权限
+grant select on class to testRole;
+--删除角色,相关的权限将从数据库全部删除
+drop role testRole;
