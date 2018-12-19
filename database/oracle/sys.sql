@@ -41,8 +41,8 @@ FROM
 
 
 --5.表空间
---创建:create tablespace 表间名 datafile '数据文件名' size 表空间大小
-create tablespace data_test datafile '/oracle/app/oradata/orcl/data_test_tbs.dbf' size 2000M;
+--创建:create tablespace 表间名 datafile '数据文件名' size 表空间大小 autoextend 自动扩展 unlimited 无限制
+create tablespace data_test datafile '/oracle/app/oradata/orcl/data_test_tbs.dbf' size 100M autoextend on next 10M maxsize unlimited;
 --查看
 SELECT tablespace_name, file_id, file_name, round(bytes / (1024 * 1024), 0) total_space FROM dba_data_files ORDER BY tablespace_name;
 
