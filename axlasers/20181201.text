@@ -26,13 +26,44 @@ impdp DMS/dms DIRECTORY=exp_dir DUMPFILE=dms.dmp
 
 create directory exp_dir as '/home/oracle';
 select * from dba_directories;
-grant read,write on directory exp_dir to DMS;
+grant read,write on directory exp_dir to public;
 
 
 impdp DMS/dms@orcl directory=exp_dir dumpfile=dms.dmp remap_schema=xhct,hc_xhct,gwht,CTMSPROD,psprd,xctg,xctgonline_dev,xhd,HCBSYQ:DMS;
-impdp DMS/dms@orcl directory=exp_dir dumpfile=dms.dmp tables=* remap_schema=xctg:DMS;
+
+impdp DMS/dms directory=exp_dir dumpfile=dms.dmp remap_schema=xhct:DMS shcemas=xhct logfile=impdp_xhct.log
 
 
-select CREATED from ALL_OBJECTS where OBJECT_TYPE='TABLE' and OBJECT_NAME=ACTIVE_LOG
+xhct xctg xhd gwht CTMSPROD psprd hc_xhct
+expdp xctg/Oracle123@orcl  directory=dir content=metadata_only schemas=xhct dumpfile=xhct.dmp
+
+create directory exp_dir as '/home/oracle';
+select * from dba_directories;
+grant read,write on directory exp_dir to public;
 
 
+impdp xhct/xhct directory=exp_dir dumpfile=xhct.dmp remap_schema=xhct:xhct logfile=xhct.log
+ORA-00959: tablespace 'PDW_XCGT' does not exist
+
+
+impdp xhd/xhd directory=exp_dir dumpfile=xhd.dmp remap_schema=xhd:xhd logfile=xhd.log
+Job "XHD"."SYS_IMPORT_FULL_01" completed with 1 error(s) at Wed Dec 19 13:38:39 2018 elapsed 0 00:00:02
+
+
+impdp gwht/gwht directory=exp_dir dumpfile=gwht.dmp remap_schema=gwht:gwht logfile=gwht.log
+ORA-00959: tablespace 'ODS_GWHT' does not exist
+
+
+impdp CTMSPROD/CTMSPROD directory=exp_dir dumpfile=CTMSPROD.dmp remap_schema=CTMSPROD:CTMSPROD logfile=CTMSPROD.log
+Job "CTMSPROD"."SYS_IMPORT_FULL_01" completed with 3 error(s) at Wed Dec 19 13:48:48 2018 elapsed 0 00:03:16
+
+
+impdp psprd/psprd directory=exp_dir dumpfile=psprd.dmp remap_schema=psprd:psprd logfile=psprd.log
+ORA-00959: tablespace 'ODS_PSPRD' does not exist
+
+
+impdp hc_xhct/hc_xhct directory=exp_dir dumpfile=hc_xhct.dmp remap_schema=hc_xhct:hc_xhct logfile=hc_xhct.log
+
+
+
+impdp xctg/xctg directory=exp_dir dumpfile=xctg.dmp remap_schema=xctg:xctg logfile=xctg.log
