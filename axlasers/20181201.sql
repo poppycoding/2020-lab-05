@@ -28,3 +28,10 @@ INSERT INTO `sys_role_permission`(`id`, `role_id`, `permission_id`) VALUES (27, 
 INSERT INTO `sys_role_permission`(`id`, `role_id`, `permission_id`) VALUES (28, 1, 28);
 INSERT INTO `sys_role_permission`(`id`, `role_id`, `permission_id`) VALUES (29, 1, 29);
 INSERT INTO `sys_role_permission`(`id`, `role_id`, `permission_id`) VALUES (30, 1, 30);
+
+
+select name from v$tablespace;
+select file_name,bytes/1024/1024 from dba_data_files where tablespace_name like 'UNDOTBS3';
+alter tablespace UNDOTBS3 add datafile '/oracle/app/oradata/orcl/undotbs03.dbf' size 1G;
+alter tablespace UNDOTBS3 add datafile '/oracle/app/oradata/orcl/undotbs04.dbf' size 1G autoextend on maxsize 16g;
+alter tablespace PDW_XCGT add datafile '/oracle/app/oradata/orcl/pdw_xctg02.dbf' size 1G autoextend on maxsize 16g;

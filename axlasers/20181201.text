@@ -67,3 +67,5 @@ impdp hc_xhct/hc_xhct directory=exp_dir dumpfile=hc_xhct.dmp remap_schema=hc_xhc
 
 
 impdp xctg/xctg directory=exp_dir dumpfile=xctg.dmp remap_schema=xctg:xctg logfile=xctg.log
+
+
