@@ -58,13 +58,11 @@ create user username identified by pwd default tablespace data_test;
 drop user test cascade;
 
 
-
 --oracle为兼容以前版本，提供三种标准角色（role）:connect(临时)/resource(正式)/dba(管理员).
 --授权：grant connect, resource to 用户名
 grant connect, resource to test;
 --撤销：revoke connect, resource from 用户名;
 revoke connect, resource from test;
-
 
 
 --用户还可以在oracle创建自己的role(需要拥有create role系统权限)
@@ -74,3 +72,34 @@ create role testRole;
 grant select on class to testRole;
 --删除角色,相关的权限将从数据库全部删除
 drop role testRole;
+
+
+
+
+
+--7.oracle查看表空间情况
+SELECT Upper(F.TABLESPACE_NAME)         "表空间名",
+       D.TOT_GROOTTE_MB                 "表空间大小(M)",
+       D.TOT_GROOTTE_MB - F.TOTAL_BYTES "已使用空间(M)",
+       To_char(Round(( D.TOT_GROOTTE_MB - F.TOTAL_BYTES ) / D.TOT_GROOTTE_MB * 100, 2), '990.99')
+       || '%'                           "使用比",
+       F.TOTAL_BYTES                    "空闲空间(M)",
+       F.MAX_BYTES                      "最大块(M)"
+FROM   (SELECT TABLESPACE_NAME,
+               Round(Sum(BYTES) / ( 1024 * 1024 ), 2) TOTAL_BYTES,
+               Round(Max(BYTES) / ( 1024 * 1024 ), 2) MAX_BYTES
+        FROM   SYS.DBA_FREE_SPACE
+        GROUP  BY TABLESPACE_NAME) F,
+       (SELECT DD.TABLESPACE_NAME,
+               Round(Sum(DD.BYTES) / ( 1024 * 1024 ), 2) TOT_GROOTTE_MB
+        FROM   SYS.DBA_DATA_FILES DD
+        GROUP  BY DD.TABLESPACE_NAME) D
+WHERE  D.TABLESPACE_NAME = F.TABLESPACE_NAME
+ORDER  BY 1
+
+
+
+
+
+--8.
+select 'alter system kill session '||''''||sid||','||serial#||''''||';' from v$session where username='PSPRD';

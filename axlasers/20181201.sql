@@ -34,4 +34,11 @@ select name from v$tablespace;
 select file_name,bytes/1024/1024 from dba_data_files where tablespace_name like 'UNDOTBS3';
 alter tablespace UNDOTBS3 add datafile '/oracle/app/oradata/orcl/undotbs03.dbf' size 1G;
 alter tablespace UNDOTBS3 add datafile '/oracle/app/oradata/orcl/undotbs04.dbf' size 1G autoextend on maxsize 16g;
-alter tablespace PDW_XCGT add datafile '/oracle/app/oradata/orcl/pdw_xctg02.dbf' size 1G autoextend on maxsize 16g;
+alter tablespace SYSTEM add datafile '/oracle/app/oradata/orcl/system01.dbf' size 1G autoextend on maxsize 16g;
+
+
+alter tablespace JZX add datafile '/oradata/neworcl/jzx02.dbf' size 1G autoextend on maxsize 16g;
+
+
+
+
