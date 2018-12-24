@@ -1,4 +1,5 @@
-1.linux 安装java
+
+--vi /etc/profile
 
 JAVA_HOME=/opt/jdk1.8.0_191
 PATH=$JAVA_HOME/bin:$PATH
