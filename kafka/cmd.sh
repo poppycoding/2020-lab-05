@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
 
+############ 查看kafka版本
+find ./libs/ -name \*kafka_\* | head -1 | grep -o '\kafka[^\n]*'
+
+
+
 
 ############ start zk (内置zk)
 nohup bin/zookeeper-server-start.sh config/zookeeper.properties > zk.log 2>&1 &
