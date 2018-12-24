@@ -54,7 +54,7 @@ select * from syscolumns c where id =1810105489
 
 
 
-MATCH (n{jobId:14}) return count(n);
+MATCH (n{jobId:21}) return count(n);
 MATCH (d:DbInfo{jobId:14}) return count(d);
 MATCH (t:TableInfo{jobId:14}) return count(t);
 MATCH (v:ViewInfo{jobId:14}) return count(v);
@@ -102,3 +102,22 @@ alter tablespace ODS_PSPRD add datafile '/oradata/neworcl/ODS_PSPRD02.dbf' size 
 
 
 
+
+
+
+
+SELECT tablespace_name, file_id, file_name, round(bytes / (1024 * 1024), 0) total_space FROM dba_data_files ORDER BY tablespace_name;
+
+
+select 'alter system kill session '||''''||sid||','||serial#||''''||';' from v$session where username='XCTG';
+alter system kill session '78,581';
+alter system kill session '62,563';
+drop user XCTG cascade;
+create user XCTG  identified by XCTG;
+grant dba to XCTG;
+
+alter tablespace PDW_XCGT add datafile '/oradata/neworcl/PDW_XCGT04.dbf' size 1G autoextend on maxsize 16g;
+alter tablespace PDW_XCGT add datafile '/oradata/neworcl/PDW_XCGT05.dbf' size 1G autoextend on maxsize 16g;
+alter tablespace PDW_XCGT add datafile '/oradata/neworcl/PDW_XCGT06.dbf' size 1G autoextend on maxsize 16g;
+
+ purge recyclebin

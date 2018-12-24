@@ -37,7 +37,7 @@ alter tablespace UNDOTBS3 add datafile '/oracle/app/oradata/orcl/undotbs04.dbf' 
 alter tablespace SYSTEM add datafile '/oracle/app/oradata/orcl/system01.dbf' size 1G autoextend on maxsize 16g;
 
 
-alter tablespace JZX add datafile '/oradata/neworcl/jzx02.dbf' size 1G autoextend on maxsize 16g;
+alter tablespace PDW_XCGT add datafile '/oradata/neworcl/PDW_XCGT11.dbf' size 1G autoextend on maxsize 16g;
 
 
 

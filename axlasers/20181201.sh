@@ -169,23 +169,25 @@ create user XHD_TOS_HIS  identified by XHD_TOS_HIS;
 
 create user XICT  identified by XICT;
 
-grant dba to CTMSPROD;
+grant dba to CTMSPROD/oracle;
+grant dba to GWHT/oracle;
+grant dba to HCBSYQ/oracle;
+grant dba to HC_XHCT/oracle;
+grant dba to XHCT/oracle;
+grant dba to XHD/oracle;
+grant dba to PSPRD/oracle;
 grant dba to DDHX;
 grant dba to DIP;
 grant dba to DZKA;
 grant dba to EAM_DW;
 grant dba to EXFSYS;
 grant dba to FLOWS_FILES;
-grant dba to GWHT;
-grant dba to HCBSYQ;
-grant dba to HC_XHCT;
 grant dba to K3;
 grant dba to MGMT_VIEW;
 grant dba to OA;
 grant dba to ODC;
 grant dba to ODS_HXMT;
 grant dba to OLAPSYS;
-grant dba to PSPRD;
 grant dba to SEMP_XCTG;
 grant dba to SI_INFORMTN_SCHEMA;
 grant dba to SPATIAL_CSW_ADMIN_USR;
@@ -193,10 +195,9 @@ grant dba to SPATIAL_WFS_ADMIN_USR;
 grant dba to TEST_USER;
 grant dba to WMSYS;
 grant dba to XCTG_BI;
+grant dba to XCTG;
 grant dba to XDB;
-grant dba to XHCT;
 grant dba to XHCTDW;
-grant dba to XHD;
 grant dba to XHD_BIS;
 grant dba to XHD_CODE;
 grant dba to XHD_TOS;
@@ -231,7 +232,7 @@ impdp XCTG/XCTG          directory=exp_dir dumpfile=xctg.dmp      logfile=xctg.l
 
 
 
- purge recyclebin
+
 
 
 

@@ -99,3 +99,9 @@ sudo ethtool eth1
 # 查找文件,根据文件大小(c是byte),文件名查找,支持正则
 find / -size 1500c
 find /home -name  test.*
+
+
+
+# 新建用户,密码es
+useradd es
+passwd es
