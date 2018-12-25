@@ -45,11 +45,12 @@ FROM
 create tablespace data_test datafile '/oracle/app/oradata/orcl/data_test_tbs.dbf' size 100M autoextend on next 10M maxsize unlimited;
 --追加表空间:
 alter tablespace PDW_XCGT add datafile '/oradata/neworcl/PDW_XCGT11.dbf' size 1G autoextend on maxsize 16g;
+--直接追加到最大(文件最大32g)
+alter tablespace PDW_XCGT add datafile '/oradata/neworcl/PDW_XCGT_max_1.dbf' size 30g autoextend off;
 --清空回收站
 purge recyclebin
 --查看
 SELECT tablespace_name, file_id, file_name, round(bytes / (1024 * 1024), 0) total_space FROM dba_data_files ORDER BY tablespace_name;
-
 
 
 

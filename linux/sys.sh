@@ -29,6 +29,12 @@ free -g
 df -h
 du -sh
 
+# 查看文件占用
+du -sh *
+
+# 查看文件时单位 -lh
+ll -lh
+ls -lh
 
 
 ############ .tar .tar.gz .gz
