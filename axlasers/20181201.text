@@ -121,3 +121,7 @@ alter tablespace PDW_XCGT add datafile '/oradata/neworcl/PDW_XCGT05.dbf' size 1G
 alter tablespace PDW_XCGT add datafile '/oradata/neworcl/PDW_XCGT06.dbf' size 1G autoextend on maxsize 16g;
 
  purge recyclebin
+
+
+
+

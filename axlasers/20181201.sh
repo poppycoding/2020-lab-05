@@ -70,112 +70,62 @@ create tablespace ODS_XHCTDW   datafile  '/oradata/neworcl/tbs_ODS_XHCTDW.dbf'  
 create tablespace ODS_EIR   datafile  '/oradata/neworcl/tbs_ODS_EIR.dbf'     size 100m autoextend on maxsize 16g;
 create tablespace SYSTEM   datafile  '/oracle/app/oradata/neworcl/system02.dbf'     size 100m autoextend on maxsize 16g;
 
-
 create user CTMSPROD  identified by CTMSPROD;
-
 create user CTXSYS  identified by CTXSYS;
-
 create user DBSNMP  identified by DBSNMP;
-
 create user DDHX  identified by DDHX;
-
 create user DIP  identified by DIP;
-
 create user DZKA  identified by DZKA;
-
 create user EAM_DW  identified by EAM_DW;
-
 create user EXFSYS  identified by EXFSYS;
-
 create user FLOWS_FILES  identified by FLOWS_FILES;
-
 create user GWHT  identified by GWHT;
-
 create user HCBSYQ  identified by HCBSYQ;
-
 create user HC_XHCT  identified by HC_XHCT;
-
 create user K3  identified by K3;
-
 create user MDDATA  identified by MDDATA;
-
 create user MDSYS  identified by MDSYS;
-
 create user MGMT_VIEW  identified by MGMT_VIEW;
-
 create user OA  identified by OA;
-
 create user ODC  identified by ODC;
-
 create user ODS_HXMT  identified by ODS_HXMT;
-
 create user OLAPSYS  identified by OLAPSYS;
-
 create user ORACLE_OCM  identified by ORACLE_OCM;
-
 create user ORDDATA  identified by ORDDATA;
-
 create user ORDPLUGINS  identified by ORDPLUGINS;
-
 create user ORDSYS  identified by ORDSYS;
-
 create user OUTLN  identified by OUTLN;
-
 create user OWBSYS  identified by OWBSYS;
-
 create user OWBSYS_AUDIT  identified by OWBSYS_AUDIT;
-
 create user PSPRD  identified by PSPRD;
-
 create user SCOTT  identified by SCOTT;
-
 create user SEMP_XCTG  identified by SEMP_XCTG;
-
 create user SI_INFORMTN_SCHEMA  identified by SI_INFORMTN_SCHEMA;
-
 create user SPATIAL_CSW_ADMIN_USR  identified by SPATIAL_CSW_ADMIN_USR;
-
 create user SPATIAL_WFS_ADMIN_USR  identified by SPATIAL_WFS_ADMIN_USR;
-
 create user SYS  identified by SYS;
-
 create user SYSMAN  identified by SYSMAN;
-
 create user SYSTEM  identified by SYSTEM;
-
 create user TEST_USER  identified by TEST_USER;
-
 create user WMSYS  identified by WMSYS;
-
 create user XCTG  identified by XCTG;
-
 create user XCTG_BI  identified by XCTG_BI;
-
 create user XDB  identified by XDB;
-
 create user XHCT  identified by XHCT;
-
 create user XHCTDW  identified by XHCTDW;
-
 create user XHD  identified by XHD;
-
 create user XHD_BIS  identified by XHD_BIS;
-
 create user XHD_CODE  identified by XHD_CODE;
-
 create user XHD_TOS  identified by XHD_TOS;
-
 create user XHD_TOS_HIS  identified by XHD_TOS_HIS;
-
 create user XICT  identified by XICT;
-
-grant dba to CTMSPROD/oracle;
-grant dba to GWHT/oracle;
-grant dba to HCBSYQ/oracle;
-grant dba to HC_XHCT/oracle;
-grant dba to XHCT/oracle;
-grant dba to XHD/oracle;
-grant dba to PSPRD/oracle;
+grant dba to CTMSPROD;
+grant dba to GWHT;
+grant dba to HCBSYQ;
+grant dba to HC_XHCT;
+grant dba to XHCT;
+grant dba to XHD;
+grant dba to PSPRD;
 grant dba to DDHX;
 grant dba to DIP;
 grant dba to DZKA;
