@@ -26,7 +26,7 @@ INSERT INTO `sys_permission`(`id`, `perm_type`, `parent_id`, `name`, `url`, `per
 INSERT INTO `sys_permission`(`id`, `perm_type`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) VALUES (9, 1, 3, '用户管理', '/system/user', NULL, 1, NULL, 8);
 INSERT INTO `sys_permission`(`id`, `perm_type`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) VALUES (10, 1, 3, '角色权限管理', '/system/authority', NULL, 1, NULL, 9);
 INSERT INTO `sys_permission`(`id`, `perm_type`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) VALUES (11, 1, 3, '字典管理', '/dictionaries', NULL, 1, NULL, 10);
-INSERT INTO `sys_permission`(`id`, `perm_type`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) VALUES (12, 1, 4, '显示', '', 'meta:map:data', 2, NULL, NULL);
+INSERT INTO `sys_permission`(`id`, `perm_type`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) VALUES (12, 1, 4, '地图', '/graph', NULL, 1, NULL, NULL);
 INSERT INTO `sys_permission`(`id`, `perm_type`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) VALUES (13, 1, 5, '显示', '', 'meta:job:list', 2, NULL, NULL);
 INSERT INTO `sys_permission`(`id`, `perm_type`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) VALUES (14, 1, 5, '采集', '', 'meta:job:list,meta:job:collect', 2, NULL, NULL);
 INSERT INTO `sys_permission`(`id`, `perm_type`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) VALUES (15, 1, 5, '导入', '', 'meta:excel:import', 2, NULL, NULL);
@@ -55,6 +55,7 @@ INSERT INTO `sys_permission`(`id`, `perm_type`, `parent_id`, `name`, `url`, `per
 INSERT INTO `sys_permission`(`id`, `perm_type`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) VALUES (38, 1, 11, '新增', '', 'sys:dict:list,sys:dict:save', 2, NULL, NULL);
 INSERT INTO `sys_permission`(`id`, `perm_type`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) VALUES (39, 1, 11, '编辑', '', 'sys:dict:list,sys:dict:update', 2, NULL, NULL);
 INSERT INTO `sys_permission`(`id`, `perm_type`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) VALUES (40, 1, 11, '删除', '', 'sys:dict:list,sys:dict:delete', 2, NULL, NULL);
+INSERT INTO `sys_permission`(`id`, `perm_type`, `parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`) VALUES (41, 1, 12, '显示', '', 'meta:map:data', 2, NULL, NULL);
 
 
 -- 系统用户
@@ -179,3 +180,4 @@ INSERT INTO  `sys_role_permission`(`id`, `role_id`, `permission_id`) VALUES (37,
 INSERT INTO  `sys_role_permission`(`id`, `role_id`, `permission_id`) VALUES (38, 1, 38);
 INSERT INTO  `sys_role_permission`(`id`, `role_id`, `permission_id`) VALUES (39, 1, 39);
 INSERT INTO  `sys_role_permission`(`id`, `role_id`, `permission_id`) VALUES (40, 1, 40);
+INSERT INTO  `sys_role_permission`(`id`, `role_id`, `permission_id`) VALUES (41, 1, 41);
