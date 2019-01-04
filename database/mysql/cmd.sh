@@ -9,3 +9,6 @@ set global time_zone = '+8:00';
 flush privileges;
 
 
+
+#查看数据库版本
+mysql -v

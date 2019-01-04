@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+
+# 查看es版本
+curl -XGET 'localhost:9200'
+
+# 查看索引状态
+curl -XGET 'localhost:9200/_cat/indices?v&pretty'
+
+
 ########### 新建es用户操作
 useradd es
 passwd es

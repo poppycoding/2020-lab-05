@@ -21,3 +21,9 @@ FROM
 (SELECT count(*) column_num FROM information_schema.COLUMNS WHERE table_schema = 'test') c
 
 
+
+
+
+--3.sql查看数据库版本
+select version();
+

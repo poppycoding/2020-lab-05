@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# 查看zk版本 (yum -y install nc)
+echo stat|nc 127.0.0.1 2181
+
+
 ############ zk启动,查看状态
 bin/zkServer.sh start
 
