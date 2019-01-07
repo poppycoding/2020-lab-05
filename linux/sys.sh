@@ -111,3 +111,6 @@ find /home -name  test.*
 # 新建用户,密码es
 useradd es
 passwd es
+
+# 重置root/es密码
+passwd root/es
