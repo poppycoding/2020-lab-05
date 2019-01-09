@@ -17,3 +17,11 @@ from
 
 
 
+-- 3.用户定义的数据类型基于在 Microsoft SQL Server 中提供的数据类型。当几个表中必须存储同一种数据类型时，并且为保证这些列有相同的数据类型、长度和可空性时，可以使用用户定义的数据类型。
+--建自定义数据类型
+Exec sp_addtype ssn,'Varchar(11)','Not Null'
+--删除自定义数据类型
+Exec sp_droptype 'ssn'
+--查看用户自定义数据类型
+select * from systypes where xtype<>xusertype
+select * from sys.types where is_user_defined=1
