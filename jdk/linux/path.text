@@ -1,5 +1,5 @@
 
---vi /etc/profile
+vi /etc/profile
 
 JAVA_HOME=/opt/jdk1.8.0_191
 PATH=$JAVA_HOME/bin:$PATH

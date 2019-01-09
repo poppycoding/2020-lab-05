@@ -37,7 +37,7 @@ ll -lh
 ls -lh
 
 
-############ .tar .tar.gz .gz
+############ .tar  .tar.gz(.tar.gzip)  .gz
 # 解压
 tar zxvf FileName.tar.gz
 tar xvf FileName.tar
@@ -114,3 +114,9 @@ passwd es
 
 # 重置root/es密码
 passwd root/es
+
+
+# 更改hostname
+hostname haha
+
+# export
