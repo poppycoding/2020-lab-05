@@ -22,6 +22,9 @@ curl http://localhost:7474
 
 
 #数据备份迁移,window下用neo4j-admin.bat,社区版需要停止服务后备份!
+#备份前停止服务,不能kill进程,必须stop
+bin/neo4j stop
+
 #linux备份
 bin/neo4j-admin dump --database=graph.db --to=/home/2018-11-29.dump
 
