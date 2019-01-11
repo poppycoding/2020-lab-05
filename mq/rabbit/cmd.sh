@@ -31,13 +31,25 @@ systemctl start rabbitmq-server
 systemctl status rabbitmq-server
 systemctl restart rabbitmq-server
 
-
 #设置为开机启动
 systemctl enable rabbitmq-server
 
 
-# 开启web页面: 15672
+
+# 查看已有插件，直接安装
+rabbitmq-plugins -list
+
+# web插件: 15672
 rabbitmq-plugins enable rabbitmq_management
+
+# 额外插件地址：https://www.rabbitmq.com/community-plugins.html
+# wget或者sftp下载上传到对应的plugins位置
+/usr/lib/rabbitmq/lib/rabbitmq_server-3.6.10/plugins
+
+# 例如：延迟队列插件下载zip，解压之后安装
+rabbitmq-plugins enable rabbitmq_delayed_message_exchange
+
+
 
 
 # 开放,15672,5672端口
@@ -52,3 +64,6 @@ rabbitmqctl add_user admin admin
 rabbitmqctl set_user_tags admin administrator
 rabbitmqctl  set_permissions -p "/" admin '.*' '.*' '.*'
 rabbitmqctl list_user_permissions admin
+
+
+
