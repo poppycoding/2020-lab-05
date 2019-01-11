@@ -120,3 +120,8 @@ passwd root/es
 hostname haha
 
 # export
+
+
+
+# 授权执行命令
+chmod +777

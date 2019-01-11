@@ -13,7 +13,7 @@ useradd es
 passwd es
 
 
-# start es (注意防火墙关闭)
+# start es (注意开放端口或防火墙关闭)-d（daemonize） Starts Elasticsearch in the background
 ./elasticsearch -d
 # 或者
 nohup bin/elasticsearch &
