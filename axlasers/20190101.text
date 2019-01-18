@@ -5,3 +5,64 @@ CPU型号主频: Intel(R) Xeon(R) CPU E5-2680，2.70GHz
 硬盘: 150g/80g/80g
 数据库及版本: mysql-5.7.24, neo4j-3.5.0, es-6.4.1
 中间件及版本: kafka-2.11-2.0.0,
+
+
+subjectAltName = IP:116.196.86.227
+
+export NGROK_DOMAIN="dm.xkcoding.com"
+
+
+openssl genrsa -out rootCA.key 2048
+
+openssl req -x509 -new -nodes -key rootCA.key -subj "/CN=$NGROK_DOMAIN" -days 5000 -out rootCA.pem
+
+openssl genrsa -out device.key 2048
+
+openssl req -new -key device.key -subj "/CN=$NGROK_DOMAIN" -out device.csr
+
+openssl x509 -req -in device.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out device.crt -days 5000
+
+
+
+cp rootCA.pem assets/client/tls/ngrokroot.crt
+
+cp device.crt assets/server/tls/snakeoil.crt
+
+cp device.key assets/server/tls/snakeoil.key
+
+GOOS=linux GOARCH=amd64 make release-client
+
+GOOS=linux GOARCH=amd64 make release-server
+
+GOOS=windows GOARCH=amd64 make release-client
+
+
+./bin/ngrokd -domain="dm.xkcoding.com"  -httpAddr=":80" -httpsAddr=":443" -tunnelAddr=":8088" &
+
+
+
+server_addr: "xkcoding.com:8088"
+trust_host_root_certs: false
+tunnels:
+  http:
+  subdomain: "dm"
+  proto:
+    http: 80
+    https:
+    subdomain: "dm"
+proto:
+  https: 443
+  ssh:
+  remote_port: 2222
+  proto:
+  tcp: 22
+  mstsc:
+    remote_port: 52222
+    proto:
+    tcp: "192.168.240.154:80"
+
+
+
+ multipart:
+            max-file-size: 30MB
+            max-request-size: 30MB
