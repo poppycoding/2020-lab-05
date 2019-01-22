@@ -25,5 +25,7 @@ ps -ef | grep nginx
 
 ######################################### error
 # 413 Request Entity Too Large nginx限制文件上传大小问题
-# 修改nginx.conf 在http{}段中加入client_max_body_size 20m,自定义最大上传的20m。
+# 修改nginx.conf[注意自己配置的server,考虑include之外的配置]在server{}段中加入client_max_body_size 20m,自定义最大上传的20m。
 client_max_body_size 20m;
+
+#client_body_buffer_size 10m

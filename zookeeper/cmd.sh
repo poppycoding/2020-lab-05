@@ -12,7 +12,7 @@ bin/zkServer.sh status
 
 ############ zk客户端,删除topic
 
-# 进入zk
+# 进入zk(不加ip默认为本机)
 bin/zkCli.sh -server  localhost:2181
 
 # 查看topic信息

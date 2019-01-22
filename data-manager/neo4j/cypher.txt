@@ -67,6 +67,7 @@ match (n)-[r]-() delete r
 MATCH (n) delete n
 
 MATCH (n:DictInfo{id:'1067304048467775488'}) -[r]-() delete n ,r
+MATCH (n:{jobId:110}) -[r]-() delete n ,r
 
 
 
