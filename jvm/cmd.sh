@@ -1,12 +1,29 @@
 #!/usr/bin/env bash
 #https://blog.csdn.net/zlzlei/article/details/46472729
 #https://blog.csdn.net/github_33644920/article/details/53228129
+#https://blog.csdn.net/java2000_wl/article/details/8042010
+#https://blog.csdn.net/wang379275614/article/details/78471604
 
 
-
-
-# heap根据pid查看java进程
+# 查看pid对应进程的jvm启动参数
+jcmd pid VM.flags
 jmap -heap pid
+jinfo -flags pid
+
+# 查看单个参数修改成flag
+jinfo -flag MaxHeapSize pid
+
+
+# 显示所有可设置参数及默认值
+java -XX:+PrintFlagsInitial
+
+
+# 显示参数及已经改变的值,其中加冒号的是修改后的值:  uintx MaxHeapSize  := 5511315456
+java -XX:+PrintFlagsFinal
+
+
+# 显示出JVM初始化完毕后所有跟最初的默认值不同的参数及它们的值
+java -XX:+PrintCommandLineFlags
 
 
 
