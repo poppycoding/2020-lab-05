@@ -282,3 +282,18 @@ SELECT DISTINCT md_concepet,md_concepet_cn FROM mc_md_type_relation
 SELECT DISTINCT md_concepet,md_concepet_cn FROM mc_md_type_relation
 
  SELECT DISTINCT md_concepet mdConcepet,md_concepet_cn mdConcepetCn FROM mc_md_type_relation
+
+
+
+
+
+  select DISTINCT a.table_name
+        from result_table_classification a, relation_table b
+        where a.job_id = 76
+        and a.config_name = '27库'
+        and a.`schema` = 'WFBEMR'
+        and b.job_id = 76
+        and b.config_name = '27库'
+        and b.root_schema = 'WFBEMR' and b.child_schema = 'WFBEMR'
+        and b.ratio &gt;='90%'
+        and a.table_name = b.root_table_name or a.table_name = b.child_table_name

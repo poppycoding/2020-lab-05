@@ -66,3 +66,182 @@ proto:
  multipart:
             max-file-size: 30MB
             max-request-size: 30MB
+
+
+
+match
+ (d1 :DbInfo {contextPath:'db-oracle@192.168.226.27@1521@orcl@MZXT'}) -[:LINEAGE|:TABLE_INFO|:IMPACT*3]->(t:TableInfo)
+ (t)<-[]
+ (d2 :DbInfo) -[:LINEAGE|:TABLE_INFO|:IMPACT*3]->(t:TableInfo)
+ RETURN *
+
+
+match
+ (d1 :DbInfo {contextPath:'db-oracle@192.168.226.27@1521@orcl@MZXT'}) -[:LINEAGE|:TABLE_INFO|:IMPACT*3]->(t:TableInfo),
+ (t)<-[:TABLE_INFO]-(d2:DbInfo), (d3 :DbInfo) -[:LINEAGE|:TABLE_INFO|:IMPACT*3]->(t3:TableInfo),
+ RETURN *
+
+
+
+match
+ (d1 :DbInfo {contextPath:'db-oracle@192.168.226.27@1521@orcl@DW_HOS'}) -[:LINEAGE|:TABLE_INFO|:IMPACT*3]->(t:TableInfo),
+ (t)<-[:TABLE_INFO]-(d2:DbInfo)
+ RETURN  {center: ( {id:d1.id, name:d1.metaName, deleted:d1.isDeleted, category:'center'}) , around: collect(DISTINCT  {id: d2.id, name:d2.metaName, deleted:d2.isDeleted, category:'around'})}
+union
+match
+ (d2 :DbInfo) -[:LINEAGE|:TABLE_INFO|:IMPACT*3]->(t:TableInfo),
+ (t)<-[:TABLE_INFO]-(d1:DbInfo {contextPath:'db-oracle@192.168.226.27@1521@orcl@MZXT'})
+ RETURN  {center: ( {id:d1.id, name:d1.metaName, deleted:d1.isDeleted, category:'center'}) , around: collect(DISTINCT  {id: d2.id, name:d2.metaName, deleted:d2.isDeleted, category:'around'})}
+
+
+
+
+match
+ (d1 :DbInfo {contextPath:'db-oracle@192.168.226.27@1521@orcl@DW_HOS'}) -[:LINEAGE|:TABLE_INFO|:IMPACT*3]->(t:TableInfo),
+ (t)<-[:TABLE_INFO]-(d2:DbInfo)
+ RETURN  d2
+union
+match
+ (d2 :DbInfo) -[:LINEAGE|:TABLE_INFO|:IMPACT*3]->(t:TableInfo),
+ (t)<-[:TABLE_INFO]-(d1:DbInfo {contextPath:'db-oracle@192.168.226.27@1521@orcl@DW_HOS'})
+ RETURN  d2)
+
+
+
+match
+(d1 :DbInfo {contextPath:'db-oracle@192.168.226.27@1521@orcl@DW_HOS'}) -[:TABLE_INFO|:IMPACT|:LINEAGE*4]- (d2 :DbInfo)
+RETURN {center: ( {id:d1.id, name:d1.metaName, deleted:d1.isDeleted, category:'center'}) , around: collect(DISTINCT  {id: d2.id, name:d2.metaName, deleted:d2.isDeleted, category:'around'})}
+
+
+影响
+match
+ (d1 :DbInfo {contextPath:'db-oracle@192.168.226.27@1521@orcl@MZXT'}) -[:LINEAGE|:TABLE_INFO|:IMPACT*3]->(t:TableInfo),
+ (t)<-[:TABLE_INFO]-(d2:DbInfo)
+ RETURN  {center: ( {id:d1.id+"@center", name:d1.metaName, deleted:d1.isDeleted, category:'center'}) , around: collect(DISTINCT  {id: d2.id+"@around", name:d2.metaName, deleted:d2.isDeleted, category:'around'})}
+
+血缘
+match
+ (d2 :DbInfo) -[:LINEAGE|:TABLE_INFO|:IMPACT*3]->(t:TableInfo),
+ (t)<-[:TABLE_INFO]-(d1:DbInfo {contextPath:'db-oracle@192.168.226.27@1521@orcl@MZXT'})
+ RETURN  {center: ( {id:d1.id+"@center", name:d1.metaName, deleted:d1.isDeleted, category:'center'}) , around: collect(DISTINCT  {id: d2.id+"@around", name:d2.metaName, deleted:d2.isDeleted, category:'around'})}
+
+
+
+match (d1 :DbInfo {id:{0}}) -[:LINEAGE|:TABLE_INFO|:IMPACT*3]->(t:TableInfo), (t)<-[:TABLE_INFO]-(d2:DbInfo) RETURN  {center: ( {id:d1.id+"@center", name:d1.metaName, deleted:d1.isDeleted, category:'center'}) , around: collect(DISTINCT  {id: d2.id+"@around", name:d2.metaName, deleted:d2.isDeleted, category:'around'})}
+
+match (d2 :DbInfo) -[:LINEAGE|:TABLE_INFO|:IMPACT*3]->(t:TableInfo), (t)<-[:TABLE_INFO]-(d1:DbInfo {id:{0}}) RETURN  {center: ( {id:d1.id+"@center", name:d1.metaName, deleted:d1.isDeleted, category:'center'}) , around: collect(DISTINCT  {id: d2.id+"@around", name:d2.metaName, deleted:d2.isDeleted, category:'around'})}
+
+
+
+Attaching to process ID 91548, please wait...
+Debugger attached successfully.
+Server compiler detected.
+JVM version is 25.172-b11
+
+using thread-local object allocation.
+Parallel GC with 2 thread(s)
+
+Heap Configuration:
+   MinHeapFreeRatio         = 0
+   MaxHeapFreeRatio         = 100
+   MaxHeapSize              = 5511315456 (5256.0MB)
+   NewSize                  = 115343360 (110.0MB)
+   MaxNewSize               = 1837105152 (1752.0MB)
+   OldSize                  = 230686720 (220.0MB)
+   NewRatio                 = 2
+   SurvivorRatio            = 8
+   MetaspaceSize            = 21807104 (20.796875MB)
+   CompressedClassSpaceSize = 1073741824 (1024.0MB)
+   MaxMetaspaceSize         = 17592186044415 MB
+   G1HeapRegionSize         = 0 (0.0MB)
+
+Heap Usage:
+PS Young Generation
+Eden Space:
+   capacity = 1741684736 (1661.0MB)
+   used     = 1286192840 (1226.6090774536133MB)
+   free     = 455491896 (434.3909225463867MB)
+   73.84762657758057% used
+From Space:
+   capacity = 47185920 (45.0MB)
+   used     = 46662456 (44.50078582763672MB)
+   free     = 523464 (0.49921417236328125MB)
+   98.89063517252605% used
+To Space:
+   capacity = 47710208 (45.5MB)
+   used     = 0 (0.0MB)
+   free     = 47710208 (45.5MB)
+   0.0% used
+PS Old Generation
+   capacity = 797966336 (761.0MB)
+   used     = 445445768 (424.81018829345703MB)
+   free     = 352520568 (336.18981170654297MB)
+   55.822626582583055% used
+
+54611 interned Strings occupying 6401816 bytes.
+
+
+
+num     #instances         #bytes  class name
+----------------------------------------------
+   1:       1523182      195956336  [C
+   2:         71799      101170640  [B
+   3:         45607       60313872  [I
+   4:        613270       58873920  org.apache.xmlbeans.impl.store.Xobj$ElementXobj
+   5:       1676720       40241280  java.lang.String
+   6:        559613       17907616  java.util.HashMap$Node
+   7:         99509        7599456  [Ljava.lang.Object;
+   8:        306128        7347072  org.openxmlformats.schemas.spreadsheetml.x2006.main.impl.CTRstImpl
+   9:         39502        6628520  [Ljava.util.HashMap$Node;
+  10:        359342        5749472  java.lang.Integer
+  11:         21911        5609216  com.mchz.datamanager.entity.neo4j.ColumnInfo
+  12:         27460        4832960  com.mchz.datamanager.entity.neo4j.TableInfo
+  13:        182926        4390224  java.util.ArrayList
+  14:         39171        3447048  java.lang.reflect.Method
+  15:        107009        3424288  java.util.concurrent.ConcurrentHashMap$Node
+
+
+
+Java 堆分为新生代和老年代，新生代一般划分为三块区域，Eden + From Survivor + To Survivor，Eden 和 Survivor 的内存比为8:1，每次只
+使用一个Eden 和一个 Survivor 区域，另一个 Survivor 用于复制收集算法回收内存。对象一般尽量分配到新生代中，而对于大对象（长字符串和大数组）
+直接分配在老年代中，同时“年龄”长的的对象会从新生代自动晋升到老年代中。
+
+Java 方法区称为永久代，只有 HotSpot 虚拟机才存在永久代。当 Eden 区域分配不足时，自动发生一次 Minor GC。当发生 Minor GC 时，虚拟机会自动
+检测（比较）新生代晋升到老年代的对象内存大小和老年代剩余内存大小，如果晋升>剩余，则发生一次Full GC；如果晋升<剩余，则去检测老年代的内存
+担保 HandlePromotionFailure 是否允许担保失败，如果不允许担保失败，则发生一次Full GC，如果允许失败，则进行一次Minor GC。
+
+S0C：年轻代中第一个survivor（幸存区）的容量 (字节) 
+S1C：年轻代中第二个survivor（幸存区）的容量 (字节) 
+S0U：年轻代中第一个survivor（幸存区）目前已使用空间 (字节) 
+S1U：年轻代中第二个survivor（幸存区）目前已使用空间 (字节) 
+EC：年轻代中Eden（伊甸园）的容量 (字节) 
+EU：年轻代中Eden（伊甸园）目前已使用空间 (字节) 
+OC：Old代的容量 (字节) 
+OU：Old代目前已使用空间 (字节) 
+PC：Perm(持久代)的容量 (字节) 
+PU：Perm(持久代)目前已使用空间 (字节) 
+YGC：从应用程序启动到采样时年轻代中gc次数 
+YGCT：从应用程序启动到采样时年轻代中gc所用时间(s) 
+FGC：从应用程序启动到采样时old代(全gc)gc次数 
+FGCT：从应用程序启动到采样时old代(全gc)gc所用时间(s) 
+GCT：从应用程序启动到采样时gc用的总时间(s) 
+NGCMN：年轻代(young)中初始化(最小)的大小 (字节) 
+NGCMX：年轻代(young)的最大容量 (字节) 
+NGC：年轻代(young)中当前的容量 (字节) 
+OGCMN：old代中初始化(最小)的大小 (字节) 
+OGCMX：old代的最大容量 (字节) 
+OGC：old代当前新生成的容量 (字节) 
+PGCMN：perm代中初始化(最小)的大小 (字节) 
+PGCMX：perm代的最大容量 (字节)   
+PGC：perm代当前新生成的容量 (字节) 
+S0：年轻代中第一个survivor（幸存区）已使用的占当前容量百分比 
+S1：年轻代中第二个survivor（幸存区）已使用的占当前容量百分比 
+E：年轻代中Eden（伊甸园）已使用的占当前容量百分比 
+O：old代已使用的占当前容量百分比 
+P：perm代已使用的占当前容量百分比 
+S0CMX：年轻代中第一个survivor（幸存区）的最大容量 (字节) 
+S1CMX ：年轻代中第二个survivor（幸存区）的最大容量 (字节) 
+ECMX：年轻代中Eden（伊甸园）的最大容量 (字节) 
+DSS：当前需要survivor（幸存区）的容量 (字节)（Eden区已满） 
+TT： 持有次数限制 
+MTT ： 最大持有次数限制 
