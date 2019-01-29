@@ -135,3 +135,12 @@ chmod +777
 ntsysv
 # 如果没有可以手动安装
 yum install ntsysv
+
+
+
+
+# linux查询结果输出到文本
+# 增量 >>
+java -XX:+PrintFlagsInitial >> /root/jvm.txt
+# 覆盖写入 >
+java -XX:+PrintFlagsInitial > /root/jvm.txt
