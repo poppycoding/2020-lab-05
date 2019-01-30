@@ -52,3 +52,17 @@ pmap pid
 
 # 查看对应进程gc情况,5000即5s更新一次:S0C S1C S0U S1U EC EU OC OU MC MU CCSC CCSU YGC YGCT FGC FGCT GCT
 jstat -gc pid 5000
+
+
+
+
+# 查看java线程cpu占用排查问题(eg:写个死循环测试)
+# 查找进程pid-top页面按p按照cpu排序
+top -c
+# 查找线程pid-根据进程pid查线程
+top -Hp pid
+# 根据线程pid查看对应java线程(导出16禁制快照0xbda)
+jstack -l pid > ./pid.stack
+# grep查看
+cat pid.stack |grep 'bda' -C 8
+
