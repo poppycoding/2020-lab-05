@@ -39,7 +39,7 @@ cp ../redis.conf 8379
 cp ../redis.conf 9379
 
 # 修改对应的配置文件(port/pidfile需要随着文件夹修改)
-bind 127.0.0.1 #69行
+bind 192.168.200.156 #69行
 protected-mode no #88行 非保护模式
 port 6379 #92行
 daemonize yes #136行 后台运行
@@ -66,10 +66,32 @@ src/redis-server ./redis-cluster-confs/9379/redis.conf
 
 # 启动集群(注意至少6个节点)
 #ERROR: Invalid configuration for cluster creation.Redis Cluster requires at least 3 master nodes. At least 6 nodes are required.
-src/redis-cli --cluster create 127.0.0.1:4379 127.0.0.1:5379 127.0.0.1:6379 127.0.0.1:7379 127.0.0.1:8379 127.0.0.1:9379 --cluster-replicas 1
+src/redis-cli --cluster create 192.168.200.156:4379 192.168.200.156:5379 192.168.200.156:6379 192.168.200.156:7379 192.168.200.156:8379 192.168.200.156:9379 --cluster-replicas 1
 
 #>>> Performing hash slots allocation on 6 nodes...
 #[WARNING] Some slaves are in the same host as their master
 #Can I set the above configuration? (type 'yes' to accept): yes
 #.....
 #[OK] All 16384 slots covered. 启动成功 !
+
+
+
+
+# 连接进入命令行界面 -host -port (-a password)
+./src/redis-cli -h 192.168.200.156 -p 6379
+# 查看所有key
+keys *
+# slave节点不可以直接set: (error) MOVED 3300 192.168.200.156:4379需要到master节点操作,可以看启动集群信息主从分配,也可以安装manager查看
+
+
+
+# 关闭集群,杀死所有进程,删除log,pid,node文件
+ps -ef | grep redis | grep -v grep | awk '{print $2}' | xargs kill -9
+rm -rf redis-cluster-pids/redis-*
+rm -rf redis-cluster-node/node-*
+rm -rf redis-cluster-log/log_*
+
+
+# 安装web管理页面 https://github.com/ngbdf/redis-manager/wiki
+# 下载tar包,解压修改application.yml中mysql账号密码(注意乱码问题,最好通过vim修改),启动之后访问8182端口配置即可
+192.168.200.156:4379,192.168.200.156:5379,192.168.200.156:6379,192.168.200.156:7379,192.168.200.156:8379,192.168.200.156:9379
