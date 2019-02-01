@@ -66,3 +66,7 @@ jstack -l pid > ./pid.stack
 # grep查看
 cat pid.stack |grep 'bda' -C 8
 
+
+# 安装arthas查看: https://alibaba.github.io/arthas/
+wget https://alibaba.github.io/arthas/arthas-boot.jar
+java -jar arthas-boot.jar -h

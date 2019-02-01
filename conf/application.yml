@@ -1,0 +1,2 @@
+
+url: jdbc:mysql://172.16.0.236:3306/sourcedata?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT%2B8
