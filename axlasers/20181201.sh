@@ -180,6 +180,10 @@ impdp XCTG/XCTG          directory=exp_dir dumpfile=xctg.dmp      logfile=xctg.l
 
 
 
+ps -ef | grep redis | grep -v grep | awk '{print $2}' | xargs kill -9
+
+
+
 
 
 

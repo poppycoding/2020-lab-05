@@ -245,3 +245,23 @@ ECMX：年轻代中Eden（伊甸园）的最大容量 (字节) 
 DSS：当前需要survivor（幸存区）的容量 (字节)（Eden区已满） 
 TT： 持有次数限制 
 MTT ： 最大持有次数限制 
+
+
+
+
+root      1  0 10:03 ?        00:00:08 src/redis-server 127.0.0.1:6379 [cluster]
+root      1  0 10:04 ?        00:00:09 src/redis-server 127.0.0.1:7379 [cluster]
+root      1  0 10:04 ?        00:00:08 src/redis-server 127.0.0.1:8379 [cluster]
+root      1  0 10:04 ?        00:00:08 src/redis-server 127.0.0.1:9379 [cluster]
+root      1  0 10:08 ?        00:00:07 src/redis-server 127.0.0.1:5379 [cluster]
+root      1  0 10:08 ?        00:00:07 src/redis-server 127.0.0.1:4379 [cluster]
+
+
+kill -9 26087
+kill -9 26097
+kill -9 26104
+kill -9 26111
+kill -9 26525
+kill -9 26532
+
+java.io.IOException: Broken pipe
