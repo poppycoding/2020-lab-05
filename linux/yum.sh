@@ -2,6 +2,7 @@
 
 # 查看服务安装情况，例如：erlang
 rpm -qa | grep -i erlang
+rpm -qa telnet*
 
 # 删除包
 rpm -e erlang-hipe-21.2-1.el7.x86_64

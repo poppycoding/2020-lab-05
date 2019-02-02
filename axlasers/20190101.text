@@ -265,3 +265,19 @@ kill -9 26525
 kill -9 26532
 
 java.io.IOException: Broken pipe
+
+
+
+
+
+
+service telnet
+{
+        flags           = REUSE
+        socket_type     = stream
+        wait            = no
+        user            = root
+        server          = /usr/sbin/in.telnetd
+        log_on_failure  += USERID
+        disable         = no     #将语句 disable = yes 改成 disable = no 保存退出。激活 telnet 服务
+}

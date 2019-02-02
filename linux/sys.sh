@@ -19,8 +19,10 @@ timedatectl set-ntp true
 ########### 防火墙(centos7) https://www.cnblogs.com/zhangzhibin/p/6231870.html
 # status running & not running
 firewall-cmd --state
-# stop
 systemctl stop firewalld.service
+# 另一种关闭方法
+service iptables status
+service iptables stop
 
 
 
@@ -135,6 +137,36 @@ chmod +777
 ntsysv
 # 如果没有可以手动安装
 yum install ntsysv
+
+
+
+
+# telnet命令无效,或者:connect to address 127.0.0.1: Connection refused,需要安装/重新安装服务
+# 先安装xinetd因为telnet要依靠xinetd服务启动
+yum install xinetd
+# 新增/修改配置文件,disable = yes 改成 disable = no
+vim /etc/xinetd.d/telnet
+#service telnet
+#{
+#        flags           = REUSE
+#        socket_type     = stream
+#        wait            = no
+#        user            = root
+#        server          = /usr/sbin/in.telnetd
+#        log_on_failure  += USERID
+#        disable         = no     #将语句 disable = yes 改成 disable = no 保存退出。激活 telnet 服务
+#}
+# 启动xinetd(/etc/init.d/xinetd start)
+service xinetd start
+service xinetd status
+
+# 重装telnet
+yum install telnet-server #安装telnet服务
+yum install telnet.* #安装telnet客户端
+
+# 查看服务(less,more,cat命令)
+less /etc/services | grep telnet
+
 
 
 

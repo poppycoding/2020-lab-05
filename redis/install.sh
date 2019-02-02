@@ -15,13 +15,17 @@ wget http://download.redis.io/releases/redis-5.0.0.tar.gz
 tar zxvf redis-5.0.0.tar.gz
 cd redis-5.0.0
 
+# 用到gcc编译出redis-server等命令
 make
 # make报错: make[3]: gcc: Command not found >> 安装gcc之后make
 yum -y install gcc automake autoconf libtool make
 
 
-# 配置文件创建
+# 文件夹创建
 mkdir redis-cluster-confs
+mkdir redis-cluster-logs
+mkdir redis-cluster-nodes
+mkdir redis-cluster-pids
 
 cd redis-cluster-confs
 mkdir 4379
@@ -32,11 +36,7 @@ mkdir 8379
 mkdir 9379
 
 cp ../redis.conf 4379
-cp ../redis.conf 5379
-cp ../redis.conf 6379
-cp ../redis.conf 7379
-cp ../redis.conf 8379
-cp ../redis.conf 9379
+
 
 # 修改对应的配置文件(port/pidfile需要随着文件夹修改)
 bind 192.168.200.156 #69行
@@ -53,6 +53,15 @@ cluster-node-timeout 15000 #852行 #超时时间
 #cluster-replica-validity-factor 10 #897行
 #cluster-migration-barrier 1 #916行
 #cluster-require-full-coverage yes #929行
+
+# 以4379为模板,修改响应的ip,host
+cp 4379/redis.conf 5379/
+cp 4379/redis.conf 6379/
+cp 4379/redis.conf 7379/
+cp 4379/redis.conf 8379/
+cp 4379/redis.conf 9379/
+
+
 
 
 
