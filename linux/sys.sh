@@ -167,6 +167,10 @@ yum install telnet.* #安装telnet客户端
 # 查看服务(less,more,cat命令)
 less /etc/services | grep telnet
 
+# 测试执行telnet host [ip],会提示:Escape character is '^]'
+telnet 127.0.0.1
+# 这个提示的意思是按Ctrl + ] 会呼出telnet的命令行，出来telnet命令好之后就可以执行telnet命令，退出quit!
+# 注意,如果是云主机，必须保证安全组中的对应的端口打开,否则telnet配置无效,如果普通虚拟机关闭防火墙即可!
 
 
 
