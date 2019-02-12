@@ -9,11 +9,11 @@
     #####################################
 
 # 下载tar: http://download.redis.io/releases/
-wget http://download.redis.io/releases/redis-5.0.0.tar.gz
+wget http://download.redis.io/releases/redis-5.0.2.tar.gz
 
 # 解压编译
-tar zxvf redis-5.0.0.tar.gz
-cd redis-5.0.0
+tar zxvf redis-5.0.2.tar.gz
+cd redis-5.0.2
 
 # 用到gcc编译出redis-server等命令
 make
@@ -41,20 +41,20 @@ cp ../redis.conf 4379
 # 修改对应的配置文件(port/pidfile需要随着文件夹修改)
 bind 192.168.200.156 #69行
 protected-mode no #88行 非保护模式
-port 6379 #92行
+port 4379 #92行
 daemonize yes #136行 后台运行
-pidfile /data-manager/app/redis-5.0.3/redis-cluster-pids/redis-6379.pid #158行
-logfile /data-manager/app/redis-5.0.3/redis-cluster-logs/log-6379.log #171行
+pidfile /data-manager/app/redis-5.0.2/redis-cluster-pids/redis-4379.pid #158行
+logfile /data-manager/app/redis-5.0.2/redis-cluster-logs/log-4379.log #171行
 appendonly yes #699行
 cluster-enabled yes #838行 启用集群模式
-cluster-config-file /data-manager/app/redis-5.0.3/redis-cluster-nodes/node-6379.conf #846行
+cluster-config-file /data-manager/app/redis-5.0.2/redis-cluster-nodes/node-4379.conf #846行
 cluster-node-timeout 15000 #852行 #超时时间
 # 待定配置
 #cluster-replica-validity-factor 10 #897行
 #cluster-migration-barrier 1 #916行
 #cluster-require-full-coverage yes #929行
 
-# 以4379为模板,修改响应的ip,host
+# 以4379为模板,修改对应的ip,host,pid,log,conf等
 cp 4379/redis.conf 5379/
 cp 4379/redis.conf 6379/
 cp 4379/redis.conf 7379/
@@ -104,3 +104,5 @@ rm -rf redis-cluster-log/log_*
 # 安装web管理页面 https://github.com/ngbdf/redis-manager/wiki
 # 下载tar包,解压修改application.yml中mysql账号密码(注意乱码问题,最好通过vim修改),启动之后访问8182端口配置即可
 192.168.200.156:4379,192.168.200.156:5379,192.168.200.156:6379,192.168.200.156:7379,192.168.200.156:8379,192.168.200.156:9379
+
+# 注意,若monitor界面的查询命令失效,且数据库显示dbNaN,是由于redis数据库中无数据导致,手动set,get几次,再尝试查询dbNaN变成db(0)即可 !
