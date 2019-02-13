@@ -72,9 +72,13 @@ ctrl + R + keyword
 
 
 
-# 查看linux版本
+# 查看linux版本（lsb_release -a）
 cat /etc/redhat-release
-lsb_release -a
+# 内核版本
+uname -r
+# 操作系统几位
+getconf LONG_BIT
+
 
 
 # 查看linux配置内核
@@ -180,3 +184,21 @@ telnet 127.0.0.1
 java -XX:+PrintFlagsInitial >> /root/jvm.txt
 # 覆盖写入 >
 java -XX:+PrintFlagsInitial > /root/jvm.txt
+
+
+
+
+# 查看环境变量,两个命都差不多
+env
+export
+
+# 单一查看
+echo $USER
+echo $PATH
+
+# 修改变量,直接用export即可
+export PATH=$PATH:/opt/au1200_rm/build_tools/bin
+# 也可以修改变量文件:
+vi /etc/profile
+# 或者
+vi /root/.bashrc
