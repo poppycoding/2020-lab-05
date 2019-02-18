@@ -1,0 +1,5 @@
+
+
+1. 手动创建线程池
+import org.apache.commons.lang3.concurrent.BasicThreadFactory;
+private final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(5, new BasicThreadFactory.Builder().namingPattern("Job-Thread-%d").build());
