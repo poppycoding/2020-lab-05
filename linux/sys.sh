@@ -41,8 +41,8 @@ ls -lh
 
 ############ .tar  .tar.gz(.tar.gzip)  .gz
 # 解压
-tar zxvf FileName.tar.gz
 tar xvf FileName.tar
+tar zxvf FileName.tar.gz
 gunzip FileName.gz
 unzip FileName.zip
 rar x FileName.rar

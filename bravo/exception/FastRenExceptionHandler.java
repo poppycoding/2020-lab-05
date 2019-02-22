@@ -42,7 +42,7 @@ public class FastRenExceptionHandler {
             return ApiResponse.ofStatus(Status.REQUEST_NOT_FOUND);
         } else if (e instanceof MethodArgumentNotValidException) {
 
-            log.error("【全局异常拦截】MethodArgumentNotValidException", e);
+            log.error("【全局异常拦截】MethodArgumentNotValidException", e.getMessage());
             return ApiResponse.of(Status.BAD_REQUEST.getCode(), ((MethodArgumentNotValidException) e).getBindingResult().getAllErrors().get(0).getDefaultMessage(), null);
         } else if (e instanceof MethodArgumentTypeMismatchException) {
 

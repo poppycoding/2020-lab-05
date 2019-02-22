@@ -108,3 +108,27 @@ ORDER  BY 1
 
 --8.强制删除用户时,kill用户相关连接
 select 'alter system kill session '||''''||sid||','||serial#||''''||';' from v$session where username='PSPRD';
+
+
+
+
+
+--9.创建序列:MY_SE从1开始每次自增1
+--创建序列
+CREATE SEQUENCE MY_FIRST_SEQ
+MINVALUE 1
+NOMAXVALUE
+INCREMENT BY 1
+START WITH 1 NOCACHE;
+
+--手动插入模式
+insert into MY_FIRST(id,comment) values(MY_FIRST_SEQ.NEXTVAL,'注释');
+
+--触发器模式
+create or replace trigger T_MY_FIRST_ID_TRIGGER
+  before insert on MY_FIRST
+  for each row
+begin
+  select MY_FIRST_SEQ.nextval into :new.id from dual;
+end T_MY_FIRST_ID_TRIGGER;
+
