@@ -32,10 +32,11 @@ cp device.key assets/server/tls/snakeoil.key
 
 # 服务端生成
 GOOS=linux GOARCH=amd64 make release-server
-# 控制台启动 tunnelAddr默认：4443
+# 控制台启动 tunnelAddr默认：443
 ./bin/ngrokd -domain="a.b.com" -httpAddr=":80" -httpsAddr=":443" -tunnelAddr=":8088" &
 # 后台启动
 nohup ./bin/ngrokd -domain="a.b.com" -httpAddr=":80" -httpsAddr=":443" -tunnelAddr=":8088" -log=stdout &
+nohup ./bin/ngrokd -domain="dm.xkcoding.com" -httpAddr=":80" -httpsAddr=":443" -tunnelAddr=":8088" -log=stdout &
 
 
 # 客户端生成

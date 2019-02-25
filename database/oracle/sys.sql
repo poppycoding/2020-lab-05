@@ -121,7 +121,7 @@ NOMAXVALUE
 INCREMENT BY 1
 START WITH 1 NOCACHE;
 
---手动插入模式
+--手动插入模式,需要id手动触发
 insert into MY_FIRST(id,comment) values(MY_FIRST_SEQ.NEXTVAL,'注释');
 
 --触发器模式
@@ -131,4 +131,6 @@ create or replace trigger T_MY_FIRST_ID_TRIGGER
 begin
   select MY_FIRST_SEQ.nextval into :new.id from dual;
 end T_MY_FIRST_ID_TRIGGER;
+--不需要id,自动触发生成
+insert into MY_FIRST(comment) values('注释');
 
