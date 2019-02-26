@@ -1,6 +1,6 @@
-package com.xlasers.opening.common.exception;
+package com.mchz.datahospital.exception;
 
-import com.xlasers.opening.common.enums.Status;
+import com.mchz.datahospital.common.Status;
 import lombok.Getter;
 
 /**
@@ -8,19 +8,19 @@ import lombok.Getter;
  * E: 全局异常类
  * </p>
  *
- * @package: com.xlasers.opening.common.exception
+ * @package: com.mchz.datahospital.exception
  * @author: Elijah.D
- * @time: CreateAt 2018/10/15 && 16:43
+ * @time: CreateAt 2019/2/19 && 17:03
  * @description: 统一处理异常
  * @copyright: Copyright © 2018 xlasers
  * @version: V1.0
  * @modified: Elijah.D
  */
 @Getter
-public class FastRenException extends BaseException {
+public class HospitalException extends BaseException {
     private static final long serialVersionUID = 2972087296820246773L;
 
-    public FastRenException(Status status) {
+    public HospitalException(Status status) {
         super(status);
     }
 
@@ -30,7 +30,7 @@ public class FastRenException extends BaseException {
      * @param status 状态枚举
      * @param data   响应数据
      */
-    public FastRenException(Status status, Object data) {
+    public HospitalException(Status status, Object data) {
         super(status, data);
     }
 
@@ -40,7 +40,7 @@ public class FastRenException extends BaseException {
      * @param code    状态码
      * @param message 响应信息
      */
-    public FastRenException(Integer code, String message) {
+    public HospitalException(Integer code, String message) {
         super(code, message);
     }
 
@@ -51,7 +51,7 @@ public class FastRenException extends BaseException {
      * @param message 响应信息
      * @param data    响应数据
      */
-    public FastRenException(Integer code, String message, Object data) {
+    public HospitalException(Integer code, String message, Object data) {
         super(code, message, data);
     }
 }

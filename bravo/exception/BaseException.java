@@ -1,6 +1,6 @@
-package com.xlasers.opening.common.exception;
+package com.mchz.datahospital.exception;
 
-import com.xlasers.opening.common.enums.Status;
+import com.mchz.datahospital.common.Status;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
  * B: 全局异基类
  * </p>
  *
- * @package: com.xlasers.opening.common.exception
+ * @package: com.mchz.datahospital.exception
  * @author: Elijah.D
  * @time: CreateAt 2018/10/15 && 16:46
  * @description: 异常基类

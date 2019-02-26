@@ -1,8 +1,9 @@
-package com.xlasers.opening.common.exception;
+package com.mchz.datahospital.exception;
 
-import com.xlasers.opening.common.ApiResponse;
-import com.xlasers.opening.common.enums.Status;
+import com.mchz.datahospital.common.ApiResponse;
+import com.mchz.datahospital.common.Status;
 import lombok.extern.slf4j.Slf4j;
+import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -16,9 +17,9 @@ import org.springframework.web.servlet.NoHandlerFoundException;
  * H: 全局异常拦截处理
  * </p>
  *
- * @package: com.xlasers.opening.common.exception
+ * @package: com.mchz.datahospital.exception
  * @author: Elijah.D
- * @time: CreateAt 2018/10/15 && 16:52
+ * @time: CreateAt 2019/2/19 && 17:03
  * @description: 统一异常处理
  * @copyright: Copyright © 2018 xlasers
  * @version: V1.0
@@ -26,7 +27,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
  */
 @Slf4j
 @ControllerAdvice
-public class FastRenExceptionHandler {
+public class HospitalExceptionHandler {
     /**
      * 统一拦截分配
      *
@@ -46,16 +47,20 @@ public class FastRenExceptionHandler {
             return ApiResponse.of(Status.BAD_REQUEST.getCode(), ((MethodArgumentNotValidException) e).getBindingResult().getAllErrors().get(0).getDefaultMessage(), null);
         } else if (e instanceof MethodArgumentTypeMismatchException) {
 
-            log.error("【全局异常拦截】MethodArgumentTypeMismatchException: 参数名 {}, 异常信息 {}", ((MethodArgumentTypeMismatchException) e).getName(), ((MethodArgumentTypeMismatchException) e).getMessage());
+            log.error("【全局异常拦截】MethodArgumentTypeMismatchException: 参数名 {}, 异常信息 {}", ((MethodArgumentTypeMismatchException) e).getName(), e.getMessage());
             return ApiResponse.ofStatus(Status.PARAM_NOT_MATCH);
         } else if (e instanceof HttpMessageNotReadableException) {
 
-            log.error("【全局异常拦截】HttpMessageNotReadableException: 错误信息 {}", ((HttpMessageNotReadableException) e).getMessage());
-            return ApiResponse.ofStatus(Status.PARAM_NOT_NULL);
-        } else if (e instanceof FastRenException) {
+            log.error("【全局异常拦截】HttpMessageNotReadableException: 错误信息 {}", e.getMessage());
+            return ApiResponse.ofStatus(Status.PARSE_JSON_ERROR);
+        } else if (e instanceof WxErrorException) {
 
-            log.error("【全局异常拦截】FastRenException: 状态码 {}, 异常信息 {}", ((FastRenException) e).getCode(), e.getMessage());
-            return ApiResponse.ofException((FastRenException) e);
+            log.error("【全局异常拦截】WxErrorException: 错误信息 {}", e.getMessage());
+            return ApiResponse.of(((WxErrorException) e).getError().getErrorCode(),((WxErrorException) e).getError().getErrorMsg(),null);
+        } else if (e instanceof HospitalException) {
+
+            log.error("【全局异常拦截】HospitalException: 状态码 {}, 异常信息 {}", ((HospitalException) e).getCode(), e.getMessage());
+            return ApiResponse.ofException((HospitalException) e);
         }
 
         log.error("【全局异常拦截】: 异常信息 {} ", e.getMessage());
