@@ -134,3 +134,27 @@ end T_MY_FIRST_ID_TRIGGER;
 --不需要id,自动触发生成
 insert into MY_FIRST(comment) values('注释');
 
+--注意同一次会话(执行完insert之后执行下列语句即可),可直接获取序列值
+SELECT MY_FIRST_SEQ.currval FROM DUAL
+
+
+
+
+
+
+--10.分页查询: oracle分页不像mysql和sqlserver那么简单，mysql有limit函数，sqlserver有top关键字，oracle没有,必须借助伪列rownum
+-- 每页显示10条分页
+select * from
+(
+select rownum rm, t.*  from t_user t
+) tm
+where rm > 10 and rm <= 20
+
+-- 换成代码形式
+select * from
+(
+select rownum rm, t.*  from t_user t
+) tm
+where rm > pageSize * ( pageNow - 1 ) and rm <= pageSize * pageNow
+
+-- 有orderBy需要再嵌套一层???
