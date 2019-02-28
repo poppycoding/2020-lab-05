@@ -41,9 +41,13 @@ public class HospitalExceptionHandler {
         if (e instanceof NoHandlerFoundException) {
             log.error("【全局异常拦截】NoHandlerFoundException: 请求方法 {}, 请求路径 {}", ((NoHandlerFoundException) e).getRequestURL(), ((NoHandlerFoundException) e).getHttpMethod());
             return ApiResponse.ofStatus(Status.REQUEST_NOT_FOUND);
+
+        // @valid-校验异常捕捉,如@NotBlank
         } else if (e instanceof MethodArgumentNotValidException) {
             log.error("【全局异常拦截】MethodArgumentNotValidException", e.getMessage());
             return ApiResponse.of(Status.BAD_REQUEST.getCode(), ((MethodArgumentNotValidException) e).getBindingResult().getAllErrors().get(0).getDefaultMessage(), null);
+
+        // 参数类型错误,传字段,但是值为null,为空等
         } else if (e instanceof MethodArgumentTypeMismatchException) {
             log.error("【全局异常拦截】MethodArgumentTypeMismatchException: 参数名 {}, 异常信息 {}", ((MethodArgumentTypeMismatchException) e).getName(), e.getMessage());
             return ApiResponse.ofStatus(Status.PARAM_NOT_MATCH, ((MethodArgumentTypeMismatchException) e).getName());
@@ -53,6 +57,8 @@ public class HospitalExceptionHandler {
         } else if (e instanceof WxErrorException) {
             log.error("【全局异常拦截】WxErrorException: 错误信息 {}", e.getMessage());
             return ApiResponse.of(((WxErrorException) e).getError().getErrorCode(), ((WxErrorException) e).getError().getErrorMsg(), null);
+
+        // @RequestParam-校验异常捕捉,必须传参
         } else if (e instanceof MissingServletRequestParameterException) {
             log.error("【全局异常拦截】MissingServletRequestParameterException: 错误信息 {}", e.getMessage());
             return ApiResponse.ofStatus(Status.PARAM_NOT_NULL, ((MissingServletRequestParameterException) e).getParameterName());
