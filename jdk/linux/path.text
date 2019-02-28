@@ -1,4 +1,7 @@
 
+tar zxvf jdk-8u191-linux-x64.tar.gzip
+
+
 vi /etc/profile
 
 JAVA_HOME=/opt/jdk1.8.0_191
