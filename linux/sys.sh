@@ -203,3 +203,29 @@ export PATH=$PATH:/opt/au1200_rm/build_tools/bin
 vi /etc/profile
 # 或者
 vi /root/.bashrc
+
+
+
+
+# 跨ip传输文件 https://blog.csdn.net/gatieme/article/details/51673229
+
+# 指定用户名，命令执行后输入密码，第1个仅指定了远程的目录，文件名字不变，第2个指定了文件名
+scp local_file remote_username@remote_ip:remote_folder
+scp local_file remote_username@remote_ip:remote_file
+#没有指定用户名，命令执行后输入用户名和密码，第3个仅指定了远程的目录，文件名字不变，第4个指定了文件名
+scp local_file remote_ip:remote_folder
+scp local_file remote_ip:remote_file
+#eg
+scp 12347.stack root@116.196.92.240:/opt
+scp 12347.stack root@116.196.92.240:/opt/newname.stack
+
+
+
+
+# 跨ip传输文件夹
+scp -r local_folder remote_username@remote_ip:remote_folder
+scp -r local_folder remote_ip:remote_folder
+#eg
+scp -r logs/ root@192.168.240.154:/opt/
+
+
