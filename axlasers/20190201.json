@@ -1,0 +1,38 @@
+[
+  {
+    "code": 200,
+    "message": "操作成功 !",
+    "data": {
+      "info": {
+        "openId": "ojvZ61DzFNxp4c0Cj1UcW_EBiYHU",
+        "avatar": "http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJpgTp0iasrEETlba8Fp8roFauXTGOBWFe6C9v86WtNlfGNSUZGqv3ImSiaiaRia8BdBL9SwAUoEsPT9w/132"
+      },
+      "status": 0
+    }
+  },
+  {
+    "code": 200,
+    "message": "操作成功 !",
+    "data": {
+      "info": [
+        {
+          "OPEN_ID": "ojvZ61DzFNxp4c0Cj1UcW_EBiYHU",
+          "SUPERIOR_EMPLOYEE_CODE": "2",
+          "ID": 1,
+          "SUPERIOR_OPEN_ID": "",
+          "EMPLOYEE_CODE": "1",
+          "AVATAR": "http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJpgTp0iasrEETlba8Fp8roFauXTGOBWFe6C9v86WtNlfGNSUZGqv3ImSiaiaRia8BdBL9SwAUoEsPT9w/132",
+          "BIND_AT": 1551145197615
+        }
+      ],
+      "status": 1
+    }
+  },
+  {
+    "openId": "ojvZ61PyT_jS63v1aUzf8IAMEdFU",
+    "employeeCode": "777",
+    "type": 2,
+    "content": "这是测试消息!",
+    "employeeName": "张医生"
+  }
+]

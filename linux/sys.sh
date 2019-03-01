@@ -24,6 +24,10 @@ systemctl stop firewalld.service
 service iptables status
 service iptables stop
 
+# 开放端口4379
+firewall-cmd --zone=public --add-port=4379/tcp --permanent
+
+
 
 
 ############ 查看内存
