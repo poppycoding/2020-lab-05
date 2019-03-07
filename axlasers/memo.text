@@ -1,0 +1,7 @@
+
+
+
+
+在Windows下查看文件编码可以使用记事本打开文件，然后点击“另存为”在右下角即可看到当前文件的编码方式。如果显示为ANSI编码，在简体中文系统下，
+ANSI 编码代表 GB2312 编码。不同 ANSI 编码之间互不兼容，ANSI是American National Standards Institute的缩写，
+记事本默认是以ANSI编码保存文本文档的。
