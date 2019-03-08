@@ -133,8 +133,15 @@ hostname haha
 
 
 
-# 授权执行命令
-chmod +777
+# 授权执行命令:  u:所有者 g:所在组 o:其他组 a:所有人(u、g、o的总和)
+# 1. chmod   u=rwx, g=rx, o=x   文件目录名
+# 2. chmod   o+w  文件目录名 给其他组的用户增加写的权限
+# 3. chmod   a-x    文件目录名 给所有人去掉可执行文件的权限
+chmod  u=rwx,g=rw,o=wx file
+
+
+#r=4 w=2 x=1: chmod u=rwx,g=rx,o=x file 相当于 chmod 751 file
+chmod 777 file
 
 
 # 查看系统服务,并且设置开机是否启动
