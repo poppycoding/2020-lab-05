@@ -1,0 +1,32 @@
+[{
+  "configId": 4,
+  "configName": "27库",
+  "schema": "WFBEMR",
+  "rootTableName": "EMR_XITONGGNB",
+  "rootColumnName": "GONGNENGDXH",
+  "rootTableType": "交易",
+  "childSchema": "WFBEMR",
+  "childTableName": "BL_BINGLIDYJL",
+  "childColumnName": "MOBANLXDM",
+  "technicalTypeName": "哈哈"
+},
+  {
+    "configId": 4,
+    "configName": "27库",
+    "schema": "WFBEMR",
+    "rootTableName": "EMR_XITONGGNB",
+    "rootColumnName": "GONGNENGDXH",
+    "rootTableType": "交易",
+    "childTableName": "BL_BINGLIDYJL",
+    "childs": [
+      {
+        "childColumnName": "MOBANLXDM",
+        "technicalTypeName": "哈哈"
+      },
+      {
+        "childColumnName": "MOBANLXDM",
+        "technicalTypeName": "呵呵"
+      }
+    ]
+  }
+  ]

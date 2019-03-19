@@ -86,3 +86,12 @@ tableData: [
 
  确认无关--1,未确认-0,确认有关-1,强关联有关-2
  确认无关:-1,未确认:0,确认有关:1,强关联有关:2
+
+
+   int min = 2;
+            String trade = "交易";
+            String tradeKey = "交易#0";
+            String reference = "参考";
+            String referenceKey = "参考#0";
+            String subject = "参考";
+            String subjectKey = "参考#0";
