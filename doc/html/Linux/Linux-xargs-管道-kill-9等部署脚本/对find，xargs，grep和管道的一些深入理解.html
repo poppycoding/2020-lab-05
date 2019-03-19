@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<!-- saved from url=(0067)http://fatmouse.xyz/2016/05/10/2016-05-10-find-grep-xargs-and-pipe/ -->
+<html class="theme-next muse use-motion"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="./对find，xargs，grep和管道的一些深入理解_files/jquery.fancybox.css" rel="stylesheet" type="text/css">
+
+
+
+
+  <link href="./对find，xargs，grep和管道的一些深入理解_files/css" rel="stylesheet" type="text/css">
+
+
+
+<link href="./对find，xargs，grep和管道的一些深入理解_files/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<link href="./对find，xargs，grep和管道的一些深入理解_files/main.css" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="linux,command,find,xargs,grep,unzip,bat,windows,cgwin,批量解压，linux高效操作，linux命令,管道,pipe">
+
+
+
+
+
+  <link rel="alternate" href="http://fatmouse.xyz/atom.xml" title="I&#39;m Terry" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://fatmouse.xyz/favicon.ico?v=0.5.0">
+
+
+
+
+
+
+<meta name="description" content="本人算是一个爱深究的人，前段时间遇到了一个问题，感觉挺有意思，这两天好好的研究了一下。
+问题相信大家都知道在目录中搜索含有固定字符串文件的命令：1find . -name &amp;apos;*.py&amp;apos; |xargs grep test
+刚开始的时候，我不熟悉xargs命令，所以直接使用的命令是1find . -name &amp;apos;*.py&amp;apos; |grep test
+结果并不是自己所期">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对find，xargs，grep和管道的一些深入理解">
+<meta property="og:url" content="http://yoursite.com/2016/05/10/2016-05-10-find-grep-xargs-and-pipe/index.html">
+<meta property="og:site_name" content="I&#39;m Terry">
+<meta property="og:description" content="本人算是一个爱深究的人，前段时间遇到了一个问题，感觉挺有意思，这两天好好的研究了一下。
+问题相信大家都知道在目录中搜索含有固定字符串文件的命令：1find . -name &amp;apos;*.py&amp;apos; |xargs grep test
+刚开始的时候，我不熟悉xargs命令，所以直接使用的命令是1find . -name &amp;apos;*.py&amp;apos; |grep test
+结果并不是自己所期">
+<meta property="og:updated_time" content="2016-05-10T11:25:28.096Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="对find，xargs，grep和管道的一些深入理解">
+<meta name="twitter:description" content="本人算是一个爱深究的人，前段时间遇到了一个问题，感觉挺有意思，这两天好好的研究了一下。
+问题相信大家都知道在目录中搜索含有固定字符串文件的命令：1find . -name &amp;apos;*.py&amp;apos; |xargs grep test
+刚开始的时候，我不熟悉xargs命令，所以直接使用的命令是1find . -name &amp;apos;*.py&amp;apos; |grep test
+结果并不是自己所期">
+
+
+
+<script src="./对find，xargs，grep和管道的一些深入理解_files/hm.js.下载"></script><script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 对find，xargs，grep和管道的一些深入理解 | I'm Terry </title>
+<script type="text/javascript" async="" src="./对find，xargs，grep和管道的一些深入理解_files/count.js.下载"></script><script type="text/javascript" async="" src="./对find，xargs，grep和管道的一些深入理解_files/embed.js.下载"></script><style type="text/css">.fancybox-margin{margin-right:17px;}</style><script src="./对find，xargs，grep和管道的一些深入理解_files/count-data.js.下载"></script><link rel="preload" as="style" href="https://c.disquscdn.com/next/embed/styles/lounge.22793468229c73f9fca4769dbeac76cf.css"><link rel="preload" as="script" href="https://c.disquscdn.com/next/embed/common.bundle.e63a160a6bfb2f2953b5059c50baaf15.js"><link rel="preload" as="script" href="https://c.disquscdn.com/next/embed/lounge.bundle.21354d142caebf813d50d9d69641db45.js"><link rel="preload" as="script" href="https://disqus.com/next/config.js"></head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans" class="" style="padding-right: 320px;">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?1c077a09c498418f3eedb6c1304fbaa6";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="http://fatmouse.xyz/" class="brand" rel="start" style="opacity: 1;">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title" style="opacity: 1; top: 0px;">I'm Terry</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle" style="opacity: 1; top: 0px;">Just another Coder and Designer</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home" style="opacity: 1; transform: translateY(0px);">
+          <a href="http://fatmouse.xyz/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories" style="opacity: 1; transform: translateY(0px);">
+          <a href="http://fatmouse.xyz/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives" style="opacity: 1; transform: translateY(0px);">
+          <a href="http://fatmouse.xyz/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article" style="opacity: 1; display: block; transform: translateY(0px);">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                对find，xargs，grep和管道的一些深入理解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-10T14:00:00+08:00" content="2016-05-10">
+              2016-05-10
+            </time>
+          </span>
+
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
+                  <a href="http://fatmouse.xyz/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="http://fatmouse.xyz/2016/05/10/2016-05-10-find-grep-xargs-and-pipe/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/10/2016-05-10-find-grep-xargs-and-pipe/" itemprop="commentsCount">2 Comments</span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本人算是一个爱深究的人，前段时间遇到了一个问题，感觉挺有意思，这两天好好的研究了一下。</p>
+<h2 id="问题"><a href="http://fatmouse.xyz/2016/05/10/2016-05-10-find-grep-xargs-and-pipe/#%E9%97%AE%E9%A2%98" class="headerlink" title="问题"></a>问题</h2><p>相信大家都知道在目录中搜索含有固定字符串文件的命令：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -name '*.py' |xargs grep test</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>刚开始的时候，我不熟悉<code>xargs</code>命令，所以直接使用的命令是<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -name '*.py' |grep test</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>结果并不是自己所期望的。此命令只是找出文件名<code>*.txt</code>有<code>test</code>的情况。</p>
+<p>这里我就研究一下，究竟<code>xargs</code>做了什么，使得结果不相同。</p>
+<a id="more"></a>
+<h2 id="参数与标准输入"><a href="http://fatmouse.xyz/2016/05/10/2016-05-10-find-grep-xargs-and-pipe/#%E5%8F%82%E6%95%B0%E4%B8%8E%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5" class="headerlink" title="参数与标准输入"></a>参数与标准输入</h2><p>这两个词我们在Linux命令中是很常见的。但是参数和标准输入其实是有区别的。我们日常使用的很多命令，例如<code>ls -lah .</code>中。<code>l</code>， <code>a</code>， <code>h</code> ，<code>.</code>都是命令<code>ls</code>的参数。至于标准输入，可以说它某种<em>流数据</em>。而通常来讲标准输入的流数据来源就是我们的终端输入。在Linux命令中，有些命令可以接收标准输入，有些是不能的。像上面的<code>ls</code>，就是只能接收参数，不能接收标准输入。像<code>cat</code>命令或<code>echo</code>命令，这些是可以的。</p>
+<p>怎么分辨一个命令可不可以接收标准输入？很简单，当你敲完命令回车后，终端会等待接收你的输入，例如当你在终端输入<code>cat</code>后，终端会等待你输入字符，当你输入一些字符后，然后按<code>Ctrl-C</code>发送终止符号。这时<code>cat</code>命令接收标准输入完毕，执行命令，也就是将刚才键入的内容输出的标准输出上（屏幕）。</p>
+<h2 id="管道"><a href="http://fatmouse.xyz/2016/05/10/2016-05-10-find-grep-xargs-and-pipe/#%E7%AE%A1%E9%81%93" class="headerlink" title="管道"></a>管道</h2><p>管道的作用是将前面命令的<strong>标准输出</strong>作为后面命令的<strong>标准输入</strong>。这里要注意，后面的命令接收的是标准输入，所以如果命令不支持接收标准输入，那么就不能直接使用管道，例如常用的<code>ls</code>命令，只能使用参数，而不能使用标准输入，所以<code>[command] | ls</code>是不能使用的。而命令如<code>echo</code>或<code>cat</code>就可以。那么肯定有方法来实现这些不能使用标准输入的命令与管道结合，这时候<code>xargs</code>便出场了。</p>
+<h2 id="xargs命令"><a href="http://fatmouse.xyz/2016/05/10/2016-05-10-find-grep-xargs-and-pipe/#xargs%E5%91%BD%E4%BB%A4" class="headerlink" title="xargs命令"></a>xargs命令</h2><p><code>xargs</code>命令通俗来讲就是将标准输入转成各种格式化的参数，所以命令<code>[command 1] | xargs [command 2]</code>就是将<code>command 1</code>的标准输出结果，通过管道<code>|</code>变成<code>xargs</code>的标准输入，然后<code>xargs</code>再将此标准输入变成参数，传给<code>[command 2]</code>。这样一来，通过<code>xargs</code>命令，我们便可以在管道后面使用那些不接收标准输入的命令了。例如<code>[command 1]|xargs ls</code>，是不是很熟悉？</p>
+<h2 id="find与grep"><a href="http://fatmouse.xyz/2016/05/10/2016-05-10-find-grep-xargs-and-pipe/#find%E4%B8%8Egrep" class="headerlink" title="find与grep"></a>find与grep</h2><p>有了以上的知识点，到这里终于可以解答最开始的问题了。为什么命令<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -name '*.py' |grep test</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>和<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -name '*.py' |xargs grep test</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>的结果是不一样的了。</p>
+<p>我们首先来查看grep手册。通过<code>man grep</code>命令。<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DESCRIPTION</span><br><span class="line">       grep searches the named input FILEs (or standard input if no files are named, or if a single hyphen-minus (-) is given as file name) for lines containing a match to the given PATTERN.  By default, grep prints the matching lines.</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>这里可以看到grep是支持标准输入的。</p>
+<p>假设目录存在如下文件：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls</span><br><span class="line">Altitest.py  python.py  runora.py  test.py  TransferFile.py</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>那么对于第一个命令<code>find . -name '*.py' |grep test</code>，是将前面命令的标准输出作为标准输入传给了<code>grep test</code>，那么<code>grep</code>是从这些标准输入寻找<code>test</code>字符，也就是<strong>文件名组成的字符流</strong><br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ find . -name '*.py' |grep test</span><br><span class="line">./Altitest.py</span><br><span class="line">./test.py</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>可以看到最终选择出的是这些文件名。</p>
+<p>而对于第二个命令<code>find . -name '*.py' |xargs grep test</code>，通过<code>xargs</code>，<code>find</code>得到的文件名成为了参数传给后面的<code>grep</code>，那么这时候这些文件名就是实实在在的文件标识，<code>grep</code>接收后会按正常的使用方式在各文件中搜寻字符串。<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#find . -name '*.py' |xargs grep test</span><br><span class="line">./runora.py:testConn = cx_Oracle.connect('user/passwd@tns')</span><br><span class="line">./runora.py:testCursor = testConn.cursor()</span><br><span class="line">./runora.py:testCursor.execute("select * from table")</span><br><span class="line">./runora.py:rows = testCursor.fetchall()</span><br><span class="line">./runora.py:testCursor.close()</span><br><span class="line">./runora.py:testConn.close()</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>到这里算是将<code>find</code>，<code>grep</code>，<code>xargs</code>和管道的作用理解清楚了。</p>
+<blockquote>
+<ol>
+<li><p><code>xargs</code>还有指定参数位置的作用。假设我们要将目录下所有的<code>.py</code>文件放到Python目录中去，可以使用命令<br><code>find . -name '*.py' | xargs -I {} mv {} ./Python</code><br>参数<code>-I</code>指定了管道前命令作为参数所应该在管道后面命令的位置。</p>
+</li>
+<li><p>我们在查看很多命令手册时，手册会说明命令的使用方法。例如<br><code>grep [OPTIONS] PATTERN [FILE...]</code>,也就是命令的最后一个位置是<strong>文件名[FILE]</strong>。<br>这里要注意这个<strong>文件名[FILE]</strong>也是<strong>参数</strong>。</p>
+</li>
+</ol>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="http://fatmouse.xyz/tags/linux/" rel="tag">#linux</a>
+          
+            <a href="http://fatmouse.xyz/tags/command/" rel="tag">#command</a>
+          
+            <a href="http://fatmouse.xyz/tags/find/" rel="tag">#find</a>
+          
+            <a href="http://fatmouse.xyz/tags/xargs/" rel="tag">#xargs</a>
+          
+            <a href="http://fatmouse.xyz/tags/grep/" rel="tag">#grep</a>
+          
+            <a href="http://fatmouse.xyz/tags/unzip/" rel="tag">#unzip</a>
+          
+            <a href="http://fatmouse.xyz/tags/bat/" rel="tag">#bat</a>
+          
+            <a href="http://fatmouse.xyz/tags/windows/" rel="tag">#windows</a>
+          
+            <a href="http://fatmouse.xyz/tags/cgwin/" rel="tag">#cgwin</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="http://fatmouse.xyz/2016/05/09/2016-05-09-unzip-bat/" rel="next" title="如何使用find和xargs完成高效的操作">
+                <i class="fa fa-chevron-left"></i> 如何使用find和xargs完成高效的操作
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="http://fatmouse.xyz/2016/09/27/2016-09-27-python-perl-offline-install/" rel="prev" title="关于在内网服务器上搭建Python和Perl环境的两个问题">
+                关于在内网服务器上搭建Python和Perl环境的两个问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread"><iframe id="dsq-app3232" name="dsq-app3232" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./对find，xargs，grep和管道的一些深入理解_files/saved_resource.html" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 457px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first" style="top: 5px; transform: rotateZ(-45deg); width: 100%;"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle" style="opacity: 0;"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last" style="top: -5px; transform: rotateZ(45deg); width: 100%;"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar sidebar-active" style="display: block; width: 320px;">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element" style="opacity: 1; display: block; transform: translateX(0px);">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person" style="opacity: 1; display: block; transform: translateX(0px);">
+          <img class="site-author-image" itemprop="image" src="./对find，xargs，grep和管道的一些深入理解_files/avatar.jpg" alt="Y.Tian">
+          <p class="site-author-name" itemprop="name">Y.Tian</p>
+          <p class="site-description motion-element" itemprop="description" style="opacity: 1; display: block; transform: translateX(0px);">生命不息，折腾不止</p>
+        </div>
+        <nav class="site-state motion-element" style="opacity: 1; display: block; transform: translateX(0px);">
+          <div class="site-state-item site-state-posts">
+            <a href="http://fatmouse.xyz/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="http://fatmouse.xyz/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element" style="opacity: 1; display: block; transform: translateX(0px);">
+            <a href="http://fatmouse.xyz/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element" style="opacity: 1; display: block; transform: translateX(0px);">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/laoshuterry" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/laoshuterry" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> twitter
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1146371305" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/laoshuterry" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> douban
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/laoshuterry" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license" style="opacity: 1; display: block; transform: translateX(0px);">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="./对find，xargs，grep和管道的一些深入理解_files/cc-by-nc-sa.svg" alt="Creative Commons">
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element" style="opacity: 1; display: block; transform: translateX(0px);">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active" style="opacity: 1; display: block; transform: translateX(0px);">
+          <div class="post-toc-indicator-top post-toc-indicator" style="opacity: 0;">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc" style="height: 824px;">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="http://fatmouse.xyz/2016/05/10/2016-05-10-find-grep-xargs-and-pipe/#%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="http://fatmouse.xyz/2016/05/10/2016-05-10-find-grep-xargs-and-pipe/#%E5%8F%82%E6%95%B0%E4%B8%8E%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5"><span class="nav-number">2.</span> <span class="nav-text">参数与标准输入</span></a></li><li class="nav-item nav-level-2 active active-current"><a class="nav-link" href="http://fatmouse.xyz/2016/05/10/2016-05-10-find-grep-xargs-and-pipe/#%E7%AE%A1%E9%81%93"><span class="nav-number">3.</span> <span class="nav-text">管道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="http://fatmouse.xyz/2016/05/10/2016-05-10-find-grep-xargs-and-pipe/#xargs%E5%91%BD%E4%BB%A4"><span class="nav-number">4.</span> <span class="nav-text">xargs命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="http://fatmouse.xyz/2016/05/10/2016-05-10-find-grep-xargs-and-pipe/#find%E4%B8%8Egrep"><span class="nav-number">5.</span> <span class="nav-text">find与grep</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator" style="opacity: 0;">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  ©  2014 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Y.Tian</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io/">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="./对find，xargs，grep和管道的一些深入理解_files/index.js.下载"></script>
+
+  <script type="text/javascript" src="./对find，xargs，grep和管道的一些深入理解_files/fastclick.min.js.下载"></script>
+
+  <script type="text/javascript" src="./对find，xargs，grep和管道的一些深入理解_files/jquery.lazyload.js.下载"></script>
+
+  <script type="text/javascript" src="./对find，xargs，grep和管道的一些深入理解_files/velocity.min.js.下载"></script>
+
+  <script type="text/javascript" src="./对find，xargs，grep和管道的一些深入理解_files/velocity.ui.min.js.下载"></script>
+
+  <script type="text/javascript" src="./对find，xargs，grep和管道的一些深入理解_files/jquery.fancybox.pack.js.下载"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="./对find，xargs，grep和管道的一些深入理解_files/utils.js.下载"></script>
+
+  <script type="text/javascript" src="./对find，xargs，grep和管道的一些深入理解_files/motion.js.下载"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="./对find，xargs，grep和管道的一些深入理解_files/scrollspy.js.下载"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="./对find，xargs，grep和管道的一些深入理解_files/bootstrap.js.下载"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'laoshuterry';
+      var disqus_identifier = '2016/05/10/2016-05-10-find-grep-xargs-and-pipe/';
+      var disqus_title = '对find，xargs，grep和管道的一些深入理解';
+      var disqus_url = 'http://yoursite.com/2016/05/10/2016-05-10-find-grep-xargs-and-pipe/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+  
+  
+  
+
+  
+
+
+
+
+<iframe style="display: none;" src="./对find，xargs，grep和管道的一些深入理解_files/saved_resource(1).html"></iframe></body></html>

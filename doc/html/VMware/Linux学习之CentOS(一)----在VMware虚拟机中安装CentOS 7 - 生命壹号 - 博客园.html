@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)https://www.cnblogs.com/smyhvae/p/3917532.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="never">
+<title>Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/bundle-darkgreentrip.css">
+<link type="text/css" rel="stylesheet" href="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/188761.css">
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/bundle-darkgreentrip-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/smyhvae/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/smyhvae/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/smyhvae/wlwmanifest.xml">
+<script async="" src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/analytics.js.下载"></script><script src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/jquery-2.2.0.min.js.下载"></script>
+<script type="text/javascript">var currentBlogApp = 'smyhvae', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/blog-common.js.下载" type="text/javascript"></script>
+<style type="text/css">#htmlToothbrush, #bodyToothbrush {overflow:hidden !important;zoom:100% !important}
+#htmlToothbrush #bodyToothbrush .parentToothbrush {overflow:visible !important;z-index:auto !important;transform:none !important;-webkit-transform-style:flat !important;transition:none !important;contain:none !important;}
+#htmlToothbrush #bodyToothbrush .absoluteToothbrush {position:absolute !important;}
+#htmlToothbrush #bodyToothbrush .playerToothbrush {position:fixed !important;top:0px !important;left:1px !important;width:calc(100vw - 2px) !important;height:100vh !important;max-width:none !important;max-height:none !important;min-width:0 !important;min-height:0 !important;margin:0 !important;padding:0 !important;z-index:2147483647 !important;border:none !important;background-color:#000 !important;transform:none !important;}
+#htmlToothbrush #bodyToothbrush .playerToothbrush video {object-fit:contain !important;}
+#playerControlBtn {visibility:hidden;opacity:0;display:none;transition: all 0.5s ease;cursor: pointer;font: 12px "微软雅黑";margin:0;width:64px;height:20px;line-height:20px;border:none;text-align: center;position: fixed;z-index:2147483647;background-color: #27A9D8;color: #FFF;} #playerControlBtn:hover {visibility:visible;opacity:1;background-color:#2774D8;}
+#playerControlBtn.playerControlBtnCol {width:20px;height:64px;line-height:16px;}
+#leftFullStackButton{display:none;position:fixed;width:1px;height:100vh;top:0;left:0;z-index:2147483647;background:#000;}
+#rightFullStackButton{display:none;position:fixed;width:1px;height:100vh;top:0;right:0;z-index:2147483647;background:#000;}</style><style type="text/css">#htmlToothbrush #bodyToothbrush .node-video.node-full video,#htmlToothbrush #bodyToothbrush .WB_h5video video {width: inherit !important;height: inherit !important;}
+#htmlToothbrush #bodyToothbrush #douyu_room_normal_flash_proxy_box {position:fixed !important;top:0px !important;left:1px !important;width:calc(100vw - 2px) !important;height:100vh !important;max-width:none !important;max-height:none !important;min-width:0 !important;min-height:0 !important;margin:0 !important;padding:0 !important;z-index:2147483645 !important;border:none !important;background-color:#000 !important;transform:none !important;}</style></head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/smyhvae/"><img id="blogLogo" src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/logo.gif" alt="返回主页"></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/smyhvae/">生命壹号</a></h1>
+<h2>博客园分享技术，公众号分享代码之外的技能。微信公众号：生命团队。</h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/smyhvae/">首页</a></li>
+<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E7%94%9F%E5%91%BD%E5%A3%B9%E5%8F%B7">联系</a></li>
+<li><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/smyhvae/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/smyhvae/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 153&nbsp; </span>
+<span id="stats_article_count">文章 - 0&nbsp; </span>
+<span id="stats-comment_count">评论 - 539</span>
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/smyhvae/p/3917532.html">Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><p><strong>【声明】</strong></p>
+<p>欢迎转载，但请保留文章原始出处→_→</p>
+<p>生命壹号：<a href="http://www.cnblogs.com/smyhvae/" target="_blank">http://www.cnblogs.com/smyhvae/</a></p>
+<p>文章来源：<a href="http://www.cnblogs.com/smyhvae/p/3917532.html">http://www.cnblogs.com/smyhvae/p/3917532.html</a></p>
+<p><span style="line-height: 1.5;">&nbsp;</span></p>
+<p><strong>【正文】</strong></p>
+<p><strong>一、 </strong><strong>VMware</strong><strong>简介：</strong></p>
+<p>VMware是一个虚拟PC的软件，可以在现有的操纵系统上虚拟出一个新的硬件环境，相当于模拟出一台新的PC，以此来实现在一台机器上真正同时运行两个独立的操作系统。</p>
+<p>VMware的主要特点：</p>
+<ul>
+<li>不需要区分或重新开机就能在同一台PC上使用两种以上的操作系统；</li>
+<li>本机系统可以与虚拟机系统网络通信；</li>
+<li>可以设定并且随时修改虚拟机操作系统的硬件环境。</li>
+</ul>
+<p>VMware Workstation10.0.3下载地址：</p>
+<p>精简版：<a href="http://pan.baidu.com/s/1jGFqhzo"><span>http://pan.baidu.com/s/1jGFqhzo</span></a> <br>官方版：<a href="https://download3.vmware.com/software/wkst/file/VMware-workstation-full-10.0.3-1895310.exe">https://download3.vmware.com/software/wkst/file/VMware-workstation-full-10.0.3-1895310.exe</a></p>
+<p><strong>和谐号</strong>    <br>1F48Z-6MJ4H-UZUA8-UT176-92W5A    <br>HA2PK-DMH1Q-5Z6E0-Q327H-3303N    <br>MF2QC-8HK07-WZ058-683N4-138NP    <br>MG2E7-8XJ82-QZR59-XTC54-13T3J</p>
+<p>&nbsp;</p>
+<p><strong>二、</strong><strong>CentOS</strong><strong>简介：</strong></p>
+<p>CentOS（Community ENTerprise Operating System）是Linux发行版之一，它是来自于Red Hat Enterprise Linux依照开放源代码规定释出的源代码所编译而成。由于出自同样的源代码，因此有些要求高度稳定性的服务器以CentOS替代商业版的Red Hat Enterprise Linux使用。两者的不同，在于CentOS并不包含封闭源代码软件。</p>
+<p>CentOS 7下载地址：</p>
+<p><a href="http://mirrors.hust.edu.cn/centos/7.0.1406/isos/x86_64/">http://mirrors.hust.edu.cn/centos/7.0.1406/isos/x86_64/</a></p>
+<p>&nbsp;</p>
+<p><strong>三、CentOS的安装：</strong></p>
+<p>虚拟机版本：<span style="color: #ff0000;">VMware Workstation_10.0.3</span></p>
+<p>Linux系统版本：<span style="color: #ff0000;">CentOS_7（64位）</span></p>
+<p>物理机版本：Win 7旗舰版</p>
+<p>注：本人为初学者，在虚拟机上安装CentOS，方便同时在Win7上操作以及和物理机进行通信；等操作熟练之后可以装双系统。</p>
+<p><strong>1</strong><strong>、虚拟机的创建：</strong></p>
+<p>打开安装好的VMware （如果大家安装的VMware是英文版的也没关系，对号入座即可），选择“文件---&gt;新建虚拟机”，如图：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171110533588371.png" alt=""></p>
+<p>&nbsp;</p>
+<p>这里选择“自定义”，下一步：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171111068424925.png" alt=""></p>
+<p>选择默认，下一步：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171111238896866.png" alt=""></p>
+<p>选择<span style="color: #ff0000;">“第三项“</span>稍后安装操作系统”，<span style="color: #ff0000;">以后安装，方便进行配置</span>。下一步：</p>
+<p>（注：上图中，第一项是用光盘安装，第二项是用硬盘里的ISO镜像安装）</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171112106393415.png" alt=""></p>
+<p>上图指的是，打算在虚拟机中模拟一个怎样的操作系统，这里选择Linux，Version里选择CentOS 64位，下一步：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171112221868409.png" alt=""></p>
+<p>输入虚拟机名称（可以随便起），选择镜像文件存放的路径。下一步：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171112437023882.png" alt=""></p>
+<p>选择给虚拟机分配的cpu核的数量，如果为虚拟机选择的cpu数超过本机实际cpu数量，VMware会给出警告。这里选择默认即可。下一步：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171112553423606.png" alt=""></p>
+<p>虚拟内存分配，一般选默认的1024MB就行（注：给虚拟机分配的内存不能超过物理 内存的一半，而且稍后如果想要使用图形界面安装CentOS，至少要分配628M的内存），下一步：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171113191709452.png" alt=""></p>
+<p>这里是网络类型分配，网络类型分配分为三种，Bridge，NAT和Host-Only，大概区别是</p>
+<p>1 BRIDGE:相当于主机和虚拟机连接到同一个hub上，虚拟机要和主机配置到同一网段上</p>
+<p>2 NAT:使用vmnet8，主机开启必要的VMware服务，如vmvare dhcp，虚拟机设置成dhcp方式即可，当然也可以手工设置成vmnet1同一网段，比较麻烦</p>
+<p>3 HOST-ONLY：使用vmnet1，直接和主机互联，可以使用ifconfig查看配置情况</p>
+<p>这里选择NAT，下一步：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171113379835965.png" alt=""></p>
+<p>选择io控制器类型，选择默认的即可，下一步：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171114028274755.png" alt=""></p>
+<p>选择要创建的磁盘类型，选择默认的即可，下一步：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171114167644380.png" alt=""></p>
+<p>选择虚拟硬盘类型，这里选择创建一个新的，下一步：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171114417955928.png" alt=""></p>
+<p>选择磁盘空间大小，默认即可，下一步：</p>
+<p><a style="line-height: 1.5;" href="https://images0.cnblogs.com/blog/641601/201408/171105383279893.png"><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171115107179663.png" alt=""></a></p>
+<p>设置虚拟镜像文件名称，默认即可，下一步：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171115211236443.png" alt=""></p>
+<p>创建完成，确认虚拟机信息（其实以后也可以修改），点“完成”即可。出现了下面的界面：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171115385772741.png" alt=""></p>
+<p><span style="line-height: 1.5;">这就是我们虚拟出来的一台计算机，上方红框中，可以看到虚拟机的硬件信息，也可以进行修改，或者点击菜单栏“虚拟机---&gt;设置”，也可以对硬件配置进行修改。</span></p>
+<p><strong>虚拟机的使用技巧：【创建快照】（可忽略）</strong></p>
+<p>快照的功能相当于一件还原，当我们在后续操作中，即使将虚拟机搞崩溃了，读取快照，就可以还原到此时的状态。</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171116170147584.png" alt=""></p>
+<p>点击上方红框中的按钮，或者选择菜单栏“虚拟机---&gt;”快照：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171116307952695.png" alt=""></p>
+<p>给快照起个名字。以后如果想要恢复快照，点击下方红框中的按钮：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171116449057904.png" alt=""></p>
+<p>弹出对话框：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171116545304811.png" alt=""></p>
+<p>选择之前保存的快照，点击“转到”，即可。</p>
+<p>注：快照会占用一定的内存，而且，真正的服务器是没有快照的功能。</p>
+<p><strong>2</strong><strong>、安装</strong><strong>CentOS</strong><strong>镜像：</strong></p>
+<p>首先需要加载CentOS镜像。选择“虚拟机---&gt;设置”：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171117558899357.png" alt=""></p>
+<p>点击”CD/DVD(IDE)”,打开虚拟机光盘设置页面，点击”使用ISO镜像文件”,选择待安装的ISO镜像文件。就是刚刚下载的CentOS-7.0-1406-x86_64-DVD.iso文件。点击“确定”：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171118164523672.png" alt=""></p>
+<p><span style="line-height: 1.5;">然后点击”开启此虚拟机“，启动虚拟机。</span></p>
+<p>PS:</p>
+<p>打开虚拟机之后，提示了一个小错误，错误如下：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171119019363735.png" alt=""></p>
+<p><span style="line-height: 1.5;">根据错误提示，到BIOS里面设置了一下，这里把Intel virtual Tehnology 的设置改为enabled 就可以啦：&nbsp;</span><span style="line-height: 1.5;"><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171120006868350.jpg" alt=""></span></p>
+<p>然后重启继续安装。这个时候，要赶紧将鼠标点进去，并快速按F2键，弹出如下的BIOS启动界面：</p>
+<p>（注：解释如下，计算机默认是从硬盘启动的，但是这个虚拟机现在是空的，所以现在要设置为通过光盘启动，才能进入安装界面）</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171120312807629.png" alt=""></p>
+<p><span style="line-height: 1.5;">根据上图所示，选择“Boot”菜单，然后通过键盘上的“+”将“CD-ROM Drive”放在最上面，即优先启动。</span></p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171120480145243.png" alt=""></p>
+<p>紧接着，按照上图所示，进入Exit菜单，选择第二项“Exit Discarding Changes”，即不保存退出，按enter键确认。</p>
+<p>之后出现如下界面：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171121087808086.png" alt=""></p>
+<p>在上图中，选择第一项“Install CentOS 7”，按enter键确认。之后，弹出如下图形化的安装界面：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171121397332410.png" alt=""></p>
+<p>选择简体中文的语言，单击“继续”，弹出如下界面：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171121591707982.png" alt=""></p>
+<p><strong>日期和时间：</strong></p>
+<p><strong><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171122133278205.png" alt=""></strong></p>
+<p>&nbsp;</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171122248738901.png" alt=""></p>
+<p>如果你安装的是英文版，需要将时区改为上海。本人安装的是中文版，选择默认的上海时间即可。</p>
+<p><strong>键盘：</strong></p>
+<p><strong><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171122543733980.png" alt=""></strong></p>
+<p>&nbsp;</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171123082335647.png" alt=""></p>
+<p>英文键盘和中文键盘布局是一样的，默认即可。</p>
+<p>安装源：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171123388583170.png" alt=""></p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171123512484523.png" alt=""></p>
+<p>可以看到，安装源是自动检测的，不用修改，单击“完成”即可。</p>
+<p><strong>软件选择：</strong></p>
+<p><strong><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171552324983655.png" alt=""></strong></p>
+<p>&nbsp;</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171552448899306.png" alt=""></p>
+<p>个人用户建议选择桌面版，服务器建议选择最小安装。我这里选择桌面版，并根据需要安装一些软件及工具（反正我是全安装了的）。</p>
+<p><strong>网络和主机名：</strong></p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171553210617790.png" alt=""></p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171553297807553.png" alt=""></p>
+<p>打开网络连接就行了，单击“完成”。</p>
+<p><strong>安装位置：</strong></p>
+<p><strong><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171553481552468.png" alt=""></strong></p>
+<p>&nbsp;</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171554090305811.png" alt=""></p>
+<p>选择“我要配置分区“，点左上角的“完成”，进入下面的界面：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171556151234235.png" alt=""></p>
+<p>根据上图所示，分区方案选择“标准分区”。并开始挂载分区：</p>
+<p>将<span style="color: #ff0000;">/boot</span>分区设为<span style="color: #ff0000;">200M</span>：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171557342333636.png" alt=""></p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171557516399620.png" alt=""></p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171558113426507.png" alt=""></p>
+<p>将<span style="color: #ff0000;">swap</span>分区设为<span style="color: #ff0000;">2G</span>：（这里不用修改文件系统方式，默认的方式为swap即可）</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171558414675943.png" alt=""></p>
+<p>将<span style="color: #ff0000;">/home</span>目录设置为<span style="color: #ff0000;">2G</span>：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171602339051487.png" alt=""></p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171602431234038.png" alt=""></p>
+<p>最后，给根分区/分配剩余的全部空间：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171603562021163.png" alt=""></p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171604227644211.png" alt=""></p>
+<p>分配完了，单击左上角的“完成”，出现如下界面：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171604420612040.png" alt=""></p>
+<p>接受更改就行了。</p>
+<p>配置完成了，单击“开始安装“：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171604599524638.png" alt=""></p>
+<p>在安装的过程中，我们可以设置一下root密码，还可以创建一个常用账号：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171605141862821.png" alt=""></p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171605212171270.png" alt=""></p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171605299204262.png" alt=""></p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/171605474057802.png" alt=""></p>
+<p>这样，就大功告成了。</p>
+<p>&nbsp;</p>
+<h2>我的公众号</h2>
+<p>想学习<span style="color: #0000ff;"><strong>代码之外的软技能</strong></span>？不妨关注我的微信公众号：<strong>生命团队</strong>（id：vitateam）。</p>
+<p>扫一扫，你将发现另一个全新的世界，而这将是一场美丽的意外：</p>
+<p><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/生命团队公众号二维码.jpg" alt=""></p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/smyhvae/category/604950.html" target="_blank">Linux</a></div>
+<div id="EntryTag">标签: <a href="http://www.cnblogs.com/smyhvae/tag/Linux%E5%AD%A6%E4%B9%A0%E4%B9%8BCentOS/">Linux学习之CentOS</a></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(3917532,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;64313984-87f0-e311-8d02-90b11c0b17d6&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/smyhvae/" target="_blank"><img src="./Linux学习之CentOS(一)----在VMware虚拟机中安装CentOS 7 - 生命壹号 - 博客园_files/20151116171645.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/smyhvae/">生命壹号</a><br>
+            <a href="http://home.cnblogs.com/u/smyhvae/followees">关注 - 53</a><br>
+            <a href="http://home.cnblogs.com/u/smyhvae/followers">粉丝 - 1079</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;64313984-87f0-e311-8d02-90b11c0b17d6&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(3917532,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">4</span>
+    </div>
+    <div class="buryit" onclick="votePost(3917532,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/smyhvae/p/3910541.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/smyhvae/p/3910541.html" title="发布于2014-08-13 16:52">Android UI组件----自定义ListView实现动态刷新</a><br><a href="http://www.cnblogs.com/smyhvae/p/3919940.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/smyhvae/p/3919940.html" title="发布于2014-08-18 16:58">Linux学习之CentOS(二)----远程登录管理工具SecureCRT的使用</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2014-08-17 11:07</span> <a href="http://www.cnblogs.com/smyhvae/">生命壹号</a> 阅读(<span id="post_view_count">10798</span>) 评论(<span id="post_comment_count">6</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=3917532" rel="nofollow">编辑</a> <a href="https://www.cnblogs.com/smyhvae/p/3917532.html#" onclick="AddToWz(3917532);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=188761,cb_entryId=3917532,cb_blogApp=currentBlogApp,cb_blogUserGuid='64313984-87f0-e311-8d02-90b11c0b17d6',cb_entryCreatedDate='2014/8/17 11:07:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<br>
+<div class="feedback_area_title">评论列表</div>
+<div class="feedbackNoItems"></div>	
+
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/smyhvae/p/3917532.html#3125038" class="layer">#1楼</a><a name="3125038" id="comment_anchor_3125038"></a>  <span class="comment_date">2015-02-06 16:31</span> <a id="a_comment_author_3125038" href="http://home.cnblogs.com/u/347621/" target="_blank">后撤步跳楼</a> <a href="http://msg.cnblogs.com/send/%E5%90%8E%E6%92%A4%E6%AD%A5%E8%B7%B3%E6%A5%BC" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3125038" class="blog_comment_body">thank u</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3125038,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3125038,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/smyhvae/p/3917532.html#3211216" class="layer">#2楼</a><a name="3211216" id="comment_anchor_3211216"></a>  <span class="comment_date">2015-06-18 18:30</span> <a id="a_comment_author_3211216" href="http://www.cnblogs.com/cleam/" target="_blank">Cleam</a> <a href="http://msg.cnblogs.com/send/Cleam" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3211216" class="blog_comment_body">thx</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3211216,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3211216,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3211216_avatar" style="display:none;">http://pic.cnblogs.com/face/506138/20130323200831.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/smyhvae/p/3917532.html#3486123" class="layer">#3楼</a><a name="3486123" id="comment_anchor_3486123"></a>  <span class="comment_date">2016-08-09 16:36</span> <a id="a_comment_author_3486123" href="http://www.cnblogs.com/lixuwu/" target="_blank">CS408</a> <a href="http://msg.cnblogs.com/send/CS408" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3486123" class="blog_comment_body">thanks！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3486123,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3486123,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3486123_avatar" style="display:none;">http://pic.cnblogs.com/face/755171/20160717235103.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/smyhvae/p/3917532.html#3559067" class="layer">#4楼</a><a name="3559067" id="comment_anchor_3559067"></a>  <span class="comment_date">2016-11-18 09:40</span> <a id="a_comment_author_3559067" href="http://www.cnblogs.com/yalunwang/" target="_blank">yalunwang</a> <a href="http://msg.cnblogs.com/send/yalunwang" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3559067" class="blog_comment_body">不错，很感谢</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3559067,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3559067,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3559067_avatar" style="display:none;">http://pic.cnblogs.com/face/681140/20160621122635.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/smyhvae/p/3917532.html#3565026" class="layer">#5楼</a><a name="3565026" id="comment_anchor_3565026"></a>  <span class="comment_date">2016-11-25 11:44</span> <a id="a_comment_author_3565026" href="http://www.cnblogs.com/lixuwu/" target="_blank">CS408</a> <a href="http://msg.cnblogs.com/send/CS408" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3565026" class="blog_comment_body">Mark</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3565026,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3565026,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3565026_avatar" style="display:none;">http://pic.cnblogs.com/face/755171/20160717235103.png</span>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/smyhvae/p/3917532.html#3905535" class="layer">#6楼</a><a name="3905535" id="comment_anchor_3905535"></a><span id="comment-maxId" style="display:none;">3905535</span><span id="comment-maxDate" style="display:none;">2018/2/7 15:11:23</span>  <span class="comment_date">2018-02-07 15:11</span> <a id="a_comment_author_3905535" href="http://www.cnblogs.com/vsimonchan/" target="_blank">VSimonChan</a> <a href="http://msg.cnblogs.com/send/VSimonChan" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3905535" class="blog_comment_body">赞</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3905535,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3905535,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3905535_avatar" style="display:none;">http://pic.cnblogs.com/face/485457/20140928155325.png</span>
+			</div>
+		</div>
+	<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/smyhvae/p/3917532.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/smyhvae/p/3917532.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"></div>
+<div id="opt_under_post"></div>
+<div id="cnblogs_c1" class="c_ad_block"></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="https://news.cnblogs.com/n/598563/" target="_blank">当Atom遇见VSCode ，微软将对GitHub做6件事</a><br> ·  <a href="https://news.cnblogs.com/n/598562/" target="_blank">十年经历第7次易主，这次有了钱和技术的A站会回春吗</a><br> ·  <a href="https://news.cnblogs.com/n/598561/" target="_blank">英特尔宣布低功率显示技术 笔记本续航可突破28小时</a><br> ·  <a href="https://news.cnblogs.com/n/598560/" target="_blank">华为的汽车梦已经开始：立志做全球“车联网”老大</a><br> ·  <a href="https://news.cnblogs.com/n/598558/" target="_blank">风云二号又发星了 讲一讲30年研发路上的故事</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="cnblogs_c2" class="c_ad_block"></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/598335/" target="_blank">程序员的宇宙时间线</a><br> ·  <a href="http://kb.cnblogs.com/page/597877/" target="_blank">突破程序员思维</a><br> ·  <a href="http://kb.cnblogs.com/page/597631/" target="_blank">云、雾和霭计算如何一起工作</a><br> ·  <a href="http://kb.cnblogs.com/page/576411/" target="_blank">你可以把编程当做一项托付终身的职业</a><br> ·  <a href="http://kb.cnblogs.com/page/596164/" target="_blank">评审的艺术——谈谈现实中的代码评审</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><div id="profile_block">昵称：<a href="https://home.cnblogs.com/u/smyhvae/">生命壹号</a><br>园龄：<a href="https://home.cnblogs.com/u/smyhvae/" title="入园时间：2014-06-10">3年11个月</a><br>粉丝：<a href="https://home.cnblogs.com/u/smyhvae/followers/">1079</a><br>关注：<a href="https://home.cnblogs.com/u/smyhvae/followees/">53</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;64313984-87f0-e311-8d02-90b11c0b17d6&#39;)">+加关注</a></div><script>getFollowStatus('64313984-87f0-e311-8d02-90b11c0b17d6')</script></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2018/05/01&#39;);return false;">&lt;</a></td><td align="center">2018年6月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2018/07/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">27</td><td class="CalOtherMonthDay" align="center">28</td><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td><td class="CalOtherMonthDay" align="center">31</td><td align="center">1</td><td class="CalWeekendDay" align="center">2</td></tr><tr><td class="CalWeekendDay" align="center">3</td><td align="center">4</td><td align="center">5</td><td class="CalTodayDay" align="center">6</td><td align="center">7</td><td align="center">8</td><td class="CalWeekendDay" align="center">9</td></tr><tr><td class="CalWeekendDay" align="center">10</td><td align="center">11</td><td align="center">12</td><td align="center">13</td><td align="center">14</td><td align="center">15</td><td class="CalWeekendDay" align="center">16</td></tr><tr><td class="CalWeekendDay" align="center">17</td><td align="center">18</td><td align="center">19</td><td align="center">20</td><td align="center">21</td><td align="center">22</td><td class="CalWeekendDay" align="center">23</td></tr><tr><td class="CalWeekendDay" align="center">24</td><td align="center">25</td><td align="center">26</td><td align="center">27</td><td align="center">28</td><td align="center">29</td><td class="CalWeekendDay" align="center">30</td></tr><tr><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td><td class="CalOtherMonthDay" align="center">7</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block"></div><div id="sidebar_categories">
+<div id="sidebar_postcategory" class="catListPostCategory sidebar-block">
+<h3 class="catListTitle">随笔分类<span style="font-size:11px;font-weight:normal">(154)</span></h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="https://www.cnblogs.com/smyhvae/category/587732.html">Android开发(54)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="https://www.cnblogs.com/smyhvae/category/638310.html">C/C++编程(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="https://www.cnblogs.com/smyhvae/category/587723.html">Java(15)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="https://www.cnblogs.com/smyhvae/category/634173.html">JavaWeb(10)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_4" href="https://www.cnblogs.com/smyhvae/category/604950.html">Linux(5)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_5" href="https://www.cnblogs.com/smyhvae/category/740114.html">前端(40)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_6" href="https://www.cnblogs.com/smyhvae/category/774934.html">设计(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_7" href="https://www.cnblogs.com/smyhvae/category/722932.html">数据结构(9)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_8" href="https://www.cnblogs.com/smyhvae/category/636369.html">数据库(11)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_9" href="https://www.cnblogs.com/smyhvae/category/825301.html">心智(6)</a> </li>
+
+</ul>
+
+</div>
+
+<div id="sidebar_postarchive" class="catListPostArchive sidebar-block">
+<h3 class="catListTitle">随笔档案<span style="font-size:11px;font-weight:normal">(152)</span></h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_1_Link_0" href="https://www.cnblogs.com/smyhvae/archive/2018/04.html">2018年4月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_1" href="https://www.cnblogs.com/smyhvae/archive/2018/03.html">2018年3月 (7)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_2" href="https://www.cnblogs.com/smyhvae/archive/2018/02.html">2018年2月 (12)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_3" href="https://www.cnblogs.com/smyhvae/archive/2018/01.html">2018年1月 (9)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_4" href="https://www.cnblogs.com/smyhvae/archive/2017/08.html">2017年8月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_5" href="https://www.cnblogs.com/smyhvae/archive/2017/07.html">2017年7月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_6" href="https://www.cnblogs.com/smyhvae/archive/2016/09.html">2016年9月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_7" href="https://www.cnblogs.com/smyhvae/archive/2016/08.html">2016年8月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_8" href="https://www.cnblogs.com/smyhvae/archive/2016/05.html">2016年5月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_9" href="https://www.cnblogs.com/smyhvae/archive/2016/04.html">2016年4月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_10" href="https://www.cnblogs.com/smyhvae/archive/2016/03.html">2016年3月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_11" href="https://www.cnblogs.com/smyhvae/archive/2016/02.html">2016年2月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_12" href="https://www.cnblogs.com/smyhvae/archive/2016/01.html">2016年1月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_13" href="https://www.cnblogs.com/smyhvae/archive/2015/11.html">2015年11月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_14" href="https://www.cnblogs.com/smyhvae/archive/2015/10.html">2015年10月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_15" href="https://www.cnblogs.com/smyhvae/archive/2015/09.html">2015年9月 (8)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_16" href="https://www.cnblogs.com/smyhvae/archive/2015/08.html">2015年8月 (9)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_17" href="https://www.cnblogs.com/smyhvae/archive/2015/07.html">2015年7月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_18" href="https://www.cnblogs.com/smyhvae/archive/2015/06.html">2015年6月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_19" href="https://www.cnblogs.com/smyhvae/archive/2015/05.html">2015年5月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_20" href="https://www.cnblogs.com/smyhvae/archive/2015/04.html">2015年4月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_21" href="https://www.cnblogs.com/smyhvae/archive/2015/03.html">2015年3月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_22" href="https://www.cnblogs.com/smyhvae/archive/2014/12.html">2014年12月 (7)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_23" href="https://www.cnblogs.com/smyhvae/archive/2014/11.html">2014年11月 (7)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_24" href="https://www.cnblogs.com/smyhvae/archive/2014/10.html">2014年10月 (26)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_25" href="https://www.cnblogs.com/smyhvae/archive/2014/09.html">2014年9月 (8)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_26" href="https://www.cnblogs.com/smyhvae/archive/2014/08.html">2014年8月 (11)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_27" href="https://www.cnblogs.com/smyhvae/archive/2014/07.html">2014年7月 (12)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_28" href="https://www.cnblogs.com/smyhvae/archive/2014/06.html">2014年6月 (2)</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_scorerank" class="sidebar-block">
+<div class="catListBlogRank">
+<h3 class="catListTitle">积分与排名</h3>
+<ul>
+	<li class="liScore">
+		积分 -	324437
+	</li>
+	<li class="liRank">
+		排名 -	565
+	</li>
+</ul>
+</div>
+
+
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/smyhvae/p/8732781.html#3980497">1. Re:裸辞两个月，海投一个月，从Android转战Web前端的求职之路</a></li>
+        <li class="recent_comment_body">机会总是留给有准备的人的，相信博主除了好的学历条件外自身也有相对的闪光点，希望即将开始的找工作之路能有较好的终点，共勉！</li>
+        <li class="recent_comment_author">--Miss熊点点</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/smyhvae/p/8732781.html#3970498">2. Re:裸辞两个月，海投一个月，从Android转战Web前端的求职之路</a></li>
+        <li class="recent_comment_body">@Captain_Li引用正决定从运维转安卓现在安卓不是不行了么？...</li>
+        <li class="recent_comment_author">--此时</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/smyhvae/p/8776837.html#3967955">3. Re:2018年Web前端入门的自学路线</a></li>
+        <li class="recent_comment_body">厉害了，mark下</li>
+        <li class="recent_comment_author">--CharmanderS5</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/smyhvae/p/8303507.html#3965512">4. Re:JavaScript语法详解：JS简介&amp;变量</a></li>
+        <li class="recent_comment_body">很好用学习了许多感谢楼主，希望楼主多发些前端HTML CSS JS JQ和小程序教程 支持</li>
+        <li class="recent_comment_author">--BRVAE前端菜鸟</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/smyhvae/p/8732781.html#3960702">5. Re:裸辞两个月，海投一个月，从Android转战Web前端的求职之路</a></li>
+        <li class="recent_comment_body">@生命壹号好，谢谢，很好的路径。...</li>
+        <li class="recent_comment_author">--陈蒙的技术空间</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="https://www.cnblogs.com/smyhvae/p/4390905.html">1. 第一次使用Android Studio时你应该知道的一切配置(281953)</a></li><li><a href="https://www.cnblogs.com/smyhvae/p/3788534.html">2. Java配置----JDK开发环境搭建及环境变量配置(234391)</a></li><li><a href="https://www.cnblogs.com/smyhvae/p/4456420.html">3. 第一次使用Android Studio时你应该知道的一切配置（三）：gradle项目构建(78322)</a></li><li><a href="https://www.cnblogs.com/smyhvae/p/4392611.html">4. 第一次使用Android Studio时你应该知道的一切配置（二）：新建一个属于自己的工程并安装Genymotion模拟器(57675)</a></li><li><a href="https://www.cnblogs.com/smyhvae/p/4965163.html">5. 阿里云+wordpress搭建个人博客网站【小白专用的图文教程】(46969)</a></li><li><a href="https://www.cnblogs.com/smyhvae/p/4004983.html">6. Android系列之网络（一）----使用HttpClient发送HTTP请求（通过get方法获取数据）(46092)</a></li><li><a href="https://www.cnblogs.com/smyhvae/p/4585340.html">7. 在Android Studio中使用shareSDK进行社会化分享（图文教程）(45703)</a></li><li><a href="https://www.cnblogs.com/smyhvae/p/4022844.html">8. 使用Android Studio搭建Android集成开发环境（图文教程）(33389)</a></li><li><a href="https://www.cnblogs.com/smyhvae/p/4133292.html">9. Android系列之UI组件----Menu菜单(31419)</a></li><li><a href="https://www.cnblogs.com/smyhvae/p/4140877.html">10. JavaWeb学习之Servlet（四）----ServletConfig获取配置信息、ServletContext的应用(22168)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="https://www.cnblogs.com/smyhvae/p/8732781.html">1. 裸辞两个月，海投一个月，从Android转战Web前端的求职之路(69)</a></li><li><a href="https://www.cnblogs.com/smyhvae/p/4585340.html">2. 在Android Studio中使用shareSDK进行社会化分享（图文教程）(35)</a></li><li><a href="https://www.cnblogs.com/smyhvae/p/4390905.html">3. 第一次使用Android Studio时你应该知道的一切配置(30)</a></li><li><a href="https://www.cnblogs.com/smyhvae/p/4965163.html">4. 阿里云+wordpress搭建个人博客网站【小白专用的图文教程】(22)</a></li><li><a href="https://www.cnblogs.com/smyhvae/p/3788534.html">5. Java配置----JDK开发环境搭建及环境变量配置(18)</a></li><li><a href="https://www.cnblogs.com/smyhvae/p/4850684.html">6. HTML标签----图文详解(17)</a></li><li><a href="https://www.cnblogs.com/smyhvae/p/4046862.html">7. JavaWeb学习----JSP简介及入门（含Eclipse for Java EE及Tomcat的配置）(17)</a></li><li><a href="https://www.cnblogs.com/smyhvae/p/4456420.html">8. 第一次使用Android Studio时你应该知道的一切配置（三）：gradle项目构建(14)</a></li><li><a href="https://www.cnblogs.com/smyhvae/p/4855106.html">9. CSS样式----CSS属性：字体属性和文本属性（图文详解）(14)</a></li><li><a href="https://www.cnblogs.com/smyhvae/p/4392611.html">10. 第一次使用Android Studio时你应该知道的一切配置（二）：新建一个属于自己的工程并安装Genymotion模拟器(13)</a></li></ul></div>
+</div>
+</div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2018 生命壹号
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+<tbdiv id="playerControlBtn"></tbdiv><tbdiv id="leftFullStackButton"></tbdiv><tbdiv id="rightFullStackButton"></tbdiv><link rel="stylesheet" type="text/css" href="chrome-extension://liecbddmkiiihnedobmlmillhodjkdmb/css/content.css"></body><loom-container id="lo-engage-ext-container"><loom-shadow data-reactroot="" classname="resolved"></loom-shadow></loom-container></html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)http://www.cnblogs.com/zhanglong0426/archive/2010/10/07/1845268.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="origin">
+<title>linux下vim命令详解 - zhanglong0426 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./linux下vim命令详解_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./linux下vim命令详解_files/bundle-summerGarden.css">
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./linux下vim命令详解_files/bundle-summerGarden-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/zhanglong0426/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/zhanglong0426/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/zhanglong0426/wlwmanifest.xml">
+<script async="" src="./linux下vim命令详解_files/analytics.js.下载"></script><script src="./linux下vim命令详解_files/jquery-2.2.0.min.js.下载"></script>
+<script type="text/javascript">var currentBlogApp = 'zhanglong0426', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="./linux下vim命令详解_files/blog-common.js.下载" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/zhanglong0426/"><img id="blogLogo" src="./linux下vim命令详解_files/logo.gif" alt="返回主页"></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/zhanglong0426/">zhanglong0426</a></h1>
+<h2></h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+	<li><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+	<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/zhanglong0426/">首页</a></li>
+	<li><a href="http://news.cnblogs.com/">新闻</a></li>
+	<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+	<li><a id="blog_nav_contact" accesskey="9" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/zhanglong0426">联系</a></li>
+	<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+	<li><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/zhanglong0426/rss">订阅</a>
+	<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/zhanglong0426/rss"><img src="./linux下vim命令详解_files/xml.gif" alt="订阅"></a></li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔- 26&nbsp;
+文章- 0&nbsp;
+评论- 28&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zhanglong0426/archive/2010/10/07/1845268.html">linux下vim命令详解</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><p>高级一些的编辑器，都会包含宏功能，vim当然不能缺少了，在vim中使用宏是非常方便的：<br><br>:qx&nbsp;&nbsp;&nbsp;&nbsp; 开始记录宏，并将结果存入寄存器x<br>q&nbsp;&nbsp;&nbsp;&nbsp; 退出记录模式<br>@x&nbsp;&nbsp;&nbsp;&nbsp; 播放记录在x寄存器中的宏命令<br>稍微解释一下，当在normal模式下输入:qx后，你对文本的所有编辑动作将会被记录下来，再次输入q即退出了记录模<br>式，然后输入@x对刚才记录下来的命令进行重复，此命令后可跟数字，表示要重复多少次，比如@x20，可以重复20次。这个在文本的批处理中是非常有用的。<br>同时编辑多个文件<br>在vim众多的插件中，有一个叫minibuffer的插件，就是下面所说的标签页功能了，可以支持同时编辑多个文件。<br>标签命令<br><br>:tabe fn&nbsp;&nbsp;&nbsp;&nbsp; 在一个新的标签页中编辑文件fn<br>gt&nbsp;&nbsp;&nbsp;&nbsp; 切换到下一个标签页<br>gT&nbsp;&nbsp;&nbsp;&nbsp; 切换到上一个标签页<br>:tabr&nbsp;&nbsp;&nbsp;&nbsp; 切换到第一个标签页<br>:tabl&nbsp;&nbsp;&nbsp;&nbsp; 切换到最后一个标签页<br>:tabm [N]&nbsp;&nbsp;&nbsp;&nbsp; 把当前tab移动到第N个tab之后<br>对，正如你所想象的那样，跟eclipse, ue等的标签页是一个意思！<br>窗口命令<br>ctrl+w s&nbsp;&nbsp;&nbsp;&nbsp; 水平分割窗口<br>ctrl+w w&nbsp;&nbsp;&nbsp;&nbsp; 切换窗口<br>ctrl+w q&nbsp;&nbsp;&nbsp;&nbsp; 退出当前窗口(由于同时有多个文件，此命令不会影响其他窗口)<br>ctrl+w v&nbsp;&nbsp;&nbsp;&nbsp; 垂直分割窗口<br>其他<br>vim在保存之前不会对文件做实际的修改，只是加载到缓冲区中，对文件的编辑其实是对缓冲区的编辑，直到:w时才会存入物理文件。<br><br>:e file&nbsp;&nbsp;&nbsp;&nbsp; 把file加载到新的缓冲区中<br>:bn&nbsp;&nbsp;&nbsp;&nbsp; 跳转到下一个缓冲区<br>:bd&nbsp;&nbsp;&nbsp;&nbsp; 删除缓冲区(关闭文件)<br>:sp fn&nbsp;&nbsp;&nbsp;&nbsp; 分割窗口，并将fn加载到新的窗口中<br>退出编辑器<br><br>:w&nbsp;&nbsp;&nbsp;&nbsp; 将缓冲区写入文件，即保存修改<br>:wq&nbsp;&nbsp;&nbsp;&nbsp; 保存修改并退出<br>:x&nbsp;&nbsp;&nbsp;&nbsp; 保存修改并退出<br>:q&nbsp;&nbsp;&nbsp;&nbsp; 退出，如果对缓冲区进行过修改，则会提示<br>:q!&nbsp;&nbsp;&nbsp;&nbsp; 强制退出，放弃修改<br>查找替换<br>/pattern&nbsp;&nbsp;&nbsp;&nbsp; 向后搜索字符串pattern<br>?pattern&nbsp;&nbsp;&nbsp;&nbsp; 向前搜索字符串pattern<br>n&nbsp;&nbsp;&nbsp;&nbsp; 下一个匹配(如果是/搜索，则是向下的下一个，?搜索则是向上的下一个)<br>N&nbsp;&nbsp;&nbsp;&nbsp; 上一个匹配(同上)<br>:%s/old/new/g&nbsp;&nbsp;&nbsp;&nbsp; 搜索整个文件，将所有的old替换为new<br>:%s/old/new/gc&nbsp;&nbsp;&nbsp;&nbsp; 搜索整个文件，将所有的old替换为new，每次都要你确认是否替换<br>复制粘贴<br>dd&nbsp;&nbsp;&nbsp;&nbsp; 删除光标所在行<br>dw&nbsp;&nbsp;&nbsp;&nbsp; 删除一个字(word)<br>x&nbsp;&nbsp;&nbsp;&nbsp; 删除当前字符<br>X&nbsp;&nbsp;&nbsp;&nbsp; 删除前一个字符<br>D&nbsp;&nbsp;&nbsp;&nbsp; 删除到行末<br>yy&nbsp;&nbsp;&nbsp;&nbsp; 复制一行，此命令前可跟数字，标识复制多行，如6yy，表示从当前行开始复制6行<br>yw&nbsp;&nbsp;&nbsp;&nbsp; 复制一个字<br>y$&nbsp;&nbsp;&nbsp;&nbsp; 复制到行末<br>p&nbsp;&nbsp;&nbsp;&nbsp; 粘贴粘贴板的内容到当前行的下面<br>P&nbsp;&nbsp;&nbsp;&nbsp; 粘贴粘贴板的内容到当前行的上面<br>]p&nbsp;&nbsp;&nbsp;&nbsp; 有缩进的粘贴，vim会自动调节代码的缩进<br>"a&nbsp;&nbsp;&nbsp;&nbsp; 将内容放入/存入a寄存器，可以支持多粘贴板<br>附：比如常用的一个寄存器就是系统寄存器，名称为+，所以从系统粘贴板粘贴到vim中的命令为"+p,注意此处的+不表示操作符，二十一个寄存器。<br>移动光标<br>在vim中移动光标跟其他的编辑器中有很大的区别，不过一旦学会了，就会飞速的在文本中移动了。<br><br>h,j,k,l&nbsp;&nbsp;&nbsp;&nbsp; 上，下，左，右<br>ctrl-f&nbsp;&nbsp;&nbsp;&nbsp; 上翻一页<br>ctrl-b&nbsp;&nbsp;&nbsp;&nbsp; 下翻一页<br>%&nbsp;&nbsp;&nbsp;&nbsp; 跳到与当前括号匹配的括号处，如当前在{，则跳转到与之匹配的}处<br>w&nbsp;&nbsp;&nbsp;&nbsp; 跳到下一个字首，按标点或单词分割<br>W&nbsp;&nbsp;&nbsp;&nbsp; 跳到下一个字首，长跳，如end-of-line被认为是一个字<br>e&nbsp;&nbsp;&nbsp;&nbsp; 跳到下一个字尾<br>E&nbsp;&nbsp;&nbsp;&nbsp; 跳到下一个字尾，长跳<br>b&nbsp;&nbsp;&nbsp;&nbsp; 跳到上一个字<br>B&nbsp;&nbsp;&nbsp;&nbsp; 跳到上一个字，长跳<br>0&nbsp;&nbsp;&nbsp;&nbsp; 跳至行首，不管有无缩进，就是跳到第0个字符<br>^&nbsp;&nbsp;&nbsp;&nbsp; 跳至行首的第一个字符<br>$&nbsp;&nbsp;&nbsp;&nbsp; 跳至行尾<br>gg&nbsp;&nbsp;&nbsp;&nbsp; 跳至文件的第一行<br>gd&nbsp;&nbsp;&nbsp;&nbsp; 跳至当前光标所在的变量的声明处<br>[N]G&nbsp;&nbsp;&nbsp;&nbsp; 跳到第N行，如0G，就等价于gg，100G就是第100行<br>fx&nbsp;&nbsp;&nbsp;&nbsp; 在当前行中找x字符，找到了就跳转至<br>;&nbsp;&nbsp;&nbsp;&nbsp; 重复上一个f命令，而不用重复的输入fx<br>tx&nbsp;&nbsp;&nbsp;&nbsp; 与fx类似，但是只是跳转到x的前一个字符处<br>Fx&nbsp;&nbsp;&nbsp;&nbsp; 跟fx的方向相反<br>),(&nbsp;&nbsp;&nbsp;&nbsp; 跳转到上/下一个语句<br>*&nbsp;&nbsp;&nbsp;&nbsp; 查找光标所在处的单词，向下查找<br>#&nbsp;&nbsp;&nbsp;&nbsp; 查找光标所在处的单词，向上查找<br>`.&nbsp;&nbsp;&nbsp;&nbsp; 跳转至上次编辑位置<br>在屏幕上移动<br><br>H&nbsp;&nbsp;&nbsp;&nbsp; 移动光标到当前屏幕上最上边的一行<br>M&nbsp;&nbsp;&nbsp;&nbsp; 移动光标到当前屏幕上中间的一行<br>L&nbsp;&nbsp;&nbsp;&nbsp; 移动光标到当前屏幕上最下边的一行<br>书签<br>ma&nbsp;&nbsp;&nbsp;&nbsp; 把当前位置存成标签a<br>`a&nbsp;&nbsp;&nbsp;&nbsp; 跳转到标签a处<br>编辑<br>r&nbsp;&nbsp;&nbsp;&nbsp; 替换一个字符<br>J&nbsp;&nbsp;&nbsp;&nbsp; 将下一行和当前行连接为一行<br>cc&nbsp;&nbsp;&nbsp;&nbsp; 删除当前行并进入编辑模式<br>cw&nbsp;&nbsp;&nbsp;&nbsp; 删除当前字，并进入编辑模式<br>c$&nbsp;&nbsp;&nbsp;&nbsp; 擦除从当前位置至行末的内容，并进入编辑模式<br>s&nbsp;&nbsp;&nbsp;&nbsp; 删除当前字符并进入编辑模式<br>S&nbsp;&nbsp;&nbsp;&nbsp; 删除光标所在行并进入编辑模式<br>xp&nbsp;&nbsp;&nbsp;&nbsp; 交换当前字符和下一个字符<br>u&nbsp;&nbsp;&nbsp;&nbsp; 撤销<br>ctrl+r&nbsp;&nbsp;&nbsp;&nbsp; 重做<br>.&nbsp;&nbsp;&nbsp;&nbsp; 重复上一个编辑命令<br>~&nbsp;&nbsp;&nbsp;&nbsp; 切换大小写，当前字符<br>g~iw&nbsp;&nbsp;&nbsp;&nbsp; 切换当前字的大小写<br>gUiw&nbsp;&nbsp;&nbsp;&nbsp; 将当前字变成大写<br>guiw&nbsp;&nbsp;&nbsp;&nbsp; 将当前字变成小写<br>&gt;&gt;&nbsp;&nbsp;&nbsp;&nbsp; 将当前行右移一个单位<br>&lt;&lt;&nbsp;&nbsp;&nbsp;&nbsp; 将当前行左移一个单位(一个tab符)<br>==&nbsp;&nbsp;&nbsp;&nbsp; 自动缩进当前行<br><br>插入模式<br>i&nbsp;&nbsp;&nbsp;&nbsp; 从当前光标处进入插入模式<br>I&nbsp;&nbsp;&nbsp;&nbsp; 进入插入模式，并置光标于行首<br>a&nbsp;&nbsp;&nbsp;&nbsp; 追加模式，置光标于当前光标之后<br>A&nbsp;&nbsp;&nbsp;&nbsp; 追加模式，置光标于行末<br>o&nbsp;&nbsp;&nbsp;&nbsp; 在当前行之下新加一行，并进入插入模式<br>O&nbsp;&nbsp;&nbsp;&nbsp; 在当前行之上新加一行，并进入插入模式<br>Esc&nbsp;&nbsp;&nbsp;&nbsp; 退出插入模式<br>可视模式<br>标记文本<br>v&nbsp;&nbsp;&nbsp;&nbsp; 进入可视模式，单字符模式<br>V&nbsp;&nbsp;&nbsp;&nbsp; 进入可视模式，行模式<br>ctrl+v&nbsp;&nbsp;&nbsp;&nbsp; 进入可视模式，列模式，类似于UE的列模式<br>o&nbsp;&nbsp;&nbsp;&nbsp; 跳转光标到选中块的另一个端点<br>U&nbsp;&nbsp;&nbsp;&nbsp; 将选中块中的内容转成大写<br>O&nbsp;&nbsp;&nbsp;&nbsp; 跳转光标到块的另一个端点<br>aw&nbsp;&nbsp;&nbsp;&nbsp; 选中一个字<br>ab&nbsp;&nbsp;&nbsp;&nbsp; 选中括号中的所有内容，包括括号本身<br>aB&nbsp;&nbsp;&nbsp;&nbsp; 选中{}括号中的所有内容<br>ib&nbsp;&nbsp;&nbsp;&nbsp; 选中括号中的内容，不含括号<br>iB&nbsp;&nbsp;&nbsp;&nbsp; 选中{}中的内容，不含{}<br><br>对标记进行动作<br>&gt;&nbsp;&nbsp;&nbsp;&nbsp; 块右移<br>&lt;&nbsp;&nbsp;&nbsp;&nbsp; 块左移<br>y&nbsp;&nbsp;&nbsp;&nbsp; 复制块<br>d&nbsp;&nbsp;&nbsp;&nbsp; 删除块<br>~&nbsp;&nbsp;&nbsp;&nbsp; 切换块中内容的大小写</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/zhanglong0426/category/264271.html" target="_blank">Linux</a></div>
+<div id="EntryTag">标签: <a href="http://www.cnblogs.com/zhanglong0426/tag/vim/">vim</a>, <a href="http://www.cnblogs.com/zhanglong0426/tag/Linux/">Linux</a></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(1845268,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;b465cd2a-fd96-df11-ba8f-001cf0cd104b&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./linux下vim命令详解_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./linux下vim命令详解_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/zhanglong0426/" target="_blank"><img src="./linux下vim命令详解_files/u148368.jpg" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/zhanglong0426/">zhanglong0426</a><br>
+            <a href="http://home.cnblogs.com/u/zhanglong0426/followees">关注 - 70</a><br>
+            <a href="http://home.cnblogs.com/u/zhanglong0426/followers">粉丝 - 45</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;b465cd2a-fd96-df11-ba8f-001cf0cd104b&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(1845268,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">18</span>
+    </div>
+    <div class="buryit" onclick="votePost(1845268,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/zhanglong0426/archive/2010/10/07/1845267.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/zhanglong0426/archive/2010/10/07/1845267.html" title="发布于2010-10-07 21:17">如何使用gcc编译器?</a><br><a href="http://www.cnblogs.com/zhanglong0426/archive/2010/10/09/1846336.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/zhanglong0426/archive/2010/10/09/1846336.html" title="发布于2010-10-09 09:50">Android界面设计简单讲解</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2010-10-07 21:18</span> <a href="http://www.cnblogs.com/zhanglong0426/">zhanglong0426</a> 阅读(<span id="post_view_count">293518</span>) 评论(<span id="post_comment_count">7</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=1845268" rel="nofollow">编辑</a> <a href="http://www.cnblogs.com/zhanglong0426/archive/2010/10/07/1845268.html#" onclick="AddToWz(1845268);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=73607,cb_entryId=1845268,cb_blogApp=currentBlogApp,cb_blogUserGuid='b465cd2a-fd96-df11-ba8f-001cf0cd104b',cb_entryCreatedDate='2010/10/7 21:18:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<!--done-->
+<br>
+<div class="feedback_area_title">发表评论</div>
+<div class="feedbackNoItems"></div>
+	
+
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/zhanglong0426/archive/2010/10/07/1845268.html#2211762" class="layer">#1楼</a><a name="2211762" id="comment_anchor_2211762"></a> <span class="comment_date">2011-09-30 16:00</span> | <a id="a_comment_author_2211762" href="http://home.cnblogs.com/u/80842/" target="_blank">三度寒流</a> <a href="http://msg.cnblogs.com/send/%E4%B8%89%E5%BA%A6%E5%AF%92%E6%B5%81" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2211762" class="blog_comment_body">good!</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2211762,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2211762,&#39;Bury&#39;,this)">反对(0)</a></div><br>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/zhanglong0426/archive/2010/10/07/1845268.html#2365915" class="layer">#2楼</a><a name="2365915" id="comment_anchor_2365915"></a> <span class="comment_date">2012-04-28 11:55</span> | <a id="a_comment_author_2365915" href="http://home.cnblogs.com/u/302966/" target="_blank">小菜38</a> <a href="http://msg.cnblogs.com/send/%E5%B0%8F%E8%8F%9C38" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2365915" class="blog_comment_body">:qx     开始记录宏，并将结果存入寄存器x  <br>应该是qx，不需要冒号。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2365915,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2365915,&#39;Bury&#39;,this)">反对(0)</a></div><br>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/zhanglong0426/archive/2010/10/07/1845268.html#2459436" class="layer">#3楼</a><a name="2459436" id="comment_anchor_2459436"></a> <span class="comment_date">2012-08-29 21:54</span> | <a id="a_comment_author_2459436" href="http://home.cnblogs.com/u/291510/" target="_blank">luoboiqingcai</a> <a href="http://msg.cnblogs.com/send/luoboiqingcai" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2459436" class="blog_comment_body">windows下没有管道机制，vim调用外部命令进行内容过滤的功能大打折扣。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2459436,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2459436,&#39;Bury&#39;,this)">反对(0)</a></div><br>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/zhanglong0426/archive/2010/10/07/1845268.html#2710534" class="layer">#4楼</a><a name="2710534" id="comment_anchor_2710534"></a> <span class="comment_date">2013-06-21 13:51</span> | <a id="a_comment_author_2710534" href="http://home.cnblogs.com/u/204345/" target="_blank">fenghuazh</a> <a href="http://msg.cnblogs.com/send/fenghuazh" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2710534" class="blog_comment_body">很强大，也很复杂。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2710534,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2710534,&#39;Bury&#39;,this)">反对(0)</a></div><br>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/zhanglong0426/archive/2010/10/07/1845268.html#2722459" class="layer">#5楼</a><a name="2722459" id="comment_anchor_2722459"></a> <span class="comment_date">2013-07-08 14:50</span> | <a id="a_comment_author_2722459" href="http://home.cnblogs.com/u/540966/" target="_blank">H_King</a> <a href="http://msg.cnblogs.com/send/H_King" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2722459" class="blog_comment_body">受用</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2722459,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2722459,&#39;Bury&#39;,this)">反对(0)</a></div><br>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/zhanglong0426/archive/2010/10/07/1845268.html#2823061" class="layer">#6楼</a><a name="2823061" id="comment_anchor_2823061"></a> <span class="comment_date">2013-11-24 15:28</span> | <a id="a_comment_author_2823061" href="http://www.cnblogs.com/-Chamgin/" target="_blank">chagin</a> <a href="http://msg.cnblogs.com/send/chagin" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2823061" class="blog_comment_body">:!<br>是什么意思啊？<br>我用的时候跳出cmd.exe,我用的是gvim.</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2823061,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2823061,&#39;Bury&#39;,this)">反对(0)</a></div><br>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="http://www.cnblogs.com/zhanglong0426/archive/2010/10/07/1845268.html#2825519" class="layer">#7楼</a><a name="2825519" id="comment_anchor_2825519"></a><span id="comment-maxId" style="display:none;">2825519</span><span id="comment-maxDate" style="display:none;">2013/11/27 16:43:03</span> <span class="comment_date">2013-11-27 16:43</span> | <a id="a_comment_author_2825519" href="http://home.cnblogs.com/u/378019/" target="_blank">我嚓的类</a> <a href="http://msg.cnblogs.com/send/%E6%88%91%E5%9A%93%E7%9A%84%E7%B1%BB" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_2825519" class="blog_comment_body">mark</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(2825519,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(2825519,&#39;Bury&#39;,this)">反对(0)</a></div><br>
+			</div>
+		</div>
+	<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="http://www.cnblogs.com/zhanglong0426/archive/2010/10/07/1845268.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/zhanglong0426/archive/2010/10/07/1845268.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】超50万VC++源码: 大型组态工控、电力仿真CAD与GIS源码库！</a><br><a href="https://www.grapecity.com.cn/developer/spreadjs?utm_source=cnblogs&amp;utm_medium=blogpage&amp;utm_term=bottom&amp;utm_content=SpreadJS&amp;utm_campaign=community" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-T2-Spread&#39;)">【前端】SpreadJS表格控件，可嵌入应用开发的在线Excel</a><br><a href="https://cloud.tencent.com/developer/labs?fromSource=gwzcw.1087957.1087957.1087957" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-T2 - 腾讯云&#39;)">【推荐】如何快速搭建人工智能应用？</a><br></div>
+<div id="opt_under_post"></div>
+<div id="cnblogs_c1" class="c_ad_block"><a href="https://cloud.tencent.com/act/campus?fromSource=gwzcw.1087959.1087959.1087959" target="_blank"><img width="300" height="250" src="./linux下vim命令详解_files/24442-20180803104321581-581345267.jpg" alt="qcloud" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;C1&#39;);"></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="https://news.cnblogs.com/n/603825/" target="_blank">高通宣布9月10日发布新芯片：用于智能手表</a><br> ·  <a href="https://news.cnblogs.com/n/603832/" target="_blank">中国铁塔上市前，董事长表示：创造了全球IPO一个奇迹</a><br> ·  <a href="https://news.cnblogs.com/n/603831/" target="_blank">我们为何总是忘记梦境？原来是海马体“慢半拍”</a><br> ·  <a href="https://news.cnblogs.com/n/603819/" target="_blank">外媒揭秘特斯拉私有化真相：马斯克想要掌握决策权</a><br> ·  <a href="https://news.cnblogs.com/n/603830/" target="_blank">检验爱因斯坦的预言：NASA创造出宇宙已知最冷点</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="cnblogs_c2" class="c_ad_block"></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/603279/" target="_blank">成为一个有目标的学习者</a><br> ·  <a href="http://kb.cnblogs.com/page/602903/" target="_blank">历史转折中的“杭派工程师”</a><br> ·  <a href="http://kb.cnblogs.com/page/602573/" target="_blank">如何提高代码质量？</a><br> ·  <a href="http://kb.cnblogs.com/page/602486/" target="_blank">在腾讯的八年，我的职业思考</a><br> ·  <a href="http://kb.cnblogs.com/page/602163/" target="_blank">为什么我离开了管理岗位</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><div id="profile_block">昵称：<a href="https://home.cnblogs.com/u/zhanglong0426/">zhanglong0426</a><br>园龄：<a href="https://home.cnblogs.com/u/zhanglong0426/" title="入园时间：2010-07-24">8年</a><br>粉丝：<a href="https://home.cnblogs.com/u/zhanglong0426/followers/">45</a><br>关注：<a href="https://home.cnblogs.com/u/zhanglong0426/followees/">70</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;b465cd2a-fd96-df11-ba8f-001cf0cd104b&#39;)">+加关注</a></div><script>getFollowStatus('b465cd2a-fd96-df11-ba8f-001cf0cd104b')</script></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+<div id="widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"></div>
+</div>
+</div>
+
+</div><div id="sidebar_shortcut" class="sidebar-block">
+<div class="catListLink">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/zhanglong0426/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="http://www.cnblogs.com/zhanglong0426/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="http://www.cnblogs.com/zhanglong0426/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="http://www.cnblogs.com/zhanglong0426/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="http://www.cnblogs.com/zhanglong0426/tag/" title="我的博客的标签列表">我的标签</a></li>
+<li><a id="itemListLink" onclick="this.blur();WarpClass(&#39;itemListLink&#39;, &#39;itemListLin_con&#39;);return false;" href="http://www.cnblogs.com/zhanglong0426/archive/2010/10/07/1845268.html#">更多链接</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+<ul>
+
+</ul>
+</div>
+</div></div><div id="sidebar_toptags" class="sidebar-block">
+<div class="catListTag">
+<h3 class="catListTitle">我的标签</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/zhanglong0426/tag/Linux/">Linux</a>(3)</li><li><a href="http://www.cnblogs.com/zhanglong0426/tag/android/">android</a>(2)</li><li><a href="http://www.cnblogs.com/zhanglong0426/tag/javascript/">javascript</a>(2)</li><li><a href="http://www.cnblogs.com/zhanglong0426/tag/js%E9%AA%8C%E8%AF%81%E5%BF%85%E5%A1%AB%E9%A1%B9%E6%A0%BC%E5%BC%8F/">js验证必填项格式</a>(1)</li><li><a href="http://www.cnblogs.com/zhanglong0426/tag/.net%E6%8E%A7%E4%BB%B6%E7%BC%A9%E5%86%99/">.net控件缩写</a>(1)</li><li><a href="http://www.cnblogs.com/zhanglong0426/tag/css/">css</a>(1)</li><li><a href="http://www.cnblogs.com/zhanglong0426/tag/Datatable/">Datatable</a>(1)</li><li><a href="http://www.cnblogs.com/zhanglong0426/tag/Datatime/">Datatime</a>(1)</li><li><a href="http://www.cnblogs.com/zhanglong0426/tag/ECMA/">ECMA</a>(1)</li><li><a href="http://www.cnblogs.com/zhanglong0426/tag/gcc/">gcc</a>(1)</li><li><a href="http://www.cnblogs.com/zhanglong0426/tag/">更多</a></li>
+</ul>
+</div></div><div id="sidebar_categories">
+<div class="catListPostCategory">
+<h3 class="catListTitle">随笔分类</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="https://www.cnblogs.com/zhanglong0426/category/264441.html">Android(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="https://www.cnblogs.com/zhanglong0426/category/326746.html">C#(6)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="https://www.cnblogs.com/zhanglong0426/category/264271.html">Linux(3)</a> </li>
+
+</ul>
+
+</div>
+
+<div class="catListPostArchive">
+<h3 class="catListTitle">随笔档案</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_1_Link_0" href="https://www.cnblogs.com/zhanglong0426/archive/2012/02.html">2012年2月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_1" href="https://www.cnblogs.com/zhanglong0426/archive/2011/11.html">2011年11月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_2" href="https://www.cnblogs.com/zhanglong0426/archive/2011/10.html">2011年10月 (7)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_3" href="https://www.cnblogs.com/zhanglong0426/archive/2011/09.html">2011年9月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_4" href="https://www.cnblogs.com/zhanglong0426/archive/2010/12.html">2010年12月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_5" href="https://www.cnblogs.com/zhanglong0426/archive/2010/10.html">2010年10月 (7)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_6" href="https://www.cnblogs.com/zhanglong0426/archive/2010/09.html">2010年9月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_7" href="https://www.cnblogs.com/zhanglong0426/archive/2010/08.html">2010年8月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_8" href="https://www.cnblogs.com/zhanglong0426/archive/2010/07.html">2010年7月 (1)</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/zhanglong0426/archive/2010/10/06/1844700.html#3867016">1. Re:C语言运算符优先级和口诀</a></li>
+        <li class="recent_comment_body">很好，就是老忘记</li>
+        <li class="recent_comment_author">--rayinnight</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/zhanglong0426/archive/2010/10/09/1846336.html#3650761">2. Re:Android界面设计简单讲解</a></li>
+        <li class="recent_comment_body">受益很多</li>
+        <li class="recent_comment_author">--zzzlinux</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/zhanglong0426/archive/2010/10/07/1845265.html#2904280">3. Re:Linux 如何写makefile文件</a></li>
+        <li class="recent_comment_body">不成文的规矩是——“clean从来都是放 在文件的最后”。</li>
+        <li class="recent_comment_author">--岁月漫步</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/zhanglong0426/archive/2010/10/06/1844700.html#2844492">4. Re:C语言运算符优先级和口诀</a></li>
+        <li class="recent_comment_body">真好</li>
+        <li class="recent_comment_author">--张妠依</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/zhanglong0426/archive/2010/10/07/1845268.html#2825519">5. Re:linux下vim命令详解</a></li>
+        <li class="recent_comment_body">mark</li>
+        <li class="recent_comment_author">--我嚓的类</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="https://www.cnblogs.com/zhanglong0426/archive/2010/10/07/1845268.html">1. linux下vim命令详解(293519)</a></li><li><a href="https://www.cnblogs.com/zhanglong0426/archive/2010/10/06/1844700.html">2. C语言运算符优先级和口诀(68574)</a></li><li><a href="https://www.cnblogs.com/zhanglong0426/archive/2010/08/30/1812947.html">3. 安装Android开发工具(25747)</a></li><li><a href="https://www.cnblogs.com/zhanglong0426/archive/2010/10/09/1846336.html">4. Android界面设计简单讲解(3541)</a></li><li><a href="https://www.cnblogs.com/zhanglong0426/archive/2010/10/07/1845140.html">5. 进程和线程有什么区别(1466)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="https://www.cnblogs.com/zhanglong0426/archive/2010/08/30/1812947.html">1. 安装Android开发工具(12)</a></li><li><a href="https://www.cnblogs.com/zhanglong0426/archive/2010/10/07/1845268.html">2. linux下vim命令详解(7)</a></li><li><a href="https://www.cnblogs.com/zhanglong0426/archive/2010/10/06/1844700.html">3. C语言运算符优先级和口诀(5)</a></li><li><a href="https://www.cnblogs.com/zhanglong0426/archive/2010/07/27/1786278.html">4. .net 控件常用命名规则(2)</a></li><li><a href="https://www.cnblogs.com/zhanglong0426/archive/2010/10/09/1846336.html">5. Android界面设计简单讲解(1)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div class="RecentComment">
+	<div id="TopDiggPostsBlock"><ul><li><a href="https://www.cnblogs.com/zhanglong0426/archive/2010/10/07/1845268.html">1. linux下vim命令详解(18)</a></li><li><a href="https://www.cnblogs.com/zhanglong0426/archive/2010/10/06/1844700.html">2. C语言运算符优先级和口诀(15)</a></li><li><a href="https://www.cnblogs.com/zhanglong0426/archive/2010/08/30/1812947.html">3. 安装Android开发工具(7)</a></li><li><a href="https://www.cnblogs.com/zhanglong0426/archive/2010/10/07/1845140.html">4. 进程和线程有什么区别(2)</a></li><li><a href="https://www.cnblogs.com/zhanglong0426/archive/2010/10/06/1844629.html">5. WEB标准(1)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2018 zhanglong0426
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+</body></html>

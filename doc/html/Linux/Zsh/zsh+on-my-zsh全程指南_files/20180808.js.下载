@@ -1,0 +1,101 @@
+/**
+ * Created by sf on 2018/8/3.
+ */
+var areaArr = []
+
+var trackHost = 'https://segmentfault.com';
+var viewApi = trackHost + '/ad/track/view'
+var clickApi = trackHost + '/ad/track/click'
+
+function ajax(opt) {
+    opt = opt || {};//opt以数组方式存参，如果参数不存在就为空。
+    opt.method = opt.method.toUpperCase() || 'POST';//转为大写失败，就转为POST
+    opt.url = opt.url || '';//检查URL是否为空
+    opt.async = opt.async || true;//是否异步
+    opt.data = opt.data || null;//是否发送参数，如POST、GET发送参数
+    opt.success = opt.success || function () {}; //成功后处理方式
+    var xmlHttp = null;//定义1个空变量
+    if (XMLHttpRequest) {
+        xmlHttp = new XMLHttpRequest();//如果XMLHttpRequest存在就新建，IE大于9&&非IE有效
+    }
+    else {
+        xmlHttp = new ActiveXObject('Microsoft.XMLHTTP');//用于低版本IE
+    }
+    var params = [];//定义1个空数组
+    for (var key in opt.data){
+        params.push(key + '=' + opt.data[key]);//将opt里的data存到push里
+    }
+    var postData = params.join('&');//追加个& params
+    if (opt.method.toUpperCase() === 'POST') {
+        xmlHttp.open(opt.method, opt.url, opt.async);//开始请求
+        xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=utf-8');//发送头信息，与表单里的一样。
+        xmlHttp.send(postData);//发送POST数据
+    }
+    else if (opt.method.toUpperCase() === 'GET') {
+        xmlHttp.open(opt.method, opt.url, opt.async);//GET请求
+        xmlHttp.send(null);//发送空数据
+    }
+    xmlHttp.onreadystatechange = function () {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {//readyState有5个状态，可以百度一下看看都有什么。当请求完成，并且返回数据成功
+            opt.success(xmlHttp.responseText);//返回成功的数据
+        }
+    };
+}
+
+var sTitle="";
+window.d = function(o) {
+    sTitle = o.getAttribute('stitle');
+    document.getElementById("gridMapHoverBox").style.display = "block"
+}
+
+window.e = function(o) {
+    sTitle = "";
+    document.getElementById("gridMapHoverBox").style.display = "none"
+}
+
+window.c = function(id) {
+
+    var clickApi2 = clickApi + '?id=' + id
+
+    ajax({url: clickApi2, method: 'GET'})
+};
+
+// 这里 data 需要注入
+[{"id":"1750000015297432","user_id":"1030000002753969","box_ad_id":"0","started":"1529078400","ended":"1533916800","cycles":"4","status":"0","banner":"\/171\/071\/1710716573-5b4ede881762c","link":"https:\/\/www.pgyer.com","title":"\u65b9\u4fbf\u5feb\u6377\u7684\u5bf9\u79fb\u52a8\u5e94\u7528\u8fdb\u884c\u5206\u53d1","area_info":{"area":"E9:J9","height":"17","width":"102","left":"68","top":"136","pos":{"rowTop":9,"rowBottom":9,"columnLeft":5,"columnRight":10},"size":6},"created":"1529029580","modified":"1529030043"},{"id":"1750000015407386","user_id":"1030000002753969","box_ad_id":"0","started":"1530115200","ended":"1534953600","cycles":"4","status":"0","banner":"\/149\/518\/1495184782-5b343ac999bb3","link":"https:\/\/www.tracup.com\/","title":"\u8f7b\u91cf\u4fbf\u6377\u7684Bug\u7ba1\u7406\u7cfb\u7edfTracup\uff0c\u8ba9\u4f60\u9ad8\u6548\u5de5\u4f5c\uff0c\u8fdc\u79bb\u52a0\u73ed","area_info":{"area":"H11:M11","height":"17","width":"102","left":"119","top":"170","pos":{"rowTop":11,"rowBottom":11,"columnLeft":8,"columnRight":13},"size":6},"created":"1530092948","modified":"1530094297"},{"id":"1750000015407700","user_id":"1030000002753969","box_ad_id":"0","started":"1530115200","ended":"1534953600","cycles":"4","status":"0","banner":"\/213\/973\/2139739455-5b35af76c66e8","link":"https:\/\/www.frontjs.com\/","title":"\u524d\u7aef\u9519\u8bef\u76d1\u63a7\u5e73\u53f0FrontJS\uff0c\u4e00\u4e2a\u5e73\u53f0\uff0cWeb\u7aef\u548c\u5c0f\u7a0b\u5e8f\u9519\u8bef\u76d1\u63a7\u5168\u641e\u5b9a","area_info":{"area":"C11:E12","height":"34","width":"51","left":"34","top":"170","pos":{"rowTop":11,"rowBottom":12,"columnLeft":3,"columnRight":5},"size":6},"created":"1530093865","modified":"1530244985"},{"id":"1750000015609595","user_id":"1030000005733696","box_ad_id":"0","started":"1533571200","ended":"1534176000","cycles":"1","status":"0","banner":"\/325\/056\/3250566087-5b665dd9c671f","link":"https:\/\/mp.weixin.qq.com\/s\/VJfqvWEbdE_rZ0wV8ecPYg","title":"\u6bcf\u65e5\u63a8\u9001\u6c42\u804c\u5e72\u6d3b\uff0c\u627e\u5185\u63a8\uff0c\u5c31\u6765\u5fae\u4fe1\u8ba2\u9605\u53f7\u300c\u679c\u6c41\u7b80\u5386\u300d","area_info":{"area":"O15:O15","height":"17","width":"17","left":"238","top":"238","pos":{"rowTop":15,"rowBottom":15,"columnLeft":15,"columnRight":15},"size":1},"created":"1531361346","modified":"1533435431"},{"id":"1750000015716948","user_id":"1030000010600733","box_ad_id":"0","started":"1532275200","ended":"1535904000","cycles":"1","status":"0","banner":"\/197\/152\/197152429-5b52eda9bb366","link":"https:\/\/www.renren.io?from=segmentfault","title":"\u4eba\u4eba\u5f00\u6e90\uff0c\u514d\u8d39\u5f00\u6e90\u7684\u540e\u53f0\u811a\u624b\u67b6\u6846\u67b6","area_info":{"area":"H6:H6","height":"17","width":"17","left":"119","top":"85","pos":{"rowTop":6,"rowBottom":6,"columnLeft":8,"columnRight":8},"size":1},"created":"1532160813","modified":"1532161569"},{"id":"1750000015772931","user_id":"1030000015588360","box_ad_id":"0","started":"1532620800","ended":"1533830400","cycles":"2","status":"0","banner":"\/245\/961\/2459612048-5b5937c588f1e","link":"https:\/\/www.accesshub.cn","title":"\u81ea\u52a8\u5316\u7ec4\u7f51\u4ea7\u54c1\uff0c\u6ee1\u8db3\u7528\u6237\u8fdc\u7a0b\u63a5\u5165\u6df7\u5408\u4e91\uff0c\u4e91\u4e0e\u4e91VPC\u4e92\u901a\uff0c\u4f01\u4e1a\u4e0e\u4e91\u4e92\u901a\u9700\u6c42","area_info":{"area":"L4:M4","height":"17","width":"34","left":"187","top":"51","pos":{"rowTop":4,"rowBottom":4,"columnLeft":12,"columnRight":13},"size":2},"created":"1532573496","modified":"1532573807"},{"id":"1750000015815639","user_id":"1030000002419637","box_ad_id":"0","started":"1533052800","ended":"1534262400","cycles":"2","status":"0","banner":"\/303\/101\/3031011988-5b5ec276b1279","link":"https:\/\/www.grapecity.com.cn\/developer\/activereports?utm_source=segmentfault&utm_medium=cpt&utm_term=AR&utm_content=AR&utm_campa","title":"\u5168\u7403\u8d8530\u4e07\u62a5\u8868\u5f00\u53d1\u4eba\u5458\u7684\u9009\u62e9\uff0c\u5168\u9762\u517c\u5bb9\u6c34\u6676\u62a5\u8868","area_info":{"area":"B6:E6","height":"17","width":"68","left":"17","top":"85","pos":{"rowTop":6,"rowBottom":6,"columnLeft":2,"columnRight":5},"size":4},"created":"1532931385","modified":"1532936827"},{"id":"1750000015902535","user_id":"1030000013858586","box_ad_id":"0","started":"1533657600","ended":"1534262400","cycles":"1","status":"0","banner":"\/299\/001\/299001061-5b681a9805a04","link":"https:\/\/jq.qq.com\/?_wv=1027&k=5aexU3s","title":"\u5206\u89e3\u4e92\u8054\u7f51Java\u540e\u7aef\u67b6\u6784\u6280\u672f\u77e5\u8bc6\u70b9\uff0c\u7cfb\u7edf\u68b3\u7406\u77e5\u8bc6\u4f53\u7cfb\u3002","area_info":{"area":"C7:L8","height":"34","width":"170","left":"34","top":"102","pos":{"rowTop":7,"rowBottom":8,"columnLeft":3,"columnRight":12},"size":20},"created":"1533538516","modified":"1533560232"},{"id":"1750000015917367","user_id":"1030000007738985","box_ad_id":"0","started":"1533657600","ended":"1534262400","cycles":"1","status":"0","banner":"\/219\/064\/2190641462-5b695612aba84","link":"https:\/\/www.mysubmail.com\/sms\/api?tag=segmentfault","title":"\u8d5b\u90ae\u4e91\u901a\u4fe1-\u4e94\u4e07\u5f00\u53d1\u8005\u559c\u7231\u7684\u4e13\u4e1a\u77ed\u4fe1\u63a5\u53e3","area_info":{"area":"H2:I3","height":"34","width":"34","left":"119","top":"17","pos":{"rowTop":2,"rowBottom":3,"columnLeft":8,"columnRight":9},"size":4},"created":"1533628788","modified":"1533629979"}].forEach(function(item) {
+    var html = '<area shape="rect" ' +
+        'target="_blank" ' +
+        'onmouseover="d(this)" ' +
+        'onmouseout="e(this)" ' +
+        'onclick="c(' + item.id + ')" ' +
+        'coords="' + item.area_info.left + ',' + item.area_info.top + ',' + ((+item.area_info.left)+(+item.area_info.width)) + ',' + ((+item.area_info.top)+(+item.area_info.height)) + '" ' +
+        'href="' + item.link + '" ' +
+        'stitle="' + item.title + '" />'
+
+    areaArr.push(html)
+})
+
+document.getElementById('gridsMap').innerHTML = areaArr.join('')
+
+document.getElementById('gridsMap').onmousemove = function(e) {
+    var pos = getMousePos(e)
+
+    document.getElementById("gridMapHoverBox").style.left = pos.x + 20 + 'px'
+    document.getElementById("gridMapHoverBox").style.top = pos.y + 20 + 'px'
+
+    document.getElementById("gridMapHoverBox").innerHTML = sTitle
+}
+
+// 增加 view 统计
+setTimeout(function() {
+    isShow = document.querySelector('img[src^="https://static.segmentfault.com/sponsor"]').clientHeight > 0
+    if (isShow) ajax({url: viewApi, method: 'GET'})
+}, 0)
+
+function getMousePos(event) {
+    var e = event || window.event;
+    var scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
+    var scrollY = document.documentElement.scrollTop || document.body.scrollTop;
+    var x = e.pageX || e.clientX + scrollX;
+    var y = e.pageY || e.clientY + scrollY;
+    return { 'x': x, 'y': y };
+}
