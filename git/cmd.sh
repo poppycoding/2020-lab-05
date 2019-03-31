@@ -21,4 +21,12 @@ git config --global user.email "657344389@qq.com"
 
 
 
+# 查看git-bash版本,更新版本
+git --version
+#2.17.1之前用
+git update
+#2.17.1之后用
+git update-git-for-windows
+
+
 
