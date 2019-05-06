@@ -25,4 +25,7 @@ mvn install:install-file -Dfile=therapi-runtime-javadoc-scribe-0.8.0.jar -Dgroup
 # pomi
 mvn install:install-file -Dfile=poi-ooxml-4.0.0.jar -DgroupId=org.apache.poi  -DartifactId=poi-ooxml -Dversion=4.0.0 -Dpackaging=jar
 
+# coherence
+mvn install:install-file -Dfile=coherence-3.3.zip -DgroupId=tangosol-coherence  -DartifactId=coherence -Dversion=3.3 -Dpackaging=jar
+
 
