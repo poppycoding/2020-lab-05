@@ -17,7 +17,7 @@ update site set url =concat('http://',url) where locate('http://',url)=0
 
 
 -- 集合相关
-CREATE TABLE `object_a` (
+create TABLE `object_a` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `oname` varchar(50) DEFAULT NULL,
   `odesc` varchar(50) DEFAULT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE `object_a` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
-CREATE TABLE `object_b` (
+create TABLE `object_b` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `oname` varchar(50) DEFAULT NULL,
   `odesc` varchar(50) DEFAULT NULL,
@@ -33,45 +33,92 @@ CREATE TABLE `object_b` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1
 
-INSERT INTO `test`.`object_a`(`id`, `oname`, `odesc`, `create_time`) VALUES (1, 'name1', 'desc1', '2019-03-14 15:05:11');
-INSERT INTO `test`.`object_a`(`id`, `oname`, `odesc`, `create_time`) VALUES (2, 'name2', 'desc2', '2019-03-14 15:05:12');
-INSERT INTO `test`.`object_a`(`id`, `oname`, `odesc`, `create_time`) VALUES (3, 'name3', 'desc3', '2019-03-14 15:05:13');
-INSERT INTO `test`.`object_a`(`id`, `oname`, `odesc`, `create_time`) VALUES (4, 'name4', 'desc4', '2019-03-14 15:05:13');
-INSERT INTO `test`.`object_b`(`id`, `oname`, `odesc`, `create_time`) VALUES (1, 'name2', 'desc2', '2019-03-14 15:05:14');
-INSERT INTO `test`.`object_b`(`id`, `oname`, `odesc`, `create_time`) VALUES (2, 'name3', 'desc3', '2019-03-14 15:05:15');
-INSERT INTO `test`.`object_b`(`id`, `oname`, `odesc`, `create_time`) VALUES (3, 'name4', 'desc4', '2019-03-14 15:05:16');
+insert into `test`.`object_a`(`id`, `oname`, `odesc`, `create_time`) VALUES (1, 'name1', 'desc1', '2019-03-14 15:05:11');
+insert into `test`.`object_a`(`id`, `oname`, `odesc`, `create_time`) VALUES (2, 'name2', 'desc2', '2019-03-14 15:05:12');
+insert into `test`.`object_a`(`id`, `oname`, `odesc`, `create_time`) VALUES (3, 'name3', 'desc3', '2019-03-14 15:05:13');
+insert into `test`.`object_a`(`id`, `oname`, `odesc`, `create_time`) VALUES (4, 'name4', 'desc4', '2019-03-14 15:05:13');
+insert into `test`.`object_b`(`id`, `oname`, `odesc`, `create_time`) VALUES (1, 'name2', 'desc2', '2019-03-14 15:05:14');
+insert into `test`.`object_b`(`id`, `oname`, `odesc`, `create_time`) VALUES (2, 'name3', 'desc3', '2019-03-14 15:05:15');
+insert into `test`.`object_b`(`id`, `oname`, `odesc`, `create_time`) VALUES (3, 'name4', 'desc4', '2019-03-14 15:05:16');
 
 
 -- 并集: 不去重复
-SELECT oname,odesc FROM object_a
-UNION ALL
-SELECT oname,odesc FROM object_b
+select oname,odesc from object_a
+union all
+select oname,odesc from object_b
 
 -- 并集: 去重
-SELECT oname,odesc FROM object_a
-UNION
-SELECT oname,odesc FROM object_b
+select oname,odesc from object_a
+union
+select oname,odesc from object_b
 
 -- 交集
-SELECT a.oname,a.odesc FROM object_a a INNER JOIN object_b b ON a.oname=b.oname AND a.odesc=b.odesc
-SELECT a.oname,a.odesc FROM object_a a INNER JOIN object_b b USING(oname,odesc)
+select a.oname,a.odesc from object_a a inner join object_b b on a.oname=b.oname and a.odesc=b.odesc
+select a.oname,a.odesc from object_a a inner join object_b b using(oname,odesc)
 
 -- 交集: 其他数据库
-SELECT oname,odesc FROM object_a
-INTERSECT
-SELECT oname,odesc FROM object_b
+select oname,odesc from object_a
+intersect
+select oname,odesc from object_b
 
 
 -- 差集
-SELECT a.oname, a.odesc
-FROM
+select a.oname, a.odesc
+from
   object_a a
-  LEFT JOIN object_b b
-    ON a.oname = b.oname
-    AND a.odesc = b.odesc
-WHERE b.id IS NULL
+  left join object_b b
+    on a.oname = b.oname
+    and a.odesc = b.odesc
+where b.id is null
 
 -- 差集: 其他数据库
-SELECT a.oname, a.odesc FROM object_a a
-MINUS
-SELECT b.oname, b.odesc FROM object_b b
+select a.oname, a.odesc from object_a a
+minus
+select b.oname, b.odesc from object_b b
+
+
+
+
+--------------储存过程，循环插入10w条数据
+
+--模糊查看储存过程
+SHOW PROCEDURE STATUS LIKE 'bat%'
+
+--删除存在
+drop procedure IF EXISTS batchInsert;
+
+--定义储存过程
+delimiter $$
+create procedure batchInsert()
+begin
+declare i int default 0;
+while i < 10001 do
+INSERT INTO student (name) select substring(MD5(RAND()),1,10);
+set i = i + 1;
+end while;
+end $$
+
+-- 调用储存过程
+delimiter ;
+call batchInsert();
+
+
+
+--10位随机字符串
+select substring(MD5(RAND()),1,10)；
+
+--返回一个不大于f的最大整数
+floor(f)；
+
+--返回一个随机浮点值 v ，范围在 0 到1 之间 (即, 其范围为 0 ≤ v ≤ 1.0)。
+rand()；
+
+--若已指定一个整数参数 N ，则它被用作种子值，用来产生重复序列。
+rand(n)；
+
+
+
+--若要在i ≤ R ≤ j 这个范围得到一个随机整数R ，需要用到表达式
+--例如，若要在7 到 12 的范围（包括7和12）内得到一个随机整数, 可使用以下语句： FLOOR(i + RAND() * (j – i + 1))；
+select floor(7 + (RAND() * 6));
+
