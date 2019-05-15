@@ -194,3 +194,40 @@ show warnings;
 | Warning | 1681 | 'EXTENDED' is deprecated and will be removed in a future release.                                                                                                                                                                                          |
 | Note    | 1003 | /* select#1 */ select `demo`.`s`.`id` AS `id`,`demo`.`s`.`name` AS `name` from `demo`.`student` `s` semi join (`demo`.`student_course` `sc`) where ((`demo`.`s`.`id` = `<subquery2>`.`s_id`) and (`demo`.`sc`.`score` = 100) and (`demo`.`sc`.`c_id` = 1)) |
 +---------+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
+select
+    INFO.ID as PERSON_INFO_ID,
+	NULL AS PAYMENT_MODE,
+	INFO.ARCHIVE_NO AS ARCHIVE_NO,
+	'01' AS IDENTITY_TYPE_SFZ,
+	( select SFZ.IDENTITY_NO from HRA00_PERSON_IDENT SFZ where SFZ.IDENTITY_TYPE = '01' and SFZ.PERSON_INFO_ID = INFO.ID and rownum = 1 ) AS IDENTITY_NO_SFZ,
+	INFO.NAME AS PATIENT_NAME,
+	INFO.BIRTHDAY AS BIRTHDAY,
+	INFO.NATIONALITY AS NATIONALITY_DM,
+	INFO.GENDER AS GENDER_DM,
+	INFO.SUB_NATIONALITY AS SUB_NATIONALITY_DM,
+	INFO.MARRIAGE AS MARRIAGE_DM,
+	INFO.BLOOD_TYPE AS BLOOD_TYPE_DM,
+	INFO.RH_BLOOD_TYPE AS RH_BLOOD_TYPE_DM,
+	INFO.EDUCATION_DEGREE AS EDUCATION_DEGREE_DM,
+	NULL AS GRSF_DM,
+	( select TELE.TELEPHONE_NO from HRA00_PERSON_TELE TELE where TELE.TELEPHONE_TYPE = '01' and TELE.PERSON_INFO_ID = INFO.ID and rownum = 1 ) AS TELEPHONE_NO,
+	INFO.S_SCQD_DM AS LYQD_DM,
+	INFO.S_SCQD_LXRXM AS LYQDLXRXM,
+	INFO.S_SCQD_LXRDH AS LYQDLXRDH,
+	INFO.S_SCQD_WLRY AS LYQDWLRY,
+	MM.EMPLOYEE_NAME AS FIRST_DCOTOR,
+	MM.REMARK AS FIRST_ADRESS,
+	MM.REGISTRATION_DATE AS FIRST_DATE,
+	ADDR.DETAIL_ADDRESS AS SXXDZ
+FROM HRA00_PERSON_INFO INFO
+LEFT JOIN HRA00_PERSON_IDENT IDENT ON INFO.ID = IDENT.PERSON_INFO_ID
+LEFT JOIN ( select row_number () over ( partition by OPC.PERSON_INFO_ID order by OPC.REGISTRATION_DATE ) RN, OPC.PERSON_INFO_ID, DOCTOR.EMPLOYEE_NAME, DEPT.REMARK, OPC.REGISTRATION_DATE
+            FROM OPC_REGISTRATION OPC
+            INNER JOIN HRM_EMPLOYEE DOCTOR ON OPC.DOCTOR_ID = DOCTOR.ID
+            INNER JOIN HRA00_DEPARTMENT DEPT ON OPC.DEPARTMENT_ID = DEPT.ID ) MM ON MM.RN = 1 AND MM.PERSON_INFO_ID = INFO.ID
+LEFT JOIN HRA00_PERSON_ADDR ADDR ON ADDR.PERSON_INFO_ID = INFO.ID
+where
+	IDENT.IDENTITY_TYPE = 0 and IDENT.IDENTITY_NO = 1
