@@ -1,0 +1,7 @@
+### idea支持直接测试接口,可以运行多个restful接口!格式查看文档即可!
+
+
+### 例如:用户登录
+POST http://localhost:8081//ivf/login/
+Accept : application/json
+Content-Type : application/json;charset=UTF-8

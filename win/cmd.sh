@@ -29,3 +29,11 @@ scoop install extras/oraclejdk
 
 # 其他相关 ... ...
 scoop install python ruby go perl
+
+
+# 添加查看路由
+# -p 永久添加路由
+route add -p 192.168.0.0 mask 255.255.255.0 172.18.248.254
+# 查看
+route print
+
