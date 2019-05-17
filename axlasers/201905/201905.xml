@@ -1,0 +1,29 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+        <ns2:getOnlineServiceInfoByHISResponse xmlns:ns2="http://imp.scivf.cdxt.com/">
+            <return>
+                <![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+                <Response>
+                <data_list>
+                <data>
+                <NAME>何希熠</NAME>
+                <BIRTH>1987-07-25</BIRTH>
+                <IDNO>530629198707250181</IDNO>
+                <CARDNO>0130175469</CARDNO>
+                <OTHERPHONE>18908215725</OTHERPHONE>
+                <HOMEADDR>成都市锦江区</HOMEADDR>
+                <SEX>女性</SEX>
+                <SICKMANID>1612010082</SICKMANID>
+                <dataResource>HIS系统</dataResource>
+                <S_SCQD_CMC>其他</S_SCQD_CMC>
+                <vip> </vip>
+                <statnote> </statnote>
+                </data>
+                </data_list>
+                <ResultCode>0</ResultCode>
+                <ResultMsg> 成功</ResultMsg>
+                </Response>]]>
+            </return>
+        </ns2:getOnlineServiceInfoByHISResponse>
+    </soap:Body>
+</soap:Envelope>
