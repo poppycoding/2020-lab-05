@@ -231,3 +231,104 @@ LEFT JOIN ( select row_number () over ( partition by OPC.PERSON_INFO_ID order by
 LEFT JOIN HRA00_PERSON_ADDR ADDR ON ADDR.PERSON_INFO_ID = INFO.ID
 where
 	IDENT.IDENTITY_TYPE = 0 and IDENT.IDENTITY_NO = 1
+
+
+select
+distinct empId, employee_name
+from V_empDept
+where  s_gzlb_dm=:s_gzlb_dm and hospital_area=:hospital_area
+
+
+
+select * from
+(
+ select row_number() over(partition by a.item_code order by b.DOCHECK_TIME desc) rn,
+ a.item_code,a.inspec_value,
+ a.item_name,a.item_name_cn,
+ b.person_info_id,b.DOCHECK_TIME
+ from lis.v_inspec_result a
+ left join lis.v_inspec_general_info b
+ on a.general_info_id = b.id
+ where b.person_info_id=:personInfoId
+ and b.DOCHECK_TIME is not null
+)ss
+where ss.rn=1 and ss.item_code is not null
+
+
+
+select * from
+(
+ select row_number() over(partition by a.item_code order by b.DOCHECK_TIME desc) rn,
+ a.item_code,a.inspec_value,
+ a.item_name,a.item_name_cn,
+ b.person_info_id,b.DOCHECK_TIME
+ from lis.v_inspec_result a
+ left join lis.v_inspec_general_info b
+ on a.general_info_id = b.id
+ where b.person_info_id=:personInfoId
+ and b.DOCHECK_TIME is not null
+)ss
+where ss.rn=1 and ss.item_code is not null
+
+
+
+SELECT * FROM (
+  select row_number() over(partition by ss.item_code order by ss.DOCHECK_TIME desc) rn,ss.* from (
+  SELECT CURR.INSPEC_VALUE,
+               G.REQUEST_ITEM_NAME,
+               CURR.HIGH_LOW,
+               CURR.UNIT,
+               CURR.HIGH_LOW_GAP,
+               (SELECT D.ITEM_CODE
+                  FROM LIS.LIS_ITEM_DEV_CODE D
+                 WHERE G.DEV_CODE = D.DEV_CODE
+                   AND CURR.ITEM_NAME = D.ITEM_NAME) AS ITEM_CODE_1,
+               (SELECT D.ITEM_CODE
+                  FROM LIS.LIS_INSPEC_ITEM D
+                 WHERE CURR.ITEM_NAME = D.ITEM_NAME) AS ITEM_CODE,
+               (SELECT D.ITEM_NAME_CN
+                  FROM LIS.LIS_ITEM_DEV_CODE D
+                 WHERE G.DEV_CODE = D.DEV_CODE
+                   AND CURR.ITEM_NAME = D.ITEM_NAME) AS ITEM_NAME_CN,
+               CURR.ITEM_NAME,
+               CURR.INSPEC_NO,
+               TO_CHAR(G.DOCHECK_TIME, 'YYYY-MM-DD') DOCHECK_TIME,
+               G.SAMPLE_NAME
+          FROM LIS.LIS_INSPEC_RESULT_INTRADAY CURR
+          JOIN LIS.LIS_INSPEC_GENERAL_INFO G
+            ON CURR.INSPEC_NO = G.INSPEC_NO
+          JOIN LIS.LIS_INSPEC_PATIENT P
+            ON P.ID = G.PATIENT_ID
+           AND CURR.DEV_CODE = G.DEV_CODE
+           AND P.PERSON_INFO_ID = :personInfoId1
+           AND G.DOCHECK_TIME IS NOT NULL
+        UNION ALL
+        SELECT HIST.INSPEC_VALUE,
+               G.REQUEST_ITEM_NAME,
+               HIST.HIGH_LOW,
+               HIST.UNIT,
+               HIST.HIGH_LOW_GAP,
+               (SELECT D.ITEM_CODE
+                  FROM LIS.LIS_ITEM_DEV_CODE D
+                 WHERE G.DEV_CODE = D.DEV_CODE
+                   AND HIST.ITEM_NAME = D.ITEM_NAME) AS ITEM_CODE_1,
+               (SELECT D.ITEM_CODE
+                  FROM LIS.LIS_INSPEC_ITEM D
+                 WHERE HIST.ITEM_NAME = D.ITEM_NAME) AS ITEM_CODE,
+               (SELECT D.ITEM_NAME_CN
+                  FROM LIS.LIS_ITEM_DEV_CODE D
+                 WHERE G.DEV_CODE = D.DEV_CODE
+                   AND HIST.ITEM_NAME = D.ITEM_NAME) AS ITEM_NAME_CN,
+               HIST.ITEM_NAME,
+               HIST.INSPEC_NO,
+               TO_CHAR(G.DOCHECK_TIME, 'YYYY-MM-DD') DOCHECK_TIME,
+               G.SAMPLE_NAME
+          FROM LIS.LIS_INSPEC_RESULT_HISTORY HIST
+          JOIN LIS.LIS_INSPEC_GENERAL_INFO_HIST G
+          LEFT JOIN LIS.LIS_INSPEC_PATIENT P
+            ON P.ID = G.PATIENT_ID ON HIST.DEV_CODE = G.DEV_CODE
+           AND HIST.INSPEC_NO = G.INSPEC_NO
+           AND HIST.ARCHIVE_DATE = G.ARCHIVE_DATE
+           AND P.PERSON_INFO_ID = :personInfoId2
+           AND G.DOCHECK_TIME IS NOT NULL) ss
+           ) mm where mm.rn=1

@@ -40,3 +40,19 @@ select a.id,a.s_xm,a.s_po_xm,t.s_identity_no,a.I_ZQLX_XH as inCycle,a.s_blh
 from ivf_patient t, IVF_CMRS a
 where a.ivf_patient_id =  t.id and t.s_identity_no = '0130151538'
 group by a.id,a.s_blh,a.s_xm,a.s_po_xm, t.s_identity_no, a.s_blh ,a.I_ZQLX_XH
+
+
+
+select * from
+(
+ select row_number() over(partition by a.item_code order by b.DOCHECK_TIME desc) rn,
+ a.item_code,a.inspec_value,
+ a.item_name,a.item_name_cn,
+ b.person_info_id,b.DOCHECK_TIME
+ from lis.v_inspec_result a
+ left join lis.v_inspec_general_info b
+ on a.general_info_id = b.id
+ where b.person_info_id= '1612010082' and
+ b.DOCHECK_TIME is not null
+)ss
+where ss.rn=1 and ss.item_code is not null

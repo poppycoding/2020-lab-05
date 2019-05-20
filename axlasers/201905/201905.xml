@@ -18,12 +18,111 @@
                 <S_SCQD_CMC>其他</S_SCQD_CMC>
                 <vip> </vip>
                 <statnote> </statnote>
-                </data>
-                </data_list>
+                </data></data_list>
                 <ResultCode>0</ResultCode>
                 <ResultMsg> 成功</ResultMsg>
                 </Response>]]>
             </return>
         </ns2:getOnlineServiceInfoByHISResponse>
     </soap:Body>
+</soap:Envelope>
+
+
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+<soap:Body>
+    <ns2:findOutPatientByHISResponse xmlns:ns2="http://imp.scivf.cdxt.com/">
+        <return>
+            <![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+         <Response>
+         <data_list><data>
+         <PERSON_INFO_ID>1612010082</PERSON_INFO_ID>
+         <PAYMENT_MODE></PAYMENT_MODE>
+         <ARCHIVE_NO>1612010082</ARCHIVE_NO>
+         <IDENTITY_TYPE_SFZ>01</IDENTITY_TYPE_SFZ>
+         <IDENTITY_NO_SFZ>530629198707250181</IDENTITY_NO_SFZ>
+         <PATIENT_NAME>何希熠</PATIENT_NAME>
+         <BIRTHDAY>1987-07-25</BIRTHDAY>
+         <NATIONALITY_DM></NATIONALITY_DM>
+         <NATIONALITY_NAME></NATIONALITY_NAME>
+         <GENDER_DM>2</GENDER_DM>
+         <GENDER_NAME>女性</GENDER_NAME>
+         <SUB_NATIONALITY_DM></SUB_NATIONALITY_DM>
+         <SUB_NATIONALITY_NAME></SUB_NATIONALITY_NAME>
+         <MARRIAGE_DM>20</MARRIAGE_DM>
+         <MARRIAGE_NAME>已婚</MARRIAGE_NAME>
+         <BLOOD_TYPE_DM></BLOOD_TYPE_DM>
+         <BLOOD_TYPE_NAME></BLOOD_TYPE_NAME>
+         <RH_BLOOD_TYPE_DM></RH_BLOOD_TYPE_DM>
+         <RH_BLOOD_TYPE_NAME></RH_BLOOD_TYPE_NAME>
+         <EDUCATION_DEGREE_DM></EDUCATION_DEGREE_DM>
+         <EDUCATION_DEGREE_NAME></EDUCATION_DEGREE_NAME>
+         <GRSF_DM></GRSF_DM>
+         <GRSF_NAME></GRSF_NAME>
+         <TELEPHONE_NO>18908215725</TELEPHONE_NO>
+         <LYQD_DM>其他</LYQD_DM>
+         <LYQDLXRXM></LYQDLXRXM>
+         <LYQDLXRDH></LYQDLXRDH>
+         <LYQDWLRY></LYQDWLRY>
+         <FIRST_DCOTOR>周瑞年</FIRST_DCOTOR>
+         <FIRST_ADRESS>成都西囡妇科医院</FIRST_ADRESS>
+         <FIRST_DATE>2018-01-20</FIRST_DATE>
+         <ADDRESS>成都市锦江区</ADDRESS>
+         </data></data_list>
+         <ResultCode>0</ResultCode>
+         <ResultMsg>成功</ResultMsg>
+         </Response>]]></return>
+    </ns2:findOutPatientByHISResponse>
+</soap:Body>
+</soap:Envelope>
+
+
+<!--S0005-->
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:imp="http://imp.scivf.cdxt.com/">
+<soapenv:Header/>
+<soapenv:Body>
+    <imp:findOutPatientByHIS>
+        <arg0>
+            <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+            <REQUEST>
+              <BUSINESS_KIND>outpatientsearch</BUSINESS_KIND>
+              <BUSINESS_CODE>S0005</BUSINESS_CODE>
+              <INFO_ID>1612010082</INFO_ID>
+            </REQUEST>
+            ]]></arg0>
+    </imp:findOutPatientByHIS>
+</soapenv:Body>
+</soapenv:Envelope>
+
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+<soap:Body>
+    <ns2:findOutPatientByHISResponse xmlns:ns2="http://imp.scivf.cdxt.com/">
+        <return>
+            <![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+            <Response><data_list>
+            <data>
+            <ITEM_CODE>5002</ITEM_CODE>
+            <INSPEC_VALUE>13.1</INSPEC_VALUE>
+            <UNIT>秒</UNIT>
+            <ITEM_NAME>PT</ITEM_NAME>
+            <ITEM_NAME_CN>凝血酶原时间</ITEM_NAME_CN>
+            <REQUEST_ITEM_NAME>凝血功能测定</REQUEST_ITEM_NAME>
+            <PERSON_INFO_ID>1612010082</PERSON_INFO_ID>
+            <DOCHECK_TIME>2018-01-21</DOCHECK_TIME>
+            </data>
+            <data>
+            <ITEM_CODE>5003</ITEM_CODE>
+            <INSPEC_VALUE>37.2</INSPEC_VALUE>
+            <UNIT>秒</UNIT>
+            <ITEM_NAME>APTT</ITEM_NAME>
+            <ITEM_NAME_CN>部分活化凝血活酶时间</ITEM_NAME_CN>
+            <REQUEST_ITEM_NAME>凝血功能测定</REQUEST_ITEM_NAME>
+            <PERSON_INFO_ID>1612010082</PERSON_INFO_ID>
+            <DOCHECK_TIME>2018-01-21</DOCHECK_TIME>
+            </data>
+            </data_list>
+            <ResultCode>0</ResultCode>
+            <ResultMsg>成功</ResultMsg>
+            </Response>]]></return>
+    </ns2:findOutPatientByHISResponse>
+</soap:Body>
 </soap:Envelope>
