@@ -70,3 +70,14 @@ cat pid.stack |grep 'bda' -C 8
 # 安装arthas查看: https://alibaba.github.io/arthas/
 wget https://alibaba.github.io/arthas/arthas-boot.jar
 java -jar arthas-boot.jar -h
+
+
+
+
+# jstack,jvisualvm查看死锁进程,eg死锁类A.class
+# jvisualvm命令开启可视化界面,查看对应类的线程信息,会显示死锁信息,通过点击dump查看具体信息: Found one Java-level deadlock:
+jvisualvm
+
+# jps查看具体类的pid,然后通过jstack查看具体进程的栈信息: Found one Java-level deadlock:
+jps
+jstack -l pid
