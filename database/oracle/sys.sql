@@ -158,3 +158,11 @@ select rownum rm, t.*  from t_user t
 where rm > pageSize * ( pageNow - 1 ) and rm <= pageSize * pageNow
 
 -- 有orderBy需要再嵌套一层???
+
+
+
+-- 查看服务端编码 AL32UTF8
+select * from nls_database_parameters where parameter ='NLS_CHARACTERSET';
+
+-- 查看客户端编码 SIMPLIFIED CHINESE
+select * from nls_instance_parameters where parameter='NLS_LANGUAGE';

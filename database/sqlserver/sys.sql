@@ -7,7 +7,7 @@ select count(*) from sysobjects  where xtype='V'
 select count(*) from syscolumns  where id =1810105489
 
 -- 2.总数列表
-SELECT u.table_num, v.view_num, (c1.column_num1+c2.column_num2) column_num,(u.table_num + v.view_num + c1.column_num1+c2.column_num2+ 1) count_all
+select u.table_num, v.view_num, (c1.column_num1+c2.column_num2) column_num,(u.table_num + v.view_num + c1.column_num1+c2.column_num2+ 1) count_all
 from
 (select count(*) table_num from sysobjects where xtype='U') u,
 (select count(*) view_num from sysobjects where xtype='V') v,
@@ -25,3 +25,4 @@ Exec sp_droptype 'ssn'
 --查看用户自定义数据类型
 select * from systypes where xtype<>xusertype
 select * from sys.types where is_user_defined=1
+

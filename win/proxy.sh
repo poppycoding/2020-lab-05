@@ -24,6 +24,8 @@ color 2
 echo active HK proxy !
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v ProxyEnable /t REG_DWORD /d 1 /f
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v ProxyServer /d "10.128.255.41:80" /f
+Start "" "C:\Program Files\Internet Explorer\iexplore.exe" "https://www.google.com/"
+taskkill /f /im iexplore.exe
 #exit
 
 
@@ -34,4 +36,6 @@ color 2
 echo active HK proxy !
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v ProxyEnable /t REG_DWORD /d 1 /f
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v ProxyServer /d "10.248.60.204:3266" /f
+Start "" "C:\Program Files\Internet Explorer\iexplore.exe" "https://www.google.com/"
+taskkill /f /im iexplore.exe
 exit
