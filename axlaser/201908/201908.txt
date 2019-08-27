@@ -1,0 +1,3 @@
+1.idea set space for cast
+
+editor->code style->java->spaces:  after type cast

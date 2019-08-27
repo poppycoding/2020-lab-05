@@ -26,7 +26,7 @@ npm run install-server
 # 安装pm2
 npm install pm2 -g
 # 后台启动服务
-pm2 start vendors/server/app.js
+pm2 start vendors/server/app.js --name yapi
 
 # 常用命令
 pm2 list
@@ -35,3 +35,20 @@ pm2 show     id
 pm2 stop     app_name
 pm2 restart  id
 pm2 delete   all
+
+# eg
+pm2 start d:/dev/Yapi/my-yapi/vendors/server/app.js  --name yapi
+pm2 info yapi
+pm2 stop yapi
+pm2 start yapi
+pm2 restart yapi
+
+
+#查看版本号列表
+yapi ls
+
+#更新到最新版本
+yapi update
+
+#更新到指定版本
+yapi update -v {Version}
