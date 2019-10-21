@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+######################################################################win
+# 开启telnet服务(可以在win的可视化界面勾选telnet客户端服务开启)
+dism / online / Enable-Feature / FeatureName：TelnetClient
+
+
+
 #The Network Time Protocol (NTP) is a protocol used to synchronize computer system clock automatically over a networks. The machine can have the system clock use Coordinated Universal Time (UTC) rather than local time.
 ############ 修改系统时区,解决java程序获取系统时间与实际时间不一致问题
 # 查看系统时区
