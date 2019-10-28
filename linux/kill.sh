@@ -10,7 +10,6 @@ netstat -nap | grep 10425 | grep LISTEN
 netstat -ano | findstr 8080
 
 
-
 ############ kill命令
 # kill process: dms.jar (v反转)
 ps -ef | grep dms.jar | grep -v grep | awk '{print $2}' | xargs kill -9

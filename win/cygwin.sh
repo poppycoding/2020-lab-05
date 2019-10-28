@@ -7,31 +7,31 @@ gcc.. make... lynx...
 
 
 
-
 # 2.配置bin目录到win的path环境变量中eg:
 C:\Apps\Dev\Cygwin\bin
 
 
+# 2.1如果是中文界面，修改英文末尾加入export LANG='en_US'
+vim ~/.bashrc
+source ..
 
 
 # 3.启动安装之后apt-cyg
- git clone https://github.com/transcode-open/apt-cyg.git
- cd apt-cyg/
+git clone https://github.com/transcode-open/apt-cyg.git
+cd apt-cyg/
 install apt-cyg /bin
 # 也可以通过lynx安装apt-cyg
 lynx -source rawgit.com/transcode-open/apt-cyg/master/apt-cyg > apt-cyg
 install apt-cyg /bin
 
+
+
 # 3.1.常用命令
 apt-cyg -h
 
 
-
-
 # 4.安装curl
 apt-cyg install curl
-
-
 
 
 # 5.安装zsh
@@ -41,22 +41,32 @@ apt-cyg install zsh
 
 
 # 6.安装oh-my-zsh
-$ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 
 # 6.1.配置zsh相关插件
 # 1.修改.bash_profile最后一行加入 exec zsh ===>> 修改默认shell为zsh
 vim ~/.bash_profile
+source ..
+
 
 # 2.安装插件git clone源码然后修改.zshrc的内容
-
 # 3.安装自动补全autosuggestions
 git clone http://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 # 修改文件,添加zsh-autosuggestions即可
+vim ~/.zshrc
 plugins=(git zsh-autosuggestions)
 
 
-# 4.安装autojump
+
+# 4.安装zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+# 修改.zshrc文件
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+
+
+
+# 5.安装autojump
 git clone http://github.com/joelthelion/autojump.git $ZSH_CUSTOM/plugins/autojump
 
 # install之后生成提示修改文件
@@ -67,9 +77,14 @@ cd /autojump
 vim ~/.zshrc
 
 
-# 5.安装zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-# 修改.zshrc文件
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+# 如果是centos环境安装autojump请用yum否则会爆出error如下： command not found: uname
+#/root/.autojump/share/autojump/autojump.zsh:22: command not found: uname
+#/usr/libexec/grepconf.sh: line 5: grep: command not found
+yum install autojump-zsh
+
+
+
+
+
 
 

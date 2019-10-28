@@ -86,3 +86,15 @@ docker exec -it 69d1 bash
 docker export 7691a814370e > xx.tar
 # import
 cat xx.tar | docker import - test/nginx:v1.2
+
+
+######### 清空容器
+
+# 查看所有容器id
+docker ps -aq
+# 停止所有容器
+docker stop $(docker ps -aq)
+# 删除所有
+docker rm $(docker ps -aq)
+# 删除所有镜像
+docker rmi $(docker images -q)
