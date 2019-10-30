@@ -100,6 +100,7 @@ git log --oneline --all -n4
 
 # 使用git自带的图形化界面gitk命令，左上角file中有start git gui可以查看详情提交等
 gitk
+gitk --all
 # 如果是centos界面可能会报错，请安装tcl，tk： /usr/local/git/bin/gitk: line 3: exec: wish: not found
 yum install tcl
 yum install tk
@@ -140,6 +141,57 @@ drwxr-xr-x 2 root root 4.0K Oct 29 16:07 pack
 git cat-file -t fda1e416b18923f
 # 查看你文件内容
 git cat-file -p fda1e416b18923f
+
+# git中的对象： commit， tree， blob
+# commit：当前位置的一次快照，内容就是一个tree，然后里面包含了各种文件夹tree，和文件bolb
+# tree：代表文件夹，里面是blob
+# blob：代表文件，git下只要文件内容一致，那么只会存在一个blob给文件名字无关
+
+
+# 分离头指针：指的是当前工作目录不在任何分支上，如果这个时候切换分支，git日后会清除掉这个记录
+You are in 'detached HEAD' state.
+# 例如：创建分支的时候忘记加参数-b就会造成不在任何分支上
+git checkout -b new-branch-name
+git checkout 90c6c0e63465e0e5a0e8cdd4f9381d733161c3a2
+# 这个时候切换分支，git会提示这个分离头指针的问题，如果要保留就需要基于这个游离状态创建新分支
+# 两种创建分支的命令checkout不仅创建分支而且直接切换到分支，branch则不是
+git branch your__branch_name 90c6c0e63465e0e5a0e8cdd4f9381d733161c3a2
+
+
+# head的用法波浪号加数字等价于尖括号，这个的HEAD代表的就是当前的commit
+git diff HEAD HEAD^
+git diff HEAD HEAD~1
+git diff HEAD HEAD^^
+git diff HEAD HEAD~2
+
+
+# 删除分支-d， -D
+git branch -d branch_name
+# 强制删除-D
+git branch -D branch_name
+
+
+# 对最近一次的commit做变更
+git commit --amend
+# 修改人一次commit消息,rebase变基操作，基于父亲做变更，也就是要修改的commit上次提交的id，进入交互式界面，修改pick为r
+git rebase -i father_commit_id
+
+# 1.合并连续的commit消息,基于父亲变基,不需要写区间，估计默认是Head到选择的id之间，然后选择一个pick，下面的修改pick为s
+git rebase -i father_commit_id
+# 2.合并不连续的commit消息，正常就是基于父亲，选择要合并的消息，然后手动移到一起修改pick为s，
+# 同时会报错：error: could not apply 986ddab... 使用continue继续操作即可
+git rebase --continue
+# 3.注意如果是根部的消息合并，没有父亲可选，需要手动复制commitid到rebase上去，同时合并后之后发现git tree上会有两个根部节点
+
+
+
+# 比较暂存区和HEAD的差异
+git diff --cached
+
+# 比较工作区和暂存区，默认比较所有,可以指定不同的文件或者多个
+git diff
+git diff file_name
+
 
 
 
