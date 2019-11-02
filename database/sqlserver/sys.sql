@@ -41,3 +41,42 @@ FROM sys.dm_exec_query_stats qs
 CROSS APPLY sys.dm_exec_sql_text(qs.plan_handle) st
 CROSS APPLY sys.dm_exec_query_plan(qs.plan_handle) qp
 ORDER BY total_elapsed_time / execution_count DESC
+
+
+-- DATEPART YEAR MONTH 日期截取
+SELECT (SELECT MIN(MIN_DATE) FROM (VALUES (DATEPART(yyyy,TEST_DATE1)),(DATEPART(yyyy,TEST_DATE2)),(DATEPART(yyyy,TEST_DATE3))) AS #TEMP(MIN_DATE)) MIN_DATE FROM TBL
+SELECT (SELECT MIN(MIN_DATE) FROM (VALUES (YEAR(TEST_DATE2)),(YEAR(TEST_DATE2)),(YEAR(TEST_DATE3))) AS #TEMP(MIN_DATE)) MIN_DATE FROM TBL
+SELECT MONTH(START_DATE) FROM TBL
+
+
+--ROUND 百分比
+SELECT CONCAT(CAST(ROUND(5*100.0/16,2) AS NUMERIC(20,2)),'%' ) FROM TBL
+
+
+--CONCAT 1 left 截取:末尾'/'
+SELECT NAME LABLE, (SELECT CODE+'/' FROM TBL WHERE NAME = A.NAME FOR XML PATH('')) VALUE FROM TBL A  WHERE rank > 3 GROUP BY NAME
+
+SELECT B.NAME,LEFT(VALUE,LEN(VALUE)-1) CODE FROM
+(
+SELECT NAME, (SELECT CODE+'/' FROM TBL WHERE NAME = A.NAME FOR XML PATH('')) AS VALUE FROM TBL A  WHERE rank > 3 GROUP BY NAME
+) B
+
+--CONCAT 2 stuff 替换:首端'/' ==>> "":   删除指定长度的字符并在指定的起始点插入另一组字符。
+STUFF ( character_expression , start , length , character_expression )
+SELECT p.NAME [value], STUFF((SELECT '/'+CODE FROM TBL WHERE NAME > 3 AND NAME = p.NAME FOR xml PATH('')),1,1,'') [label] FROM TBL p WHERE p.NAME > 3 GROUP BY p.NAME ORDER BY [value]
+
+
+--STR
+STR ( float_expression [ , length [ , decimal ] ] )
+
+--日期截取,时分只需要选择对应格式,然后char/varchar截取对应的数字位: 常用8,106,23
+SELECT CONVERT(varchar(5), GETDATE(), 23)
+SELECT CONVERT(char(5),GETDATE(),8)
+SELECT CONVERT(varchar(20), GETDATE(), 106)
+
+--sqlServer转义like中的下划线用中括号(单引号用单引号转义)
+... LIKE '%[_]d'
+
+
+--sqlserver获取序列下一个值
+SELECT NEXT VALUE FOR TBL_TEST_SEQ AS SEQ_ID

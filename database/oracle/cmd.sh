@@ -27,7 +27,20 @@ grant select on class to testRole;
 # 删除角色,相关的权限将从数据库全部删除
 drop role testRole;
 
+to_char
+to_date
+to_number
 
+# nvl函数基本语法为nvl(E1,E2)，意思是E1为null就返回E2，不为null就返回E1。
+# nvl2函数的是nvl函数的拓展，基本语法为nvl2(E1,E2,E3)，意思是E1为null，就返回E3，不为null就返回E2。
+
+
+# ESCAPE: 自定义一个转义字符,这个字符的字符原样匹配不作为通配符号使用
+ESCAPE 'escape_character'
+#  / 定义斜杆转义
+SELECT * FROM A WHERE NAME LIKE '%A/%B%' ESCAPE '/'
+#  ! 定义叹号转义
+SELECT * FROM A WHERE NAME LIKE '%A!%B%' ESCAPE '!'
 
 
 
