@@ -312,3 +312,9 @@ git add .
 
 
 
+# blame查看提交细节,L限定行数
+git blame file
+git blame -L 10,20 file
+# log也能查看,不如blame详细,L限定行数
+git log file
+git log -L 10,20:file
