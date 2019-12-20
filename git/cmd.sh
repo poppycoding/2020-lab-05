@@ -318,3 +318,72 @@ git blame -L 10,20 file
 # log也能查看,不如blame详细,L限定行数
 git log file
 git log -L 10,20:file
+
+
+
+# fetch时添加prune参数是保证远端已经清除的分支等信息,拉取时在本地也会自动清除,如果不加不会清除本地的信息
+# egL当远端有分支删除,仅仅fetch是不能删除本地的分支,可以添加参数--prune实现本地删除远程已经不存在的分支
+git fetch --prune
+git fetch -p
+
+
+# tag里程碑
+# 创建,默认是当前commit
+git tag v-1.0
+
+# 创建时添加额外备注信息
+git tag -a v-1.0 -m "you can after -a add 'tag name' and add tag note info after -m!"
+
+# 查看所有tag
+git tag
+# 查看远端所有tag
+# 查看远端所有tag即使已经删除(暂时不确定)
+git show-ref --tag
+# 查看远端tag,额外多出来删除后又创建回来的tag(暂时不确定),同时tag后面特殊标记:^{},eg: refs/tags/v-0.0.1^{}
+git ls-remote --tags origin
+
+
+# 旧版git-v1.7.0之前删除远端tag之前,必须先删除本地tag,然后推送
+# 先删除本地tag,然后同步到远端
+git tag -d v-0.0.1
+git push origin :refs/tags/v-0.0.1
+# 删除本地所有tag
+git tag -l | xargs git tag -d
+# 然后同步到远端..使用awk等管道匹配删除(git show-ref --tag筛选需要确定)
+git show-ref --tag| awk '{print ":"$2}' | xargs git push origin
+
+# git-v1.7.0之后删除tag方法直接加参数--delete即可删除远端tag,本地tag删除方法同上
+git push origin -d tag v-0.0.2
+# 删除所有本地/远端tag
+git tag -l | xargs git tag -d
+git show-ref --tag | xargs git push origin -d
+
+
+
+# 创建tag到指定commit
+git tag v-2.0 commitID
+git tag -a v-2.0 -m "version 2.0 success to publish haha!"
+
+# 查看详细的tag信息
+git show v-2.0
+
+# 推送某个tag到远端
+git push origin v-2.0
+
+# 推送所有tag到远端
+git push origin --tags
+
+
+# git 命令行删除远端分支
+git branch --delete --remotes  origin/feature/agent
+git branch -dr  origin/feature/agent
+
+
+
+
+
+
+
+
+
+
