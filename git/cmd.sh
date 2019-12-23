@@ -86,9 +86,6 @@ git add reademe.md
 git mv remade remade.md
 
 
-# 创建分支基于某一次commit id,不需要完整的id
-git checkout -b 90c6c0e634
-
 
 # git 查看log命令
 git log
@@ -374,9 +371,32 @@ git push origin v-2.0
 git push origin --tags
 
 
+# 创建分支基于某一次commit id,不需要完整的id
+git checkout -b 90c6c0e634
+# git基于master创建新分支new branch
+git checkout -b new_branch master
+# 推送到远程,建立关系
+git push --set-upstream origin new_branch
+
+
 # git 命令行删除远端分支
 git branch --delete --remotes  origin/feature/agent
 git branch -dr  origin/feature/agent
+
+
+# git 分支重命名(old->new)
+# 1.重命名local分支名
+git branch -m old new
+# 2.删除远端old分支
+git branch -dr origin/old
+# 3.重新推送本地new到远端,并且建立关联关系
+git push --set-upstream origin new
+
+
+# git查看分支关联的远程信息
+git branch -vv
+
+
 
 
 
