@@ -71,3 +71,8 @@ route add -p 192.168.0.0 mask 255.255.255.0 172.18.248.254 metric 1
 route delete 192.168.0.0
 
 
+# 查找服务:SERVICE_NAME服务名,DISPLAY_NAME显示名
+sc query |findstr Mongo
+sc delete MongoDB
+
+
