@@ -8,4 +8,4 @@ pm2 start yapi
 pm2 restart yapi
 
 # first package
-mvn verify sonar:sonar -DskipTests -Dsonar.projectKey = "develop"
+mvn verify sonar:sonar -D skipTests

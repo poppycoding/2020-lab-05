@@ -40,7 +40,17 @@ Robo 3T
 https://www.mongodb.com/download-center
 
 
+# 下载解压dump数据,到../Backup文件夹
+curl -O -k https://raw.githubusercontent.com/tapdata/geektimemongodb-course/master/aggregation/dump.tar.gz
+tar -xvf dump.tar.gz
 
+# Backup目录下执行restore,恢复dump文件
+mongorestore -h localhost:27017
+
+
+
+# 为当前数据库创建角色,最后一个readWrite是当前数据库,三个role分别是集群,任意数据库,test数据库
+db.createUser({user:"customDB",pwd:"customDB123",roles:[{role:"clusterAdmin",db:"admin" },{role:"readAnyDatabase",db:"admin" },{role:"readWrite",db:"test"},"readWrite"]})
 
 
 
