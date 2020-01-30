@@ -250,9 +250,13 @@ scp -r logs/ root@192.168.240.154:/opt/
 lsof +D /home/xx/xx
 
 # 当删除文件遇到：Operation not permitted，如果是root权限，那么应该是文件被锁定导致，通过下面lsattr等操作即可
-# 查看xx文件的属性,其中如果有i，a属性，则不可以不删除：------ia-------e--
+# 查看xx文件的属性,其中如果有i，a属性，则禁止执行删除等相关操作：------ia-------e--
 lsattr /home/xx/xx
 
 # 通过chattr去除之后执行
 chattr -i /home/xx/xx
 chattr -a /home/xx/xx
+
+# 取消执行权限，若遇到上述not permitted仍然chattr减去ia
+chattr -ai /usr/bin/exin
+sudo chmod -x /usr/bin/exin
