@@ -54,7 +54,12 @@ db.createUser({user:"customDB",pwd:"customDB123",roles:[{role:"clusterAdmin",db:
 
 
 
-
+# 创建索引
+db.contact.createIndex( { "email": 1,})
+# 创建唯一索引
+db.contact.createIndex( { "email": 1,}, { unique: true })
+# 唯一复合索引
+db.contact.createIndex( { "email": 1,"name": 1 }, { unique: true } )
 
 
 
