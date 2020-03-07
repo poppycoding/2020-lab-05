@@ -1,3 +1,0 @@
-MATCH
-(n:DbInfo) -[:TABLE_INFO|:VIEW_INFO]- (x),(x) -[:COLUMN_INFO]-(y)
-where n.dbName="whmtest" and x.contextPath ends with "ee"  and y.columnName="name" RETURN n,x,y
