@@ -1,12 +1,25 @@
-traditional:
-build
-ci
-chore
-docs
-feat
-fix
-perf
-refactor
-revert
-style
-test
+######################################### Git Commit Guide #########################################
+
+# 提交格式
+<type>(<scope>): <subject>
+<BLANK LINE>
+<body>
+
+# 内容
+type: [必选],用于说明 commit 的类别.
+scope: [非必选],用于说明 commit 影响的范围,比如数据层,控制层,视图层等等.
+subject: [必选],对 commit 的简短描述,50个字符;首字母小写,动词开头,第一人称现在时,结尾无句号.
+body: [非必选],对commit 的详细描述,可以分成多行.
+
+# 文字版本(参考angular.js)
+build | ci | chore | docs | feat | fix | perf | refactor | revert | style | test.
+
+# emoji版本
+:tada: | :sparkles: | ....
+
+# eg:
+feat: complete git guideline.
+doc: update readme.
+
+:tada: init commit.
+:bug: fix NPE.
