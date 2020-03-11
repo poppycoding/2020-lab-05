@@ -49,7 +49,7 @@
      </properties>
      ```
 
-   - sonar过滤规则,对于某些不必要扫描以及单元测试覆盖的代码,可以通过exclude过滤排除
+   - sonar过滤规则,对于某些不必要扫描以及单元测试覆盖的代码,可以通过exclusions过滤排除,或者inclusions只扫描包含的文件
 
      ```xml
      <properties>
@@ -101,10 +101,16 @@
 
    ##### Scan
 
-   项目pom同级目录下执行verify命令进行扫描项目,注意首先保证target已经生成,否则需要先package
+   项目pom同级目录下执行verify命令进行扫描项目:
 
    ```shell
    mvn verify sonar:sonar
+   ```
+
+   项目pom中如果没有配置sonar相关配置,也可以通过mvn命令动态传递参数如:
+
+   ```shell
+   mvn verify sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.login=token
    ```
 
 6. ------
