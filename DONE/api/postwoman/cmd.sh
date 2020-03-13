@@ -5,7 +5,6 @@ npm install
 # 默认端口访问:localhost:3000
 npm run dev
 
-
 # 修改默认端口,也即是修改nuxt启动端口
 cd postwoman
 vim nuxt.config.js
@@ -16,7 +15,6 @@ vim nuxt.config.js
     port: "4000"
 
   }
-
 
 # 如果安装pm2管理器,通过pm2启动如下
 # 暂时不清楚问题原因,测试发现在使用如下绝对路径命令时,能成功启动,但是本地访问无效!!!

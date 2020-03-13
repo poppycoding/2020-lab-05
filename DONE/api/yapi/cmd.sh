@@ -2,7 +2,7 @@
 
 # https://www.jianshu.com/p/9a9505e213de
 
-# 环境要求 nodejs（7.6+)  mongodb（2.6+） git   pm2: pm2带有负载均衡功能的Node应用的进程管理器
+# 环境要求 nodejs（7.6+) mongodb（2.6+） git pm2: pm2带有负载均衡功能的Node应用的进程管理器
 
 # 安装server
 npm install -g yapi-cli
@@ -20,16 +20,18 @@ npm i
 node vendors/server/app.js
 
 # 初始化管理员账户,修改config.json中的账号之后vendors中运行
-#初始化管理员账号成功,账号名："****@admin.com"，密码："ymfe.org"
+# 初始化管理员账号成功,账号名："****@admin.com"，密码："ymfe.org"
 npm run install-server
 
 # 安装pm2
 npm install pm2 -g
+
 # 后台启动服务
 pm2 start vendors/server/app.js --name yapi
 
 # 常用命令
 pm2 list
+
 # <app_name|id|'all'|json_conf>
 pm2 show     id
 pm2 stop     app_name
