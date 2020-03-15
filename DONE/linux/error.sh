@@ -7,14 +7,14 @@ abrt-auto-reporting enabled
 
 
 
-# linux内核锁 BUG: soft lockup - CPU#2 stuck for 22s! [lsmd:767],务器跑大量高负载程序，造成cpu soft lockup.
-# soft lockup：内核软死锁，这个bug并没有让系统彻底死机，但是若干进程/线程被锁死在某个状态。
+# linux内核锁 BUG: soft lockup - CPU#2 stuck for 22s! [lsmd:767],服务器跑大量高负载程序,造成cpu soft lockup.
+# soft lockup：内核软死锁,这个bug并没有让系统彻底死机,但是若干进程/线程被锁死在某个状态.
 echo 30 > /proc/sys/kernel/watchdog_thresh
 tail -1 /proc/sys/kernel/watchdog_thresh
 # 临时生效
 sysctl -w kernel.watchdog_thresh=30
 
 
-# 永久生效 ? ?
+# 永久生效 ??
 vi /etc/sysctl.conf
 kernel.watchdog_thresh=30

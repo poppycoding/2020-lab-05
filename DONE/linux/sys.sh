@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-######################################################################win
 # 开启telnet服务(可以在win的可视化界面勾选telnet客户端服务开启)
 dism / online / Enable-Feature / FeatureName：TelnetClient
 
@@ -49,7 +48,7 @@ ll -lh
 ls -lh
 
 
-############ .tar  .tar.gz(.tar.gzip)  .gz
+############ .tar .tar.gz(.tar.gzip) .gz
 # 解压
 tar xvf FileName.tar
 tar zxvf FileName.tar.gz
@@ -73,11 +72,11 @@ ctrl + shift + f
 
 ############ HISTORY
 # 设置历史格式
-export HISTTIMEFORMAT='%F %T '
+export HISTTIMEFORMAT='%F %T'
 
 # 文本形式查看历史命令
 history | grep -i "tail"
-# 搜索keyword，再次输入
+# 搜索keyword,再次输入
 ctrl + R + keyword
 
 
@@ -94,7 +93,7 @@ getconf LONG_BIT
 # 查看linux配置内核
 # 总核数 = 物理CPU个数 X 每颗物理CPU的核数
 # 总逻辑CPU数 = 物理CPU个数 X 每颗物理CPU的核数 X 超线程数
-#一般情况下，逻辑cpu=物理CPU个数×每颗核数，如果不相等的话，则表示服务器的CPU支持超线程技术
+#一般情况下,逻辑cpu=物理CPU个数×每颗核数,如果不相等的话,则表示服务器的CPU支持超线程技术
 
 # 查看物理CPU个数
 cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l
@@ -135,8 +134,6 @@ passwd root/es
 # 更改hostname
 hostname haha
 
-# export
-
 
 
 # 授权执行命令:  u:所有者 g:所在组 o:其他组 a:所有人(u、g、o的总和)
@@ -151,10 +148,10 @@ chmod 777 file
 
 
 # 查看系统服务,并且设置开机是否启动
-#上下键：可以在中间的方框当中，在各个服务之间移动；
-#空格键：可以用来选择你所需要的服务，[*]表示开起启动；
-#tab键：可以在方框、OK、Cancel之间移动；
-#[F1]键：可以显示该服务的说明。
+# 上下键：可以在中间的方框当中,在各个服务之间移动；
+# 空格键：可以用来选择你所需要的服务,[*]表示开起启动；
+# tab键：可以在方框、OK、Cancel之间移动；
+# [F1]键：可以显示该服务的说明.
 ntsysv
 # 如果没有可以手动安装
 yum install ntsysv
@@ -175,7 +172,7 @@ vim /etc/xinetd.d/telnet
 #        user            = root
 #        server          = /usr/sbin/in.telnetd
 #        log_on_failure  += USERID
-#        disable         = no     #将语句 disable = yes 改成 disable = no 保存退出。激活 telnet 服务
+#        disable         = no     #将语句 disable = yes 改成 disable = no 保存退出.激活 telnet 服务
 #}
 # 启动xinetd(/etc/init.d/xinetd start)
 service xinetd start
@@ -190,8 +187,8 @@ less /etc/services | grep telnet
 
 # 测试执行telnet host [ip],会提示:Escape character is '^]'
 telnet 127.0.0.1
-# 这个提示的意思是按Ctrl + ] 会呼出telnet的命令行，出来telnet命令好之后就可以执行telnet命令，退出quit!
-# 注意,如果是云主机，必须保证安全组中的对应的端口打开,否则telnet配置无效,如果普通虚拟机关闭防火墙即可!
+# 这个提示的意思是按Ctrl + ] 会呼出telnet的命令行,出来telnet命令好之后就可以执行telnet命令,退出quit!
+# 注意,如果是云主机,必须保证安全组中的对应的端口打开,否则telnet配置无效,如果普通虚拟机关闭防火墙即可!
 
 # 查询公网ip
 curl -s https://ip.cn
@@ -226,13 +223,13 @@ vi /root/.bashrc
 
 # 跨ip传输文件 https://blog.csdn.net/gatieme/article/details/51673229
 
-# 指定用户名，命令执行后输入密码，第1个仅指定了远程的目录，文件名字不变，第2个指定了文件名
+# 指定用户名,命令执行后输入密码,第1个仅指定了远程的目录,文件名字不变,第2个指定了文件名
 scp local_file remote_username@remote_ip:remote_folder
 scp local_file remote_username@remote_ip:remote_file
-#没有指定用户名，命令执行后输入用户名和密码，第3个仅指定了远程的目录，文件名字不变，第4个指定了文件名
+# 没有指定用户名,命令执行后输入用户名和密码,第3个仅指定了远程的目录,文件名字不变,第4个指定了文件名
 scp local_file remote_ip:remote_folder
 scp local_file remote_ip:remote_file
-#eg
+# eg
 scp 12347.stack root@116.196.92.240:/opt
 scp 12347.stack root@116.196.92.240:/opt/newname.stack
 
@@ -249,14 +246,14 @@ scp -r logs/ root@192.168.240.154:/opt/
 # 查看xx文件是否被占用
 lsof +D /home/xx/xx
 
-# 当删除文件遇到：Operation not permitted，如果是root权限，那么应该是文件被锁定导致，通过下面lsattr等操作即可
-# 查看xx文件的属性,其中如果有i，a属性，则禁止执行删除等相关操作：------ia-------e--
+# 当删除文件遇到：Operation not permitted,如果是root权限,那么应该是文件被锁定导致,通过下面lsattr等操作即可
+# 查看xx文件的属性,其中如果有i,a属性,则禁止执行删除等相关操作：------ia-------e--
 lsattr /home/xx/xx
 
 # 通过chattr去除之后执行
 chattr -i /home/xx/xx
 chattr -a /home/xx/xx
 
-# 取消执行权限，若遇到上述not permitted仍然chattr减去ia
+# 取消执行权限,若遇到上述not permitted仍然chattr减去ia
 chattr -ai /usr/bin/exin
 sudo chmod -x /usr/bin/exin

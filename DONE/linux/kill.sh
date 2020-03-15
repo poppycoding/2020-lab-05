@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-
-
 ############ 端口-进程互相查询命令
 netstat -nap | grep 8080 | grep LISTEN
 netstat -nap | grep 10425 | grep LISTEN
