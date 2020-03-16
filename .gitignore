@@ -24,4 +24,6 @@
 /nbdist/
 /.nb-gradle/
 logs/
-/axlaser/forbidden/
+
+### Work ###
+/axlaser/work/
