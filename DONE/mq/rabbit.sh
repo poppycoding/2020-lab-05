@@ -7,12 +7,12 @@
 docker search rabbitMq
 docker pull docker.io/rabbitmq:3.8-management
 
-# 查看rabbitMQ镜像ID: b23cfb64730
+# 查看rabbitMQ镜像ID: 7c5e671f0a1e
 docker images
 
 # 创建运行容器: name指定了容器名称,d指定容器以后台守护进程方式运行,p指定容器内部端口号与宿主机之间的映射,
 # rabbitMq默认要使用15672为其web端界面访问时端口,5672为数据通信端口
-docker run --name rabbitmq -d -p 15672:15672 -p 5672:5672 4b23cfb64730
+docker run --name rabbitmq -d -p 15672:15672 -p 5672:5672 7c5e671f0a1e
 
 # 查看正在运行的容器: 3ae75edc48e2416292db6bcae7b1054091cb
 docker ps
@@ -37,6 +37,30 @@ rabbitmqctl list_users
 
 # exit
 exit
+
+# 访问web页面15672,查看版本信息
+# 安装对应版本的rabbitmq_delayed_message_exchange插件: https://www.rabbitmq.com/community-plugins.html
+
+# 查看已有/已启用插件
+rabbitmq-plugins list
+rabbitmq-plugins list --enabled
+
+# 从宿主机复制到rabbit容器的plugins中
+docker cp /root/download/rabbitmq_delayed_message_exchange-3.8.0.ez 3ae75ed:/plugins
+
+# 启用插件
+rabbitmq-plugins enable rabbitmq_delayed_message_exchange
+rabbitmq-plugins list
+
+
+# sbin目录下,关闭应用
+rabbitmqctl stop_app
+# 清除所有队列
+rabbitmqctl reset
+#重新
+rabbitmqctl start_app
+
+# web页面也可以手动清空队列消息,删除队列,交换机等功能
 
 
 
@@ -112,3 +136,6 @@ rabbitmqctl list_queues
 
 # 交换机信息
 rabbitmqctl list_exchanges
+
+# 查看版本
+rabbitmqctl status | grep rabbit
