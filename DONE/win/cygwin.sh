@@ -1,19 +1,20 @@
 ################################ win下安装cygwin相关shell
 
 # 1.官网下载exe: https://cygwin.com/install.html
+
+# 1.1 国内镜像: http://mirrors.163.com/cygwin/
 # 选择相关依赖包安装基础环境,自行搜索网上相关资料,不太统一,大致安装gcc,make,lynx,git,vim,curl相关...可能下载10G+
 # 如果没有下载完,应该问题不大,可以通过安装apt-cyg继续命令行安装(重新运行setup.exe似乎可以,太费时间!!)
-gcc.. make... lynx...
-
+gcc.. make... lynx... curl... libiconv2... wget... tar... vim... git...
 
 
 # 2.配置bin目录到win的path环境变量中eg:
-C:\Apps\Dev\Cygwin\bin
+D:\Dev\Cygwin\bin
 
 
 # 2.1如果是中文界面，修改英文末尾加入export LANG='en_US'
 vim ~/.bashrc
-source ..
+source ~/.bashrc
 
 
 # 3.启动安装之后apt-cyg
@@ -39,7 +40,6 @@ apt-cyg install zsh
 
 
 
-
 # 6.安装oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
@@ -47,8 +47,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 # 6.1.配置zsh相关插件
 # 1.修改.bash_profile最后一行加入 exec zsh ===>> 修改默认shell为zsh
 vim ~/.bash_profile
-source ..
-
+source ~/.bash_profile
 
 # 2.安装插件git clone源码然后修改.zshrc的内容
 # 3.安装自动补全autosuggestions
@@ -58,23 +57,30 @@ vim ~/.zshrc
 plugins=(git zsh-autosuggestions)
 
 
-
 # 4.安装zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 # 修改.zshrc文件
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+source ~/.zshrc
 
 
-
-# 5.安装autojump
+# 5.安装autojump(直接 j folder跳转)
 git clone http://github.com/joelthelion/autojump.git $ZSH_CUSTOM/plugins/autojump
 
 # install之后生成提示修改文件
-cd /autojump
+cd .oh-my-zsh/custom/plugins/autojump
+apt-cyg install python
 ./install.py
 
 # 修改添加脚本的提示如:[[ -s /home/elijahdu/.autojump/etc/profile.d/autojump.sh ]] && source /home/elijahdu/.autojump/etc/profile.d/autojump.sh
+# 务必添加到.zshrc而不是.bashrc,否则在idea中的terminal报错 command not found: env/uname等等ls命令不可用等问题
 vim ~/.zshrc
+
+
+# 设置主题
+# ZSH_THEME_RANDOM_CANDIDATES=( "ys" "agnoster" )
+ZSH_THEME="ys"
+
 
 
 # 如果是centos环境安装autojump请用yum否则会爆出error如下： command not found: uname
