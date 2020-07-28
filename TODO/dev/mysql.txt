@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# win10安装mysql
+
+1.下载对应版本的msyql,解压到目录
+
+2.新建my.ini文件
+[mysqld]  
+port = 3306  
+basedir=D:\Dev\DB\Mysql\Mysql
+datadir=D:\Dev\DB\Mysql\Mysql\data  
+max_connections=200  
+character-set-server=utf8  
+default-storage-engine=INNODB  
+[mysql]  
+default-character-set=utf8
+
+3.admin权限打cmd,进入到bin目录
+
+#安装服务
+mysqld.exe -install
+
+#初始化data目录
+mydqld --initialize-insecure --usermysql
+
+#启动服务
+net start mysql
+
+#设置root密码,第一个enter密码直接忽略enter,之后输入新密码,然后确认新密码
+mysqladmin -uroot -p password
+
+#成功登陆
+mysql -uroot -p
+
